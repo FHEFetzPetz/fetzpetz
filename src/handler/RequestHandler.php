@@ -14,11 +14,13 @@ class RequestHandler extends Handler
     public function handleRequest() {
 
         $this->requestURI = $this->kernel->getConfig()["htaccessRouting"] ? $_SERVER['REQUEST_URI'] : urldecode($_GET["page"] ?? urlencode("/"));
-        $this->baseURL = $this->getBaseURL();
+        $this->baseURL = $this->parseBaseURL();
 
         $this->kernel->getLogger()->log('Handling request for URI: ' . $this->getRequestURI(), 'debug');
 
         $routeFound = false;
+
+        $fallback404Route = null;
 
         foreach($this->routes as $route => $data) {
             if($route == $this->baseURL) {
@@ -27,19 +29,26 @@ class RequestHandler extends Handler
 
                 $this->controllerClasses[$data[0]]->{$data[1]}();
                 $routeFound = true;
-            }
+            } else if($fallback404Route == null && $route == "404")
+                $fallback404Route = $data;
         }
 
-        if(!$routeFound) {
+        if(!$routeFound && $fallback404Route) {
+            $this->controllerClasses[$fallback404Route[0]]->{$fallback404Route[1]}();
+        } else if(!$routeFound) {
             $this->kernel->getLogger()->log('Found no route for URI: ' . $this->getRequestURI(), 'debug');
 
             echo '404 - Route not found';
         }
     }
 
-    public function getBaseURL() {
+    private function parseBaseURL(): string {
         $withoutQuery = explode('?', $this->requestURI)[0];
         return explode('#', $withoutQuery)[0];
+    }
+
+    public function getBaseURL(): string {
+        return $this->baseURL;
     }
 
     public function getRequestURI(): string {

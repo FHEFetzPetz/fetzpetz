@@ -4,5 +4,6 @@ $config['database'] = [
     'host' => 'localhost',
     'username' => 'root',
     'password' => null,
-    'database' => 'fetzpetz'
+    'database' => 'shop_fetzpetz',
+    'port'     => 3306
 ];

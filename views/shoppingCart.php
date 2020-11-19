@@ -1,8 +1,8 @@
 <html>
     <head>
-        <title>Test</title>
+        <title>Einkaufswagen</title>
     </head>
     <body>
-        Testseite
+        Einkaufswagen
     </body>
 </html>
