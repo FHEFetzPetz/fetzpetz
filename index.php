@@ -11,3 +11,5 @@ require_once './src/Kernel.php';
 
 $kernel = new Kernel($config);
 $kernel->getRequestHandler()->handleRequest();
+
+$kernel->getDatabaseHandler()->closeConnection();
