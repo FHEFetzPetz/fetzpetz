@@ -1,5 +1,6 @@
 <?php
 
+
 $config = [];
 
 require_once "./src/config/database.php";
