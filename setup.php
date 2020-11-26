@@ -28,6 +28,10 @@ if($mysqli->connect_errno)
 
 $queryResult = $mysqli->query('CREATE DATABASE ' . $dbConfig["database"]);
 
+$mysqli->select_db($dbConfig['database']);
+
+$queryResult = $mysqli->query('CREATE TABLE customer (id INT NOT NULL PRIMARY KEY, firstname VARCHAR(150), lastname VARCHAR(150), birthday DATE, password VARCHAR(250), email VARCHAR(150))');
+
 if($queryResult)
     echo "\n\nDatabase '" . $dbConfig["database"] . "' created.\n\nGoodbye";
 else
