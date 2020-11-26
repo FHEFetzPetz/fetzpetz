@@ -3,7 +3,8 @@
 $config = [
     'appDir' => __DIR__,
     'environment' => 'dev',
-    'htaccessRouting' => false
+    'htaccessRouting' => false,
+    'subDirectory' => '/test'
 ];
 
 require_once './src/config/base.php';
