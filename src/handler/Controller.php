@@ -22,4 +22,22 @@ class Controller extends Handler
         }
     }
 
+    public function getAbsolutePath($url) {
+        $config = $this->kernel->getConfig();
+
+        $baseURL = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]" . $this->kernel->getConfig()["subDirectory"];
+
+        if($this->kernel->getConfig()["htaccessRouting"])
+            return $baseURL .= $url;
+        else
+            return $baseURL .= "?page=$url";
+    }
+
+    public function getPath($url) {
+        if($this->kernel->getConfig()["htaccessRouting"])
+            return $url;
+        else
+            return "/?page=$url";
+    }
+
 }
