@@ -1,7 +1,10 @@
 <?php
 
+namespace App\FetzPetz\Services;
 
-class PaymentHandler extends Handler
+use App\FetzPetz\Core\Service;
+
+class PaymentService extends Service
 {
 
     public function performPayment(int $a, int $b) {

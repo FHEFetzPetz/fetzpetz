@@ -8,9 +8,9 @@ $config = [
 ];
 
 require_once './src/config/base.php';
-require_once './src/Kernel.php';
+require_once "autoload.php";
 
-$kernel = new Kernel($config);
-$kernel->getRequestHandler()->handleRequest();
+$kernel = new \App\FetzPetz\Kernel($config);
+$kernel->getRequestService()->handleRequest();
 
-$kernel->getDatabaseHandler()->closeConnection();
+$kernel->getDatabaseService()->closeConnection();

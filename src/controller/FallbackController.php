@@ -1,5 +1,8 @@
 <?php
 
+namespace App\FetzPetz\Controller;
+
+use App\FetzPetz\Components\Controller;
 
 class FallbackController extends Controller
 {

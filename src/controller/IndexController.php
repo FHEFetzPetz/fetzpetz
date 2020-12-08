@@ -1,5 +1,10 @@
 <?php
 
+namespace App\FetzPetz\Controller;
+
+use App\FetzPetz\Components\Controller;
+use App\FetzPetz\Model\User;
+
 class IndexController extends Controller
 {
 
@@ -16,7 +21,7 @@ class IndexController extends Controller
     }
 
     public function shoppingCart() {
-        $this->kernel->getPaymentHandler()->performPayment(10,32);
+        $this->kernel->getPaymentService()->performPayment(10,32);
         return $this->renderView("shoppingCart.php");
     }
 }

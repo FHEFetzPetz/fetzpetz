@@ -1,7 +1,10 @@
 <?php
 
+namespace App\FetzPetz\Core;
 
-class Handler
+use App\FetzPetz\Kernel;
+
+class Service
 {
 
     protected $kernel;

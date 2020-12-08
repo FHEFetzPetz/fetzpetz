@@ -1,6 +1,10 @@
 <?php
 
-class Controller extends Handler
+namespace App\FetzPetz\Components;
+
+use App\FetzPetz\Core\Service;
+
+class Controller extends Service
 {
 
     public function shareRoutes(): array {

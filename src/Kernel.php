@@ -1,49 +1,61 @@
 <?php
 
-require_once "handler/Handler.php";
-require_once "handler/DatabaseHandler.php";
-require_once "handler/RequestHandler.php";
-require_once "handler/PaymentHandler.php";
-require_once "handler/Logger.php";
+namespace App\FetzPetz;
+
+use App\FetzPetz\Services\DatabaseService;
+use App\FetzPetz\Services\LoggerService;
+use App\FetzPetz\Services\ModelService;
+use App\FetzPetz\Services\PaymentService;
+use App\FetzPetz\Services\RequestService;
 
 class Kernel {
 
     private $config;
-    private $databaseHandler;
-    private $requestHandler;
-    private $paymentHandler;
-    private $logger;
+    private $databaseService;
+    private $requestService;
+    private $paymentService;
+    private $loggerService;
+    private $modelService;
 
     public function __construct(array $config)
     {
         $this->config = $config;
-        $this->databaseHandler = new DatabaseHandler($this);
-        $this->requestHandler = new RequestHandler($this);
-        $this->paymentHandler = new PaymentHandler($this);
-        $this->logger = new Logger($this);
+        $this->databaseService = new DatabaseService($this);
+        $this->requestService = new RequestService($this);
+        $this->paymentService = new PaymentService($this);
+        $this->loggerService = new LoggerService($this);
+        $this->modelService = new ModelService($this);
 
-        $this->databaseHandler->prepareHandler();
-        $this->requestHandler->registerControllers();
+        $this->databaseService->prepareHandler();
+        $this->requestService->registerControllers();
     }
 
     public function getConfig(): array {
         return $this->config;
     }
 
-    public function getDatabaseHandler(): DatabaseHandler {
-        return $this->databaseHandler;
+    public function getDatabaseService(): DatabaseService {
+        return $this->databaseService;
     }
 
-    public function getRequestHandler(): RequestHandler {
-        return $this->requestHandler;
+    public function getRequestService(): RequestService {
+        return $this->requestService;
     }
 
-    public function getPaymentHandler(): PaymentHandler {
-        return $this->paymentHandler;
+    public function getPaymentService(): PaymentService {
+        return $this->paymentService;
     }
 
-    public function getLogger(): Logger {
-        return $this->logger;
+    public function getLoggerService(): LoggerService {
+        return $this->loggerService;
+    }
+
+    public function getModelService(): ModelService {
+        return $this->modelService;
+    }
+
+    public function getDatabase(): \PDO {
+        return $this->databaseService->getDatabase();
     }
 
     public function getAppDir(): string {

@@ -1,5 +1,9 @@
 <?php
 
+namespace App\FetzPetz\Controller;
+
+use App\FetzPetz\Components\Controller;
+
 class SubpageController extends Controller
 {
 
