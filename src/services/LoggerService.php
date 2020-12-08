@@ -1,7 +1,11 @@
 <?php
 
+namespace App\FetzPetz\Services;
 
-class Logger extends Handler
+use App\FetzPetz\Core\Service;
+use App\FetzPetz\Kernel;
+
+class LoggerService extends Service
 {
 
     private $logLevels = [
@@ -26,7 +30,7 @@ class Logger extends Handler
     }
 
     private function getMessagePrefix(string $level): string {
-        return '[' . (new DateTime())->format('d.m.Y H:i:s') . '] [' . $level . ']';
+        return '[' . (new \DateTime())->format('d.m.Y H:i:s') . '] [' . $level . ']';
     }
 
     public function log(string $message, string $level = 'debug', string $logFile = null) {

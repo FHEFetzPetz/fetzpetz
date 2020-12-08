@@ -1,8 +1,10 @@
 <?php
 
-require_once "Controller.php";
+namespace App\FetzPetz\Services;
 
-class RequestHandler extends Handler
+use App\FetzPetz\Core\Service;
+
+class RequestService extends Service
 {
 
     private $requestURI;
@@ -16,7 +18,7 @@ class RequestHandler extends Handler
         $this->requestURI = $this->kernel->getConfig()["htaccessRouting"] ? $_SERVER['REQUEST_URI'] : urldecode($_GET["page"] ?? urlencode("/"));
         $this->baseURL = $this->parseBaseURL();
 
-        $this->kernel->getLogger()->log('Handling request for URI: ' . $this->getRequestURI(), 'debug');
+        $this->kernel->getLoggerService()->log('Handling request for URI: ' . $this->getRequestURI(), 'debug');
 
         $routeFound = false;
 
@@ -25,7 +27,7 @@ class RequestHandler extends Handler
         foreach($this->routes as $route => $data) {
             if($route == $this->baseURL) {
 
-                $this->kernel->getLogger()->log('Found route for URI: ' . $this->getRequestURI() . ' (' . $data[0] . '->' . $data[1] . ')', 'debug');
+                $this->kernel->getLoggerService()->log('Found route for URI: ' . $this->getRequestURI() . ' (' . $data[0] . '->' . $data[1] . ')', 'debug');
 
                 $this->controllerClasses[$data[0]]->{$data[1]}();
                 $routeFound = true;
@@ -36,7 +38,7 @@ class RequestHandler extends Handler
         if(!$routeFound && $fallback404Route) {
             $this->controllerClasses[$fallback404Route[0]]->{$fallback404Route[1]}();
         } else if(!$routeFound) {
-            $this->kernel->getLogger()->log('Found no route for URI: ' . $this->getRequestURI(), 'debug');
+            $this->kernel->getLoggerService()->log('Found no route for URI: ' . $this->getRequestURI(), 'debug');
 
             echo '404 - Route not found';
         }
@@ -60,18 +62,19 @@ class RequestHandler extends Handler
 
         foreach(scandir($controllerDirectory) as $fileName) {
             $path = $controllerDirectory . '/' . $fileName;
+
             if(is_file($path) && pathinfo($path, PATHINFO_EXTENSION) == 'php') {
-                require_once($path);
+                $className = "\\App\\FetzPetz\\Controller\\" . explode('.',$fileName)[0];
 
-                $className = explode('.',$fileName)[0];
+                if(class_exists($className)) {
+                    $controllerClass = new $className($this->kernel);
+                    $sharedRoutes = $controllerClass->shareRoutes();
 
-                $controllerClass = new $className($this->kernel);
-                $sharedRoutes = $controllerClass->shareRoutes();
+                    $this->controllerClasses[$className] = $controllerClass;
 
-                $this->controllerClasses[$className] = $controllerClass;
-
-                foreach($sharedRoutes as $route => $method) {
-                    $this->routes[$route] = [$className, $method];
+                    foreach($sharedRoutes as $route => $method) {
+                        $this->routes[$route] = [$className, $method];
+                    }
                 }
             }
         }
