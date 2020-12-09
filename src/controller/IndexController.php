@@ -17,6 +17,16 @@ class IndexController extends Controller
     }
 
     public function index() {
+
+      //  $user = $this->kernel->getModelService()->findOne(User::class);
+      //  $user->__set('firstname','lili');
+
+     //   $this->kernel->getModelService()->update($user);
+
+      //  print_r($user);
+
+      //  $this->kernel->getModelService()->destroy($user);
+
         return $this->renderView("index.php");
     }
 
