@@ -32,7 +32,8 @@ $mysqli->select_db($dbConfig['database']);
 
 echo "\nCreating tables...\n";
 
-$queryResult = $mysqli->query('CREATE TABLE user (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, firstname VARCHAR(150), lastname VARCHAR(150), birthday DATE, password VARCHAR(250), email VARCHAR(150))');
+
+$mysqli->query('CREATE TABLE user (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, firstname VARCHAR(150), lastname VARCHAR(150), birthday DATE, password VARCHAR(250), email VARCHAR(150))');
 
 if($queryResult)
     echo "\n\nDatabase '" . $dbConfig["database"] . "' created.\n\nGoodbye";
