@@ -6,7 +6,7 @@ use App\FetzPetz\Components\Model;
 
 class Address extends Model
 {
-    const TABLENAME = '`address`';
+    const TABLENAME = '`administrationAccess`';
     const PRIMARY_KEY = 'id';
 
     public function __construct($values, $initializedFromSQL = false) {

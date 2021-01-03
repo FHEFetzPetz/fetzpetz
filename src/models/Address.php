@@ -16,6 +16,7 @@ class Address extends Model
             ['lastname',self::TYPE_STRING,null],
             ['street',self::TYPE_STRING,null],
             ['zip',self::TYPE_STRING,null],
+            ['city',self::TYPE_STRING,null],
             ['state',self::TYPE_STRING,null],
             ['country',self::TYPE_STRING,null],
             ['phoneNumber',self::TYPE_STRING,null]
