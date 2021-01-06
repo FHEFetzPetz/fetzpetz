@@ -5,7 +5,7 @@ namespace App\FetzPetz\Model;
 use App\FetzPetz\Components\Model;
 use App\FetzPetz\Services\ModelService;
 
-class Address extends Model
+class AdministrationAccess extends Model
 {
     const TABLENAME = '`administration_access`';
     const PRIMARY_KEY = 'id';

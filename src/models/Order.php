@@ -7,7 +7,7 @@ use App\FetzPetz\Services\ModelService;
 
 class Order extends Model
 {
-    const TABLENAME = '`order`';
+    const TABLENAME = '`order_object`';
     const PRIMARY_KEY = 'id';
 
     public function __construct($values, $initializedFromSQL = false) {
