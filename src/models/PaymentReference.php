@@ -6,7 +6,7 @@ use App\FetzPetz\Components\Model;
 
 class PaymentReference extends Model
 {
-    const TABLENAME = '`paymentReference`';
+    const TABLENAME = '`payment_reference`';
     const PRIMARY_KEY = 'id';
 
     public function __construct($values, $initializedFromSQL = false) {

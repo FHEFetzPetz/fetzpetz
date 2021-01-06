@@ -3,6 +3,7 @@
 namespace App\FetzPetz\Model;
 
 use App\FetzPetz\Components\Model;
+use App\FetzPetz\Services\ModelService;
 
 class Order extends Model
 {
@@ -21,5 +22,21 @@ class Order extends Model
         ];
 
         parent::__construct($values, $initializedFromSQL);
+    }
+
+    public function getUserID(ModelService $modelService) {
+        return $modelService->findOneById(User::class, $this->__get("user_id"));
+    }
+
+    public function getPaymentReferenceID(ModelService $modelService) {
+        return $modelService->findOneById(PaymentReference::class, $this->__get("payment_reference_id"));
+    }
+
+    public function getShippingAddressId(ModelService $modelService) {
+        return $modelService->findOneById(Address::class, $this->__get("shipping_address_id"));
+    }
+
+    public function getBillingAddressId(ModelService $modelService) {
+        return $modelService->findOneById(Address::class, $this->__get("billing_address_id"));
     }
 }
