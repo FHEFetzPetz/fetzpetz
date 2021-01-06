@@ -3,10 +3,11 @@
 namespace App\FetzPetz\Model;
 
 use App\FetzPetz\Components\Model;
+use App\FetzPetz\Services\ModelService;
 
 class OrderItem extends Model
 {
-    const TABLENAME = '`orderItem`';
+    const TABLENAME = '`order_item`';
     const PRIMARY_KEY = 'id';
 
     public function __construct($values, $initializedFromSQL = false) {
@@ -20,5 +21,13 @@ class OrderItem extends Model
         ];
 
         parent::__construct($values, $initializedFromSQL);
+    }
+
+    public function getOrderID(ModelService $modelService) {
+        return $modelService->findOneById(Order::class, $this->__get("order_id"));
+    }
+
+    public function getProductID(ModelService $modelService) {
+        return $modelService->findOneById(Product::class, $this->__get("product_id"));
     }
 }

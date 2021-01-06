@@ -15,8 +15,12 @@ class User extends Model
             ['firstname',self::TYPE_STRING,null],
             ['lastname',self::TYPE_STRING,null],
             ['birthday',self::TYPE_DATE,null],
-            ['password',self::TYPE_STRING,null],
-            ['email',self::TYPE_STRING,null]
+            ['password_hash',self::TYPE_STRING,null],
+            ['email',self::TYPE_STRING,null],
+            ['email_verified',self::TYPE_INTEGER,null],
+            ['email_verification_hash',self::TYPE_STRING,null],
+            ['active',self::TYPE_INTEGER,null],
+            ['created_at',self::TYPE_DATETIME,null]
         ];
 
         parent::__construct($values, $initializedFromSQL);
