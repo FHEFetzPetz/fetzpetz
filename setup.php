@@ -36,7 +36,7 @@ $queryResult = $mysqli->query('CREATE TABLE user (id INT NOT NULL PRIMARY KEY AU
 
 $queryResult = $mysqli->query('CREATE TABLE payment_reference (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, payment_method VARCHAR(100) NOT NULL, payment_data TEXT, created_at DATETIME NOT NULL)');
 
-$queryResult = $mysqli->query('CREATE TABLE address (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, firstname VARCHAR(150) NOT NULL, lastname VARCHAR(150) NOT NULL, street VARCHAR(150) NOT NULL, zip VARCHAR(15) NOT NULL, city VARCHAR(100) NOT NULL, state VARCHAR(100), country VARCHAR(2) NOT NULL, phoneNumber VARCHAR(30) NOT NULL)');
+$queryResult = $mysqli->query('CREATE TABLE address (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, firstname VARCHAR(150) NOT NULL, lastname VARCHAR(150) NOT NULL, street VARCHAR(150) NOT NULL, zip VARCHAR(15) NOT NULL, city VARCHAR(100) NOT NULL, state VARCHAR(100), country VARCHAR(2) NOT NULL, phone_number VARCHAR(30) NOT NULL)');
 
 $queryResult = $mysqli->query('CREATE TABLE category (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, created_by INT NOT NULL, name VARCHAR(100) NOT NULL, description TEXT NOT NULL, image VARCHAR(100) NOT NULL, active TINYINT(1) DEFAULT 1, CONSTRAINT fk_category_user_id FOREIGN KEY (created_by) REFERENCES user(id))');
 
@@ -44,9 +44,9 @@ $queryResult = $mysqli->query('CREATE TABLE product (id INT NOT NULL PRIMARY KEY
 
 $queryResult = $mysqli->query('CREATE TABLE administration_access (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, user_id INT NOT NULL, created_by INT, active TINYINT(1) DEFAULT 1, created_at DATETIME NOT NULL, CONSTRAINT fk_administration_access_user_id FOREIGN KEY (user_id) REFERENCES user(id), CONSTRAINT fk_administration_access_user_created_by FOREIGN KEY (created_by) REFERENCES user(id))');
 
-$queryResult = $mysqli->query('CREATE TABLE order (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, user_id INT NOT NULL, payment_reference_id INT NOT NULL, shipping_address_id INT NOT NULL, billing_address_id INT, order_status VARCHAR(100) DEFAULT "pending_payment", shipment_data TEXT, CONSTRAINT fk_order_user_id FOREIGN KEY (user_id) REFERENCES user(id), CONSTRAINT fk_order_payment_reference_id FOREIGN KEY (payment_reference_id) REFERENCES payment_reference(id), CONSTRAINT fk_order_shipping_address_id FOREIGN KEY (shipping_address_id) REFERENCES address(id), CONSTRAINT fk_order_billing_address_id FOREIGN KEY (billing_address_id) REFERENCES address(id))');
+$queryResult = $mysqli->query('CREATE TABLE order_object (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, user_id INT NOT NULL, payment_reference_id INT NOT NULL, shipping_address_id INT NOT NULL, billing_address_id INT, order_status VARCHAR(100) DEFAULT "pending_payment", shipment_data TEXT, CONSTRAINT fk_order_user_id FOREIGN KEY (user_id) REFERENCES user(id), CONSTRAINT fk_order_payment_reference_id FOREIGN KEY (payment_reference_id) REFERENCES payment_reference(id), CONSTRAINT fk_order_shipping_address_id FOREIGN KEY (shipping_address_id) REFERENCES address(id), CONSTRAINT fk_order_billing_address_id FOREIGN KEY (billing_address_id) REFERENCES address(id))');
 
-$queryResult = $mysqli->query('CREATE TABLE order_item (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, order_id INT NOT NULL, product_id INT NOT NULL, amount INT NOT NULL, cost_per_item DECIMAL(7,2) NOT NULL, item_data TEXT, CONSTRAINT fk_order_item_order_id FOREIGN KEY (order_id) REFERENCES order(id), CONSTRAINT fk_order_item_product_id FOREIGN KEY (product_id) REFERENCES product(id))');
+$queryResult = $mysqli->query('CREATE TABLE order_item (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, order_id INT NOT NULL, product_id INT NOT NULL, amount INT NOT NULL, cost_per_item DECIMAL(7,2) NOT NULL, item_data TEXT, CONSTRAINT fk_order_item_order_id FOREIGN KEY (order_id) REFERENCES order_object(id), CONSTRAINT fk_order_item_product_id FOREIGN KEY (product_id) REFERENCES product(id))');
 
 if($queryResult)
     echo "\n\nDatabase '" . $dbConfig["database"] . "' created.\n\nGoodbye";

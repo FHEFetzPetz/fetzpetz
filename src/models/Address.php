@@ -19,7 +19,7 @@ class Address extends Model
             ['city',self::TYPE_STRING,null],
             ['state',self::TYPE_STRING,null],
             ['country',self::TYPE_STRING,null],
-            ['phoneNumber',self::TYPE_STRING,null]
+            ['phone_number',self::TYPE_STRING,null]
         ];
 
         parent::__construct($values, $initializedFromSQL);
