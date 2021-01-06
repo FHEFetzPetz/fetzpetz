@@ -11,27 +11,12 @@ class IndexController extends Controller
     public function shareRoutes(): array
     {
         return [
-            '/' => 'index',
-            '/einkaufswagen' => 'shoppingCart'
+            '/' => 'index'
         ];
     }
 
     public function index() {
-
-      //  $user = $this->kernel->getModelService()->findOne(User::class);
-      //  $user->__set('firstname','lili');
-
-     //   $this->kernel->getModelService()->update($user);
-
-      //  print_r($user);
-
-      //  $this->kernel->getModelService()->destroy($user);
-
-        return $this->renderView("index.php");
-    }
-
-    public function shoppingCart() {
-        $this->kernel->getPaymentService()->performPayment(10,32);
-        return $this->renderView("shoppingCart.php");
+        $this->setParameter("title", "FetzPetz | Main Page");
+        $this->setView("index.php");
     }
 }

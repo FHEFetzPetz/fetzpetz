@@ -30,6 +30,8 @@ class RequestService extends Service
                 $this->kernel->getLoggerService()->log('Found route for URI: ' . $this->getRequestURI() . ' (' . $data[0] . '->' . $data[1] . ')', 'debug');
 
                 $this->controllerClasses[$data[0]]->{$data[1]}();
+
+                $this->controllerClasses[$data[0]]->renderTemplate();
                 $routeFound = true;
             } else if($fallback404Route == null && $route == "404")
                 $fallback404Route = $data;
