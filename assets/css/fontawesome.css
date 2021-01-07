@@ -96,3 +96,7 @@
 .icon.times:before {
     content: '\f00d';
 }
+
+.icon.house:before {
+    content: '\e065';
+}
