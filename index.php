@@ -3,7 +3,7 @@
 $config = [
     'appDir' => __DIR__,
     'environment' => 'dev',
-    'htaccessRouting' => false,
+    'htaccessRouting' => true,
     'subDirectory' => ''
 ];
 
