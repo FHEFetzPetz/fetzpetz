@@ -3,6 +3,7 @@
 namespace App\FetzPetz\Components;
 
 use App\FetzPetz\Core\Service;
+use App\FetzPetz\Model\User;
 
 class Controller extends Service
 {
@@ -11,6 +12,7 @@ class Controller extends Service
     private $template = "base";
     private $variables = [];
     private $extraHeaderFields = [];
+    private $canRender = true;
 
     public function shareRoutes(): array {
         return [];
@@ -57,6 +59,8 @@ class Controller extends Service
     }
 
     public function renderTemplate() {
+        if(!$this->canRender) return;
+
         $templatesDirectory = $this->kernel->getAppDir() . '/' . $this->getRoutingConfig()['viewDirectory'] . '/templates';
         $templatePath = $templatesDirectory . '/' . $this->template . '.php';
 
@@ -72,6 +76,8 @@ class Controller extends Service
     }
 
     protected function renderView() {
+        if(!$this->canRender) return;
+
         if($this->view == null)
             die("No view path provided");
 
@@ -89,6 +95,8 @@ class Controller extends Service
     }
 
     protected function renderComponent($path, $variables = []) {
+        if(!$this->canRender) return;
+
         $viewsDirectory = $this->kernel->getAppDir() . '/' . $this->getRoutingConfig()['viewDirectory'];
         $componentPath = $viewsDirectory . '/' . $path;
 
@@ -118,6 +126,19 @@ class Controller extends Service
             return $url;
         else
             return "/?page=$url";
+    }
+
+    public function getUser(): ?User {
+        return $this->kernel->getSecurityService()->getUser();
+    }
+
+    public function isAuthenticated(): bool {
+        return $this->kernel->getSecurityService()->isAuthenticated();
+    }
+
+    public function redirectTo($url) {
+        $this->canRender = false;
+        header("Location: " . $this->getPath($url));
     }
 
 }
