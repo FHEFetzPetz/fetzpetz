@@ -7,6 +7,8 @@ $config = [
     'subDirectory' => ''
 ];
 
+session_start();
+
 require_once './src/config/base.php';
 require_once "autoload.php";
 

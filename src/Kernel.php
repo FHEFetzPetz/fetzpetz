@@ -7,11 +7,13 @@ use App\FetzPetz\Services\LoggerService;
 use App\FetzPetz\Services\ModelService;
 use App\FetzPetz\Services\PaymentService;
 use App\FetzPetz\Services\RequestService;
+use App\FetzPetz\Services\SecurityService;
 
 class Kernel {
 
     private $config;
     private $databaseService;
+    private $securityService;
     private $requestService;
     private $paymentService;
     private $loggerService;
@@ -21,12 +23,14 @@ class Kernel {
     {
         $this->config = $config;
         $this->databaseService = new DatabaseService($this);
+        $this->securityService = new SecurityService($this);
         $this->requestService = new RequestService($this);
         $this->paymentService = new PaymentService($this);
         $this->loggerService = new LoggerService($this);
         $this->modelService = new ModelService($this);
 
         $this->databaseService->prepareHandler();
+        $this->securityService->prepareService();
         $this->requestService->registerControllers();
     }
 
@@ -36,6 +40,11 @@ class Kernel {
 
     public function getDatabaseService(): DatabaseService {
         return $this->databaseService;
+    }
+
+    public function getSecurityService(): SecurityService
+    {
+        return $this->securityService;
     }
 
     public function getRequestService(): RequestService {

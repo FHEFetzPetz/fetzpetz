@@ -40,8 +40,8 @@ $desktopCategoryLimit = 3;
         </div>
         <div class="logo-holder">
             <a href="/">
-                <img src="/assets/images/logo.png" class="mobile-logo">
-                <img src="/assets/images/logo-text.png" class="desktop-logo">
+                <img alt="FetzPetz Logo" src="/assets/images/logo.png" class="mobile-logo">
+                <img alt="FetzPetz Logo" src="/assets/images/logo-text.png" class="desktop-logo">
             </a>
         </div>
         <div class="search-box">
