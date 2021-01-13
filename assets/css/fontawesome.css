@@ -100,3 +100,11 @@
 .icon.house:before {
     content: '\e065';
 }
+
+.icon.question-circle:before {
+    content: '\f059';
+}
+
+.icon.chevron-up:before {
+    content: '\f077';
+}

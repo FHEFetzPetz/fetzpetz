@@ -1,15 +1,211 @@
 #mainpage {
+}
+
+#mainpage .row {
     display: flex;
     flex-direction: row;
+    padding: 10px;
+    align-items: flex-start;
 }
 
 #sidebar {
-    flex: 1;
-    max-width: 300px;
-    background: blue;
+    display: none;
 }
 
-#content{
+#content {
     flex: 1;
-    background: yellow;
+    padding: 0 10px;
+}
+
+#content .product-wrap {
+    min-width: 100%;
+    max-width: 100%;
+}
+
+#content #welcome-box {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: url(../images/header-image.jpg);
+    background-size: cover;
+    background-position: center;
+    margin-bottom: 10px;
+    color: white;
+    padding: 35px 15px;
+    text-align: center;
+}
+
+#content #welcome-box h1 {
+    margin-bottom: 5px;
+    margin-top: 0;
+    font-size: 35px;
+}
+
+#content #welcome-box h2 {
+    font-size: 17px;
+    margin-bottom: 25px;
+    margin-top: 0;
+}
+
+#content #welcome-box .search-box {
+    width: 100%;
+    max-width: 500px;
+}
+
+#content #welcome-box .search-box .search-inner {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    background: white;
+}
+
+#content #welcome-box .search-box .search-inner input {
+    height: 100%;
+    flex: 1;
+    background: none;
+    border: none;
+    padding-left: 15px;
+}
+
+#content #welcome-box .search-box .search-inner .search-button {
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #7c7c7c;
+}
+
+#content .products {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -5px;
+    justify-content: center;
+}
+
+#content .promoted-product-wrap {
+    flex: 1;
+    min-width: 100%;
+    padding: 5px;
+}
+
+#content .promoted-product-wrap .product-card {
+    position: relative;
+}
+
+#content .promoted-product-wrap .product-card .image {
+    height: 220px;
+}
+
+#content .promoted-product-wrap .product-card .data .title .like-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #C4C4C4;
+    border-radius: 50%;
+    height: 47px;
+    width: 47px;
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: background-color .2s ease;
+}
+
+#content .promoted-product-wrap .product-card .data .title .like-button:hover {
+    background-color: rgba(255,255,255,0.2);
+}
+
+#content .promoted-product-wrap .product-card .data .title {
+    font-size: 25px;
+    display: flex;
+    margin-bottom: 6px;
+}
+
+#content .promoted-product-wrap .product-card .data .price {
+    font-size: 20px;
+}
+
+#content .promoted-product-wrap .product-card .data .description {
+    margin-top: 20px;
+    font-size: 15px;
+}
+
+@media (min-width: 550px) {
+    #content .product-wrap {
+        min-width: 267px;
+        max-width: 267px;
+        padding: 3px;
+    }
+}
+
+@media (min-width: 1200px) {
+
+    #sidebar {
+        display: block;
+        flex: 1;
+        max-width: 300px;
+        background: #333333;
+    }
+
+    #sidebar .item {
+        height: 50px;
+        border-bottom: solid 1px #484848;
+        padding: 0 15px;
+        display: flex;
+        align-items: center;
+        color: #a7a7a7;
+        font-size: 14px;
+        text-decoration: none;
+        cursor: pointer;
+        transition: background-color .2s ease;
+    }
+
+    #sidebar .item:hover {
+        background-color: rgba(255,255,255,0.1);
+    }
+
+    #sidebar .item span {
+        flex: 1;
+    }
+
+    #sidebar .item i {
+        width: 30px;
+        text-align: center;
+    }
+
+    #sidebar .item.margin-top {
+        margin-top: 50px;
+        border-top: solid 1px #484848;
+    }
+
+    #sidebar .item.color {
+        background: linear-gradient(to right, #EB5757, #844ABA);
+        color: white;
+        border: none;
+    }
+
+    #content .products {
+        justify-content: flex-start;
+    }
+
+    #content .promoted-product-wrap .product-card {
+        display: flex;
+    }
+
+    #content .promoted-product-wrap .product-card .image {
+        max-width: 600px;
+        height: 500px;
+    }
+
+    #content .promoted-product-wrap .product-card .data {
+        flex: 1;
+        padding: 15px 20px;
+    }
+
+    #content .promoted-product-wrap .product-card .data .title span {
+        flex: 1;
+    }
 }

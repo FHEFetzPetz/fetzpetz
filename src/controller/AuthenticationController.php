@@ -23,6 +23,9 @@ class AuthenticationController extends Controller
         $user = $this->kernel->getModelService()->findOne(User::class);
 
         if(isset($_POST["submit"])) {
+
+
+
             if($user) {
                 $this->kernel->getSecurityService()->authenticateWithUser($user);
                 $this->redirectTo("/security");
