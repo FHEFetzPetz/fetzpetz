@@ -38,12 +38,13 @@ $desktopCategoryLimit = 3;
         <div class="menu-toggle">
             <i class="icon bars"></i>
         </div>
-        <div class="logo-holder">
+        <div class="logo-holder" <?php if(isset($showSearch) && !$showSearch): ?> style="padding-left: 0"<?php endif ?>>
             <a href="/">
                 <img alt="FetzPetz Logo" src="/assets/images/logo.png" class="mobile-logo">
                 <img alt="FetzPetz Logo" src="/assets/images/logo-text.png" class="desktop-logo">
             </a>
         </div>
+        <?php if(!isset($showSearch) || $showSearch): ?>
         <div class="search-box">
             <div class="search-inner">
                 <input type="text" placeholder="Search for products">
@@ -52,6 +53,7 @@ $desktopCategoryLimit = 3;
                 </div>
             </div>
         </div>
+        <?php endif; ?>
         <div class="actions">
             <div class="desktop-actions">
                 <div class="action"><i class="icon user"></i></div>

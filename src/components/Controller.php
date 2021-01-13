@@ -97,6 +97,8 @@ class Controller extends Service
     protected function renderComponent($path, $variables = []) {
         if(!$this->canRender) return;
 
+        $variables = array_merge($variables, $this->getParameters());
+
         $viewsDirectory = $this->kernel->getAppDir() . '/' . $this->getRoutingConfig()['viewDirectory'];
         $componentPath = $viewsDirectory . '/' . $path;
 
@@ -104,7 +106,7 @@ class Controller extends Service
 
             extract($variables, EXTR_PREFIX_SAME, 'param');
 
-            require_once($componentPath);
+            require($componentPath);
         } else {
             die('Component to render not found');
         }

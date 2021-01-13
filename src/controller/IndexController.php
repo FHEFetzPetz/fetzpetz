@@ -3,6 +3,7 @@
 namespace App\FetzPetz\Controller;
 
 use App\FetzPetz\Components\Controller;
+use App\FetzPetz\Model\Product;
 use App\FetzPetz\Model\User;
 
 class IndexController extends Controller
@@ -22,6 +23,11 @@ class IndexController extends Controller
         $this->addExtraHeaderFields([
             ["type" => "stylesheet", "href" => "/assets/css/mainpage.css"]
         ]);
+
+        $products = $this->kernel->getModelService()->find(Product::class);
+
+        $this->setParameter("products", $products);
+        $this->setParameter("showSearch", false);
 
         $this->setView("index.php");
     }

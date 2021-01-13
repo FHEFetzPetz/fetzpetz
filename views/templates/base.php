@@ -34,7 +34,24 @@
             if(!isset($navigation) || $navigation) $this->renderComponent("components/navigation.php");
             $this->renderView()
         ?>
+        <div id="scroll-top"><i class="icon chevron-up"></i></div>
         <script>
+            scrollTopButton = document.getElementById("scroll-top");
+
+            window.onscroll = function() {scrollFunction()};
+
+            function scrollFunction() {
+                if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                    scrollTopButton.classList.add("reveal");
+                } else {
+                    scrollTopButton.classList.remove("reveal");
+                }
+            }
+
+            scrollTopButton.addEventListener("click", function() {
+                document.body.scrollIntoView({behavior: 'smooth', block: 'start'})
+            });
+
             <?php if(!isset($navigation) || $navigation) { ?>
             document.querySelector("#navigation .menu-toggle").addEventListener("click",function() {
                 document.getElementById("navigation").classList.add("reveal-menu");
@@ -50,6 +67,11 @@
 
             document.querySelector("#navigation .menu").addEventListener("click",function(e) {
                 e.stopPropagation();
+            });
+
+            document.querySelector("#navigation .search-box .search-button").addEventListener("click",function(e) {
+                if(window.screen.width < 900)
+                    document.getElementById("navigation").classList.add("search");
             });
             <?php } ?>
         </script>

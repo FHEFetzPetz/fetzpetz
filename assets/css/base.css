@@ -146,6 +146,7 @@ body, html {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+    padding-left: 60px;
 }
 
 #navigation .logo-holder img {
@@ -157,7 +158,12 @@ body, html {
     display: none;
 }
 
-#navigation .search-box {
+#navigation .search-box,
+#navigation .search-box .search-inner {
+    height: 100%;
+}
+
+#navigation .search-box input {
     display: none;
 }
 
@@ -170,6 +176,7 @@ body, html {
     display: none;
 }
 
+#navigation .search-box .search-button,
 #navigation .actions .action {
     height: 100%;
     width: 60px;
@@ -183,8 +190,131 @@ body, html {
     transition: background-color .2s ease;
 }
 
+#navigation .search-box .search-button:hover,
 #navigation .actions .action:hover {
     background-color: rgba(255,255,255,0.1);
+}
+
+#navigation.search .logo-holder {
+    display: none;
+}
+
+#navigation.search .search-box {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+#navigation.search .search-box .search-inner {
+    flex: 1;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    background: #C4C4C4;
+}
+
+#navigation.search .search-box .search-inner input {
+    display: block;
+    flex: 1;
+    background: none;
+    border: none;
+    height: 100%;
+    padding-left: 15px;
+}
+
+#navigation.search .search-box .search-button {
+    color: #7c7c7c;
+}
+
+.product-wrap {
+    flex: 1;
+    min-width: 267px;
+    max-width: 267px;
+    padding: 3px;
+}
+
+.product-card {
+    background: #333333;
+    padding: 4px;
+    display: block;
+    text-decoration: none;
+
+    transition: background-color .2s ease;
+}
+
+.product-card:hover {
+    background-color: #2d2d2d;
+}
+
+.product-card .image {
+    width: 100%;
+    height: 160px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.product-card .image .like-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color: #C4C4C4;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: background-color .2s ease;
+}
+
+.product-card .image .like-button:hover {
+    background-color: rgba(255,255,255,0.2);
+}
+
+.product-card .data {
+    padding: 8px 5px;
+    color: #C4C4C4;
+}
+
+.product-card .data .price {
+    font-size: 12px;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+#scroll-top {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    width: 45px;
+    height: 45px;
+    background: #EB5757;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(60px);
+
+    transition: background-color .2s ease, opacity .2s ease, transform .2s cubic-bezier(.43,-0.4,.52,1.61);
+}
+
+#scroll-top.reveal {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+#scroll-top:hover {
+    background-color: #844ABA;
 }
 
 @media (min-width: 600px) {
@@ -241,6 +371,7 @@ body, html {
 
     #navigation .logo-holder {
         justify-content: flex-start;
+        padding-left: 0;
     }
 
     #navigation .logo-holder .desktop-logo {
@@ -248,22 +379,45 @@ body, html {
     }
 
     #navigation .actions {
-        flex: 1;
         justify-content: flex-end;
+    }
+
+    #navigation.search .actions,
+    #navigation.search .logo-holder {
+        flex: 0;
+    }
+
+    #navigation.search .logo-holder {
+        display: block !important;
     }
 
     #navigation .actions .desktop-actions {
         display: flex;
     }
 
+    #navigation.search .search-box {
+        padding: 0 15px;
+    }
+
 }
 
 @media (min-width: 900px) {
+
+    #navigation .logo-holder {
+        display: block !important;
+    }
+
+    #navigation .actions,
+    #navigation .logo-holder {
+        flex: 1 !important;
+    }
+
     #navigation .search-box {
         display: flex;
         width: 100%;
         max-width: 500px;
         padding: 0 10px;
+        align-items: center;
     }
 
     #navigation .search-box .search-inner {
@@ -275,6 +429,7 @@ body, html {
     }
 
     #navigation .search-box .search-inner input {
+        display: block;
         height: 100%;
         flex: 1;
         background: none;
@@ -292,6 +447,7 @@ body, html {
         display: flex;
         align-items: center;
         cursor: pointer;
+        color: #7c7c7c;
 
         transition: background-color .2s ease;
     }
