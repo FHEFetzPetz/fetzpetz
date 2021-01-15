@@ -3,7 +3,7 @@ $categories = $this->kernel->getModelService()->find(\App\FetzPetz\Model\Categor
 $desktopCategoryLimit = 3;
 
 ?>
-<div id="navigation">
+<nav id="navigation">
     <div class="menu-overlay">
         <div class="menu">
             <div class="header">
@@ -62,4 +62,4 @@ $desktopCategoryLimit = 3;
             <div class="action"><i class="icon shopping-cart"></i></div>
         </div>
     </div>
-</div>
+</nav>
