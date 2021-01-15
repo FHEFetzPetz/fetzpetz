@@ -33,6 +33,7 @@ body, html {
 #navigation.reveal-menu .menu-overlay {
     opacity: 1;
     pointer-events: auto;
+    z-index: 20;
 }
 
 #navigation .menu {

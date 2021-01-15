@@ -52,7 +52,7 @@
                 document.body.scrollIntoView({behavior: 'smooth', block: 'start'})
             });
 
-            <?php if(!isset($navigation) || $navigation) { ?>
+            <?php if(!isset($navigation) || $navigation): ?>
             document.querySelector("#navigation .menu-toggle").addEventListener("click",function() {
                 document.getElementById("navigation").classList.add("reveal-menu");
             });
@@ -69,11 +69,13 @@
                 e.stopPropagation();
             });
 
+            <?php if(!isset($showSearch) || $showSearch): ?>
             document.querySelector("#navigation .search-box .search-button").addEventListener("click",function(e) {
                 if(window.screen.width < 900)
                     document.getElementById("navigation").classList.add("search");
             });
-            <?php } ?>
+            <?php endif ?>
+            <?php endif ?>
         </script>
     </body>
 </html>

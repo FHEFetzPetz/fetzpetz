@@ -3,7 +3,7 @@ $categories = $this->kernel->getModelService()->find(\App\FetzPetz\Model\Categor
 ?>
 
 <div class="container">
-    <div id="mainpage">
+    <section id="mainpage">
         <div class="row">
             <div id="sidebar">
                 <div class="sticky-box">
@@ -39,7 +39,7 @@ $categories = $this->kernel->getModelService()->find(\App\FetzPetz\Model\Categor
                 </div>
             </div>
             <div id="content">
-                <div id="welcome-box">
+                <header id="welcome-box">
                     <h1>Welcome to FetzPetz</h1>
                     <h2>Your store for nice shit</h2>
                     <div class="search-box">
@@ -50,7 +50,7 @@ $categories = $this->kernel->getModelService()->find(\App\FetzPetz\Model\Categor
                             </div>
                         </div>
                     </div>
-                </div>
+                </header>
                 <div class="products">
 
                     <?php
@@ -59,7 +59,7 @@ $categories = $this->kernel->getModelService()->find(\App\FetzPetz\Model\Categor
                     foreach($products as $product):
 
                     if($isFirst) { ?>
-                        <div class="promoted-product-wrap">
+                        <article class="promoted-product-wrap">
                             <a href="#" class="product-card">
                                 <div class="image" style="background-image: url(<?= $product->__get("image") ?>)"></div>
                                 <div class="data">
@@ -73,7 +73,7 @@ $categories = $this->kernel->getModelService()->find(\App\FetzPetz\Model\Categor
                                     <div class="description"><?= nl2br($product->__get("description")) ?></div>
                                 </div>
                             </a>
-                        </div>
+                        </article>
                     <?php $isFirst = false;
                     } else
                         $this->renderComponent("components/productCard.php", ["product"=>$product]);
@@ -82,5 +82,5 @@ $categories = $this->kernel->getModelService()->find(\App\FetzPetz\Model\Categor
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 </div>

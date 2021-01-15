@@ -1,4 +1,4 @@
-<div class="product-wrap">
+<article class="product-wrap">
     <a href="#" class="product-card">
         <div class="image" style="background-image: url(<?= $product->__get("image") ?>)">
             <div class="like-button">
@@ -10,4 +10,4 @@
             <span class="price"><?= $product->__get("cost_per_item") ?> €</span>
         </div>
     </a>
-</div>
+</article>
