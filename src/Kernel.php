@@ -19,6 +19,12 @@ class Kernel {
     private $loggerService;
     private $modelService;
 
+    /**
+     * Kernel constructor.
+     * Initializing the Kernel and services
+     *
+     * @param array $config
+     */
     public function __construct(array $config)
     {
         $this->config = $config;

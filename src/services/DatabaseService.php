@@ -17,6 +17,9 @@ class DatabaseService extends Service
         $this->openConnection();
     }
 
+    /**
+     * Opens the database connection with configuration values
+     */
     public function openConnection() {
         if($this->database != null) return;
 

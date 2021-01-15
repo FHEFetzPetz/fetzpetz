@@ -9,6 +9,7 @@ const targets = [
     "src/Kernel.php"
 ];
 
+//looping through php necessary files
 foreach(targets as $target)
     foreach(glob($target) as $class)
         require_once $class;

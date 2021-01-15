@@ -8,6 +8,14 @@ use App\FetzPetz\Core\Service;
 class ModelService extends Service
 {
 
+    /**
+     * searches for a entry in the specified model-class
+     *
+     * @param $className
+     * @param array $where
+     * @param array|string[] $select
+     * @return array
+     */
     public function find($className, array $where = [], array $select = ['*']) {
         $this->kernel->getLoggerService()->log('Called find for model ' . $className, 'debug');
 
@@ -42,6 +50,14 @@ class ModelService extends Service
         return $output;
     }
 
+    /**
+     * Returns one entry of a specified class-model-table if exists
+     *
+     * @param $className
+     * @param array $where
+     * @param array|string[] $select
+     * @return mixed|null
+     */
     public function findOne($className, array $where = [], array $select = ['*'])
     {
         $this->kernel->getLoggerService()->log('Called findOne for model ' . $className, 'debug');
@@ -51,10 +67,23 @@ class ModelService extends Service
         return null;
     }
 
+    /**
+     * Returns one entry of a specified class-model-table by a id
+     *
+     * @param $className
+     * @param int $id
+     * @return mixed|null
+     */
     public function findOneById($className, int $id) {
         return $this->findOne($className, ['id' => $id]);
     }
 
+    /**
+     * Insert a model into the class-model-table
+     *
+     * @param Model $model
+     * @param false $throwError
+     */
     public function insert(Model $model, $throwError = false)
     {
         $class = get_class($model);
@@ -100,6 +129,12 @@ class ModelService extends Service
         $model->__set($primaryKey, $insertId);
     }
 
+    /**
+     * Updates a table-entry with values from the model
+     *
+     * @param Model $model
+     * @param false $throwError
+     */
     public function update(Model $model, $throwError = false)
     {
         $class = get_class($model);
@@ -137,6 +172,12 @@ class ModelService extends Service
         }
     }
 
+    /**
+     * Deletes the table-entry by the model-id
+     *
+     * @param Model $model
+     * @param false $throwError
+     */
     public function destroy(Model $model, $throwError = false)
     {
         $class = get_class($model);
