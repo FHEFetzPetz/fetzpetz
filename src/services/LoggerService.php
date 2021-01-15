@@ -22,6 +22,13 @@ class LoggerService extends Service
         return $this->kernel->getConfig()['log'];
     }
 
+    /**
+     * determines if the message level is "important"
+     * enough for logging
+     *
+     * @param string $level
+     * @return bool
+     */
     private function isMatchingLevel(string $level) {
         $logLevel = $this->logLevels[$level] ?? -1;
         $maximumLevel = $this->logLevels[$this->getLogConfig()['level']] ?? -1;
@@ -29,10 +36,23 @@ class LoggerService extends Service
         return $logLevel <= $maximumLevel;
     }
 
+    /**
+     * Returns message prefix with datetime and level
+     *
+     * @param string $level
+     * @return string
+     */
     private function getMessagePrefix(string $level): string {
         return '[' . (new \DateTime())->format('d.m.Y H:i:s') . '] [' . $level . ']';
     }
 
+    /**
+     * Logs a message in the log-file
+     *
+     * @param string $message
+     * @param string $level
+     * @param string|null $logFile
+     */
     public function log(string $message, string $level = 'debug', string $logFile = null) {
         if(!$this->isMatchingLevel($level)) return;
         if($logFile == null) $logFile = $this->getLogConfig()['filename'];

@@ -12,6 +12,12 @@ class SecurityService extends Service
 {
     private $currentUser = null;
 
+    /**
+     * Prepares the session by checking if the user
+     * has any session parameters and if the given
+     * values are still valid, otherwise it will be
+     * destroyed
+     */
     public function prepareService() {
         if(isset($_SESSION["user_id"])) {
             $id = intval($_SESSION["user_id"]);
@@ -22,11 +28,23 @@ class SecurityService extends Service
         }
     }
 
+    /**
+     * Updating the session and adding the current
+     * user to the service
+     *
+     * @param User $user
+     */
     public function authenticateWithUser(User $user) {
         $_SESSION["user_id"] = $user->__get("id");
         $this->currentUser = $user;
     }
 
+    /**
+     * Destroys the session and removing the
+     * current user from the service
+     *
+     * @param bool $recreate
+     */
     public function destroySession($recreate = true) {
         session_destroy();
         $this->currentUser = null;
