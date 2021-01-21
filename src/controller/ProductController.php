@@ -25,7 +25,11 @@ class ProductController extends Controller
 
         $product = $this->kernel->getModelService()->findOne(Product::class);
 
-        $this->setParameter("product", $product);
+        $products = $this->kernel->getModelService()->find(Product::class);
+        
+        $this->setParameter("products", $products);
+
+        $this->setParameter("shownProduct", $product);
 
         $this->setView("product.php");
     }
