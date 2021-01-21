@@ -5,7 +5,7 @@ namespace App\FetzPetz;
 use App\FetzPetz\Services\DatabaseService;
 use App\FetzPetz\Services\LoggerService;
 use App\FetzPetz\Services\ModelService;
-use App\FetzPetz\Services\PaymentService;
+use App\FetzPetz\Services\ShopService;
 use App\FetzPetz\Services\RequestService;
 use App\FetzPetz\Services\SecurityService;
 
@@ -15,7 +15,7 @@ class Kernel {
     private $databaseService;
     private $securityService;
     private $requestService;
-    private $paymentService;
+    private $shopService;
     private $loggerService;
     private $modelService;
 
@@ -31,7 +31,7 @@ class Kernel {
         $this->databaseService = new DatabaseService($this);
         $this->securityService = new SecurityService($this);
         $this->requestService = new RequestService($this);
-        $this->paymentService = new PaymentService($this);
+        $this->shopService = new ShopService($this);
         $this->loggerService = new LoggerService($this);
         $this->modelService = new ModelService($this);
 
@@ -57,8 +57,8 @@ class Kernel {
         return $this->requestService;
     }
 
-    public function getPaymentService(): PaymentService {
-        return $this->paymentService;
+    public function getShopService(): ShopService {
+        return $this->shopService;
     }
 
     public function getLoggerService(): LoggerService {

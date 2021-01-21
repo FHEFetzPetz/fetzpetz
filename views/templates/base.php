@@ -71,7 +71,7 @@
 
             <?php if(!isset($showSearch) || $showSearch): ?>
             document.querySelector("#navigation .search-box .search-button").addEventListener("click",function(e) {
-                if(window.screen.width < 900)
+                if(window.innerWidth < 900)
                     document.getElementById("navigation").classList.add("search");
             });
             <?php endif ?>

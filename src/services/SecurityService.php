@@ -24,7 +24,7 @@ class SecurityService extends Service
 
             $user = $this->checkUserExistence($id);
             if($user) $this->currentUser = $user;
-            else $this->destroySession(true);
+            else $this->removeAuthentication();
         }
     }
 
@@ -45,11 +45,9 @@ class SecurityService extends Service
      *
      * @param bool $recreate
      */
-    public function destroySession($recreate = true) {
-        session_destroy();
+    public function removeAuthentication() {
+        unset($_SESSION["user_id"]);
         $this->currentUser = null;
-
-        if($recreate) session_start();
     }
 
     public function checkUserExistence(int $id): ?User {
