@@ -29,12 +29,12 @@ $categories = $this->kernel->getModelService()->find(\App\FetzPetz\Model\Categor
                         <span>My Profile</span>
                     </div>
                     <?php else: ?>
-                    <div class="item margin-top">
+                    <a href="<?= $this->getPath('/login'); ?>" class="item margin-top">
                         <span>Log in</span>
-                    </div>
-                    <div class="item color">
+                    </a>
+                    <a href="<?= $this->getPath('/signup'); ?>" class="item color">
                         <span>Sign up</span>
-                    </div>
+                    </a>
                     <?php endif ?>
                 </div>
             </div>

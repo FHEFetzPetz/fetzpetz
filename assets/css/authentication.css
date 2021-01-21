@@ -1,0 +1,102 @@
+#authentication {
+    display: flex;
+    flex-direction: column-reverse;
+    padding: 15px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+#authentication .divider {
+    border-top: solid 1px #c4c4c4;
+    margin: 30px 0;
+}
+
+#authentication .view {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+}
+
+#authentication .view h1,
+#authentication .view h2 {
+    color: #c4c4c4;
+    font-size: 20px;
+    margin: 20px 0 10px 0;
+    font-weight: 600;
+}
+
+#authentication .view .form {
+    width: 100%;
+    max-width: 350px;
+    padding: 0 20px;
+}
+
+#authentication .view .form .input-item {
+    display: flex;
+    margin: 5px -5px;
+}
+
+#authentication .view .form .input-item input {
+    height: 40px;
+    width: 100%;
+    padding: 0 15px;
+    margin: 5px;
+    border: solid 1px #c4c4c4;
+    border-radius: 5px;
+    background: #f1f1f1;
+}
+
+#authentication .view .form .submit-item {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+#authentication .view .form .submit-item button {
+    height: 40px;
+    padding: 0 25px;
+    border: none;
+    border-radius: 5px;
+    background: #f1f1f1;
+    font-size: 18px;
+    color: #333333;
+    cursor: pointer;
+
+    transition: background-color .2s ease, color .2s ease;
+}
+
+#authentication .view .form .submit-item button:hover {
+    background-color: #844aba; 
+    color: white;
+}
+
+#authentication .view .form .input-item input:focus,
+#authentication .view .form .submit-item button:focus {
+    outline: none;
+}
+
+@media (min-width: 900px) {
+
+    #authentication {
+        flex-direction: row;
+        min-height: 75vh;
+        align-items: center;
+    }
+
+    #authentication .divider {
+        border-top: none;
+        border-left: solid 1px #c4c4c4;
+        margin: 0 10px;
+        height: 50vh;
+    }
+
+    #authentication .signup-info {
+        flex: 1;
+    }
+
+    #authentication .authentication-view {
+        flex: 1;
+    }
+
+}

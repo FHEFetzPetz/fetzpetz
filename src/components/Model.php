@@ -121,6 +121,7 @@ class Model
 
         switch($type) {
             case self::TYPE_DATE: return $value->format('Y-m-d H:i:s');
+            case self::TYPE_DATETIME: return $value->format('Y-m-d H:i:s');
             case self::TYPE_BOOL: return $value ? 1 : 0;
             default: return $value;
         }
