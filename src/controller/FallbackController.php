@@ -15,7 +15,9 @@ class FallbackController extends Controller
     }
 
     public function page404() {
-        return $this->renderView("fallback/404.php");
+        $this->setParameter("title", "FetzPetz | 404 - Page not found");
+        $this->setParameter('message','Page not found');
+        return $this->setView("fallback/404.php");
     }
 
 }

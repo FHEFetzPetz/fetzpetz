@@ -12,12 +12,13 @@ class ShopService extends Service
      * Returns an array with cart items stored in the session with fetched products
      * @return array
      */
-    public function getCart() : array {
+    public function getCart(): array
+    {
         $cartItems = $_SESSION["cart"] ?? [];
         $output = [];
         $productEntries = $this->kernel->getModelService()->find(Product::class, ["id" => array_keys($cartItems)]);
 
-        foreach($productEntries as $product) {
+        foreach ($productEntries as $product) {
             $cartItem = $cartItems[$product->__get("id")];
             $total = $product->__get("cost_per_item") * $cartItem["quantity"];
 
@@ -27,11 +28,12 @@ class ShopService extends Service
         return $output;
     }
 
-    public function getProductInCart(Product $product) : ?array {
+    public function getProductInCart(Product $product): ?array
+    {
         $cartItems = $_SESSION["cart"] ?? [];
         $id = $product->__get("id");
 
-        if(isset($cartItems[$id])) {
+        if (isset($cartItems[$id])) {
             $cartItem = $cartItems[$id];
             $total = $product->__get("cost_per_item") * $cartItem["quantity"];
 
@@ -42,14 +44,18 @@ class ShopService extends Service
     }
 
     /**
-     * Adds a product to the cart and overrides the existing product
+     * Adds a product to the cart or increases the existing products quantity
      * @param Product $product
      * @param int $quantity
      */
-    public function addToCart(Product $product, int $quantity) {
+    public function addToCart(Product $product, int $quantity)
+    {
         $cartItems = $_SESSION["cart"] ?? [];
 
-        $cartItems[$product->__get("id")] = ["last_updated" => new \DateTime(), "quantity" => $quantity];
+        if (isset($cartItems[$product->__get("id")]))
+            $cartItems[$product->__get("id")] = ["last_updated" => new \DateTime(), "quantity" => $quantity + $cartItems[$product->__get('id')]['quantity']];
+        else
+            $cartItems[$product->__get("id")] = ["last_updated" => new \DateTime(), "quantity" => $quantity];
 
         $_SESSION["cart"] = $cartItems;
     }
@@ -58,10 +64,11 @@ class ShopService extends Service
      * Removes the product from the cart if existing
      * @param Product $product
      */
-    public function removeFromCart(Product $product) {
+    public function removeFromCart(Product $product)
+    {
         $cartItems = $_SESSION["cart"] ?? [];
 
-        if(isset($cartItems[$product->__get("id")]))
+        if (isset($cartItems[$product->__get("id")]))
             unset($cartItems[$product->__get("id")]);
 
         $_SESSION["cart"] = $cartItems;
@@ -72,14 +79,15 @@ class ShopService extends Service
      * @param Product $product
      * @param int $quantity
      */
-    public function changeQuantity(Product $product, int $quantity) {
-        if($quantity <= 0) {
+    public function changeQuantity(Product $product, int $quantity)
+    {
+        if ($quantity <= 0) {
             $this->removeFromCart($product);
             return;
         }
         $cartItems = $_SESSION["cart"] ?? [];
 
-        if(isset($cartItems[$product->__get("id")]))
+        if (isset($cartItems[$product->__get("id")]))
             $cartItems[$product->__get("id")] = ["last_updated" => new \DateTime(), "quantity" => $quantity];
 
         $_SESSION["cart"] = $cartItems;
@@ -89,14 +97,14 @@ class ShopService extends Service
      * Get total of cart items by product price and quantity
      * @return float
      */
-    public function getTotal() : float {
+    public function getTotal(): float
+    {
         $cart = $this->getCart();
         $total = 0.00;
 
-        foreach($cart as $item)
+        foreach ($cart as $item)
             $total += $item["total"];
 
         return $total;
     }
-
 }

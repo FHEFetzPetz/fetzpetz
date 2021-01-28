@@ -29,7 +29,7 @@
                                                     <div class="image" style="background-image: url(<?= $item['product']->__get("image") ?>)"></div>
                                                     <div class="data">
                                                         <h4><?= $item['product']->__get("name") ?></h4>
-                                                        <div class="price"><?= $item['product']->__get("cost_per_item") ?> €</div>
+                                                        <div class="price"><?= number_format($item['product']->__get("cost_per_item"),2,'.','') ?> €</div>
                                                         <div class="actions">
                                                             <a href="<?= $this->getPath('/cart/remove/' . $item['product']->__get('id')) ?>" class="action">Remove from Cart</a>
                                                         </div>
@@ -37,7 +37,7 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="item-price"><?= number_format($item["total"], 2) ?> €</div>
+                                                <div class="item-price"><?= number_format($item["total"], 2,'.','') ?> €</div>
                                             </td>
                                             <td class="quantity">
                                                 <span><?= $item['quantity'] ?></span>
@@ -52,7 +52,7 @@
                                 <tfoot>
                                     <tr>
                                         <td colspan="3" class="total">
-                                            <span class="total-text">Total (<?= sizeof($items) ?> Item(s)): <?= number_format($total, 2) ?></span>
+                                            <span class="total-text">Total (<?= sizeof($items) ?> Item(s)): <?= number_format($total, 2,'.','') ?> €</span>
                                             <br>
                                             <div class="checkout-button">Proceed to Checkout</div>
                                         </td>

@@ -127,3 +127,7 @@
 .icon.share:before {
     content: '\f1e0';
 }
+
+.icon.sad:before {
+    content: '\f5b4';
+}

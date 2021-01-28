@@ -6,6 +6,7 @@
     display: flex;
     flex-direction: column;
     background-color: #333333;
+    position: relative;
 }
 
 #product .product-view .image {
@@ -23,7 +24,6 @@
     margin: 14px;
     color: #C4C4C4;
     text-align: left;
-    position: relative;
 }
 
 #product .product-view .data .actions {
@@ -60,6 +60,31 @@
 #product .product-view .price,
 #product .product-view .description {
     margin: 0 0 14px 0;
+}
+
+#product .product-view .cart-button {
+    height: 40px;
+    padding: 0 15px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 5px;
+    background: #f1f1f1;
+    font-size: 18px;
+    color: #333333;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    transition: background-color .2s ease, color .2s ease;
+}
+
+#product .product-view .cart-button i {
+    margin-right: 5px;
+}
+
+#product .product-view .cart-button:hover {
+    background-color: #844aba;
+    color: white;
 }
 
 .more-products {
