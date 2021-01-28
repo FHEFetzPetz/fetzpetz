@@ -6,37 +6,35 @@ $categories = $this->kernel->getModelService()->find(\App\FetzPetz\Model\Categor
     <section id="mainpage">
         <div class="row">
             <div id="sidebar">
-                <div class="sticky-box">
-                    <?php
-                    foreach($categories as $category) { ?>
-                        <div class="item">
-                            <span><?= $category->__get('name') ?></span>
-                            <i class="icon chevron-right"></i>
-                        </div>
-                    <?php }
-                    ?>
+                <?php
+                foreach($categories as $category) { ?>
                     <div class="item">
-                        <span>Wishlist</span>
+                        <span><?= $category->__get('name') ?></span>
+                        <i class="icon chevron-right"></i>
                     </div>
-                    <div class="item">
-                        <span>Cart</span>
-                    </div>
-                    <?php if($this->isAuthenticated()): ?>
-                    <div class="item margin-top">
-                        <span>Logout</span>
-                    </div>
-                    <div class="item color">
-                        <span>My Profile</span>
-                    </div>
-                    <?php else: ?>
-                    <a href="<?= $this->getPath('/login'); ?>" class="item margin-top">
-                        <span>Log in</span>
-                    </a>
-                    <a href="<?= $this->getPath('/signup'); ?>" class="item color">
-                        <span>Sign up</span>
-                    </a>
-                    <?php endif ?>
+                <?php }
+                ?>
+                <div class="item">
+                    <span>Wishlist</span>
                 </div>
+                <a href="<?= $this->getPath('/cart') ?>" class="item">
+                    <span>Cart</span>
+                </a>
+                <?php if($this->isAuthenticated()): ?>
+                <div class="item margin-top">
+                    <span>Logout</span>
+                </div>
+                <div class="item color">
+                    <span>My Profile</span>
+                </div>
+                <?php else: ?>
+                <a href="<?= $this->getPath('/login'); ?>" class="item margin-top">
+                    <span>Log in</span>
+                </a>
+                <a href="<?= $this->getPath('/signup'); ?>" class="item color">
+                    <span>Sign up</span>
+                </a>
+                <?php endif ?>
             </div>
             <div id="content">
                 <header id="welcome-box">

@@ -27,6 +27,20 @@ class ShopService extends Service
         return $output;
     }
 
+    public function getProductInCart(Product $product) : ?array {
+        $cartItems = $_SESSION["cart"] ?? [];
+        $id = $product->__get("id");
+
+        if(isset($cartItems[$id])) {
+            $cartItem = $cartItems[$id];
+            $total = $product->__get("cost_per_item") * $cartItem["quantity"];
+
+            return array_merge(["product_id" => intval($id), "total" => $total], $cartItem);
+        }
+
+        return null;
+    }
+
     /**
      * Adds a product to the cart and overrides the existing product
      * @param Product $product

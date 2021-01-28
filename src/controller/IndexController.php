@@ -27,7 +27,7 @@ class IndexController extends Controller
         $products = $this->kernel->getModelService()->find(Product::class);
 
         $this->setParameter("products", $products);
-        $this->setParameter("showSearch", false);
+        $this->setParameter("slim", true);
 
         $this->setView("index.php");
     }

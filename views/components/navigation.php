@@ -3,7 +3,7 @@ $categories = $this->kernel->getModelService()->find(\App\FetzPetz\Model\Categor
 $desktopCategoryLimit = 3;
 
 ?>
-<nav id="navigation">
+<nav id="navigation"<?php if (isset($slim) && $slim) { ?> class="slim"<?php } ?>>
     <div class="menu-overlay">
         <div class="menu">
             <div class="header">
@@ -39,13 +39,13 @@ $desktopCategoryLimit = 3;
         <div class="menu-toggle">
             <i class="icon bars"></i>
         </div>
-        <div class="logo-holder" <?php if (isset($showSearch) && !$showSearch) : ?> style="padding-left: 0" <?php endif ?>>
+        <div class="logo-holder" <?php if (isset($slim) && $slim) : ?> style="padding-left: 0" <?php endif ?>>
             <a href="/">
                 <img alt="FetzPetz Logo" src="/assets/images/logo.png" class="mobile-logo">
                 <img alt="FetzPetz Logo" src="/assets/images/logo-text.png" class="desktop-logo">
             </a>
         </div>
-        <?php if (!isset($showSearch) || $showSearch) : ?>
+        <?php if (!isset($slim) || !$slim) : ?>
             <div class="search-box">
                 <div class="search-inner">
                     <input type="text" placeholder="Search for products">
@@ -60,7 +60,7 @@ $desktopCategoryLimit = 3;
                 <a href="<?= $this->getPath('/login'); ?>" class="action"><i class="icon user"></i></a> <!-- Konditionen für anmeldung-->
                 <div class="action"><i class="icon heart"></i></div>
             </div>
-            <div class="action"><i class="icon shopping-cart"></i></div>
+            <a href="<?= $this->getPath('/cart') ?>" class="action"><i class="icon shopping-cart"></i></a>
         </div>
     </div>
 </nav>

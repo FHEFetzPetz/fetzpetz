@@ -1,0 +1,197 @@
+#cart {
+    padding: 10px;
+}
+
+#cart .row {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    align-items: flex-start;
+}
+
+#content {
+    flex: 1;
+    padding: 0 10px;
+}
+
+#content .box {
+    background: #333333;
+    padding: 15px;
+}
+
+#content .box h1 {
+    color: #a7a7a7;
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+#content .box .items .empty-message {
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: #a7a7a7;
+}
+
+#content .box .items .empty-message i {
+    font-size: 40px;
+}
+
+#content .box .items .empty-message span {
+    font-size: 17px;
+    font-weight: 600;
+    margin-top: 20px;
+}
+
+#content .box .items .empty-message a {
+    color: #844ABA;
+    font-weight: 500;
+    text-decoration: none;
+    margin-top: 10px;
+}
+
+#content .box table {
+    width: 100%;
+    color: #a7a7a7;
+    margin-top: 20px;
+}
+
+#content .box table thead th:nth-child(1) {
+    width: 100%;
+}
+
+#content .box table thead th {
+    min-width: 150px;
+    text-align: left;
+    padding: 0 10px 10px;
+    font-size: 14px;
+}
+
+#content .box table thead th:last-child {
+    text-align: right;
+}
+
+#content .box table tbody td {
+    border-top: solid 1px #484848;
+    padding: 10px;
+    vertical-align: top;
+}
+
+#content .box .product-item {
+    display: flex;
+    align-items: flex-start;
+}
+
+#content .box .product-item .image {
+    width: 120px;
+    height: 120px;
+    margin-right: 10px;
+    background-size: cover;
+    background-position: center;
+}
+
+#content .box .product-item .data {
+    flex: 1;
+    display: flex;
+    min-height: 120px;
+    flex-direction: column;
+}
+
+#content .box .product-item .data h4 {
+    margin: 0 0 10px;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+#content .box .product-item .data .price {
+    font-size: 16px;
+    margin-bottom: 20px;
+    flex: 1;
+}
+
+#content .box .product-item .data .actions {
+    margin: 0 -4px;
+}
+
+#content .box .product-item .data .actions .action {
+    font-size: 14px;
+    margin: 0 4px;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    transition: color .2s ease;
+}
+
+#content .box .product-item .data .actions .action:hover {
+    color: #844ABA;
+}
+
+#content .box table tbody .item-price {
+    font-size: 18px;
+    font-weight: 600;
+    min-height: 30px;
+    display: flex;
+    align-items: center;
+}
+
+#content .box table tbody .quantity {
+    text-align: right;
+}
+
+#content .box table tbody .quantity .quantity-actions {
+    display: inline-flex;
+    margin: 0 -4px 0 6px;
+}
+
+#content .box table tbody .quantity .quantity-actions .action {
+    height: 30px;
+    width: 30px;
+    border: solid 1px #c4c4c4;
+    border-radius: 5px;
+    background: #f1f1f1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 4px;
+    color: #333333;
+    cursor: pointer;
+    transition: background .2s ease;
+}
+
+#content .box table tbody .quantity .quantity-actions .action:hover {
+    background: #d1d1d1;
+}
+
+#content .box table tbody input:focus {
+    outline: none;
+}
+
+#content .box table tfoot .total {
+    text-align: right;
+    border-top: solid 1px #484848;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+#content .box table tfoot .total .checkout-button {
+    height: 35px;
+    padding: 0 15px;
+    border: none;
+    border-radius: 5px;
+    background: #f1f1f1;
+    font-size: 16px;
+    color: #333333;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    margin-top: 10px;
+
+    transition: background-color .2s ease, color .2s ease;
+}
+
+#content .box table tfoot .total .checkout-button:hover {
+    background-color: #844aba;
+    color: white;
+}
