@@ -107,12 +107,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
     transition: background-color .2s ease;
 }
 
 #content .promoted-product-wrap .product-card .data .title .like-button:hover {
-    background-color: rgba(255,255,255,0.2);
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 #content .promoted-product-wrap .product-card .data .title {
@@ -139,14 +138,12 @@
 }
 
 @media (min-width: 1200px) {
-
     #sidebar {
         display: block;
         flex: 1;
         max-width: 300px;
         background: #333333;
     }
-
     #sidebar .item {
         height: 50px;
         border-bottom: solid 1px #484848;
@@ -159,49 +156,39 @@
         cursor: pointer;
         transition: background-color .2s ease;
     }
-
     #sidebar .item:hover {
-        background-color: rgba(255,255,255,0.1);
+        background-color: rgba(255, 255, 255, 0.1);
     }
-
     #sidebar .item span {
         flex: 1;
     }
-
     #sidebar .item i {
         width: 30px;
         text-align: center;
     }
-
     #sidebar .item.margin-top {
         margin-top: 50px;
         border-top: solid 1px #484848;
     }
-
     #sidebar .item.color {
         background: linear-gradient(to right, #EB5757, #844ABA);
         color: white;
         border: none;
     }
-
     #content .products {
         justify-content: flex-start;
     }
-
     #content .promoted-product-wrap .product-card {
         display: flex;
     }
-
     #content .promoted-product-wrap .product-card .image {
         max-width: 600px;
         height: 500px;
     }
-
     #content .promoted-product-wrap .product-card .data {
         flex: 1;
         padding: 15px 20px;
     }
-
     #content .promoted-product-wrap .product-card .data .title span {
         flex: 1;
     }

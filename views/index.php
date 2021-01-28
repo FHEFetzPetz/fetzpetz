@@ -58,7 +58,7 @@ $categories = $this->kernel->getModelService()->find(\App\FetzPetz\Model\Categor
 
                     if($isFirst) { ?>
                         <article class="promoted-product-wrap">
-                            <a href="#" class="product-card">
+                            <a href="<?= $this->getPath('/product/' . $product->__get('id')) ?>" class="product-card">
                                 <div class="image" style="background-image: url(<?= $product->__get("image") ?>)"></div>
                                 <div class="data">
                                     <div class="title">

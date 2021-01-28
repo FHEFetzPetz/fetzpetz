@@ -12,18 +12,19 @@ class ProductController extends Controller
     public function shareRoutes(): array
     {
         return [
-            '/product' => 'product',
+            '/product/{id}' => 'product',
         ];
     }
 
-    public function product() {
+    public function product($id) {
         $this->setParameter("title", "FetzPetz | Product Page");
 
         $this->addExtraHeaderFields([
             ["type" => "stylesheet", "href" => "/assets/css/product.css"]
         ]);
 
-        $product = $this->kernel->getModelService()->findOne(Product::class);
+        $product = $this->kernel->getModelService()->findOneById(Product::class, $id);
+        if ($product == null) return $this->redirectTo('/');
 
         $products = $this->kernel->getModelService()->find(Product::class);
         

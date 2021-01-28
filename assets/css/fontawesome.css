@@ -4,40 +4,44 @@
     font-family: 'Font Awesome 5 Brands';
     font-style: normal;
     font-weight: 400;
-    src: url("../fonts/fontawesome/fa-brands-400.eot") /* IE9 */;
-    src:
-        url("../fonts/fontawesome/fa-brands-400.eot?#iefix") format("embedded-opentype") /* Old Browsers */,
-        url("../fonts/fontawesome/fa-brands-400.woff2") format("woff2") /* Modern Browsers (newest) */,
-        url("../fonts/fontawesome/fa-brands-400.woff") format("woff") /* Modern Browsers */,
-        url("../fonts/fontawesome/fa-brands-400.ttf") format("truetype") /* Safari, Mobile */,
-        url("../fonts/fontawesome/fa-brands-400.svg#fontawesome") format("svg") /* iOS (old) */;
+    src: url("../fonts/fontawesome/fa-brands-400.eot")/* IE9 */
+    ;
+    src: url("../fonts/fontawesome/fa-brands-400.eot?#iefix") format("embedded-opentype")/* Old Browsers */
+    , url("../fonts/fontawesome/fa-brands-400.woff2") format("woff2")/* Modern Browsers (newest) */
+    , url("../fonts/fontawesome/fa-brands-400.woff") format("woff")/* Modern Browsers */
+    , url("../fonts/fontawesome/fa-brands-400.ttf") format("truetype")/* Safari, Mobile */
+    , url("../fonts/fontawesome/fa-brands-400.svg#fontawesome") format("svg")/* iOS (old) */
+    ;
 }
 
 @font-face {
     font-family: 'Font Awesome 5 Free';
     font-style: normal;
     font-weight: 400;
-    src: url("../fonts/fontawesome/fa-regular-400.eot") /* IE9 */;
-    src:
-            url("../fonts/fontawesome/fa-regular-400.eot?#iefix") format("embedded-opentype") /* Old Browsers */,
-            url("../fonts/fontawesome/fa-regular-400.woff2") format("woff2") /* Modern Browsers (newest) */,
-            url("../fonts/fontawesome/fa-regular-400.woff") format("woff") /* Modern Browsers */,
-            url("../fonts/fontawesome/fa-regular-400.ttf") format("truetype") /* Safari, Mobile */,
-            url("../fonts/fontawesome/fa-regular-400.svg#fontawesome") format("svg") /* iOS (old) */;
+    src: url("../fonts/fontawesome/fa-regular-400.eot")/* IE9 */
+    ;
+    src: url("../fonts/fontawesome/fa-regular-400.eot?#iefix") format("embedded-opentype")/* Old Browsers */
+    , url("../fonts/fontawesome/fa-regular-400.woff2") format("woff2")/* Modern Browsers (newest) */
+    , url("../fonts/fontawesome/fa-regular-400.woff") format("woff")/* Modern Browsers */
+    , url("../fonts/fontawesome/fa-regular-400.ttf") format("truetype")/* Safari, Mobile */
+    , url("../fonts/fontawesome/fa-regular-400.svg#fontawesome") format("svg")/* iOS (old) */
+    ;
 }
 
 @font-face {
     font-family: 'Font Awesome 5 Free';
     font-style: normal;
     font-weight: 900;
-    src: url("../fonts/fontawesome/fa-solid-900.eot") /* IE9 */;
-    src:
-            url("../fonts/fontawesome/fa-solid-900.eot?#iefix") format("embedded-opentype") /* Old Browsers */,
-            url("../fonts/fontawesome/fa-solid-900.woff2") format("woff2") /* Modern Browsers (newest) */,
-            url("../fonts/fontawesome/fa-solid-900.woff") format("woff") /* Modern Browsers */,
-            url("../fonts/fontawesome/fa-solid-900.ttf") format("truetype") /* Safari, Mobile */,
-            url("../fonts/fontawesome/fa-solid-900.svg#fontawesome") format("svg") /* iOS (old) */;
+    src: url("../fonts/fontawesome/fa-solid-900.eot")/* IE9 */
+    ;
+    src: url("../fonts/fontawesome/fa-solid-900.eot?#iefix") format("embedded-opentype")/* Old Browsers */
+    , url("../fonts/fontawesome/fa-solid-900.woff2") format("woff2")/* Modern Browsers (newest) */
+    , url("../fonts/fontawesome/fa-solid-900.woff") format("woff")/* Modern Browsers */
+    , url("../fonts/fontawesome/fa-solid-900.ttf") format("truetype")/* Safari, Mobile */
+    , url("../fonts/fontawesome/fa-solid-900.svg#fontawesome") format("svg")/* iOS (old) */
+    ;
 }
+
 
 /* Icon-Base */
 
@@ -45,13 +49,11 @@
     /* Making font look smooth without Distortion */
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
-
     display: inline-block;
     font-style: normal;
     font-variant: normal;
     text-rendering: auto;
     line-height: 1;
-
     /* Initializing with solid font-type */
     font-family: 'Font Awesome 5 Free', serif;
     font-weight: 900;
@@ -66,6 +68,7 @@
     font-family: 'Font Awesome 5 Brands', serif;
     font-weight: 400;
 }
+
 
 /* Required Icons */
 
@@ -115,4 +118,12 @@
 
 .icon.minus:before {
     content: '\f068';
+}
+
+.icon.shopping-cart-plus:before {
+    content: '\f217';
+}
+
+.icon.share:before {
+    content: '\f1e0';
 }

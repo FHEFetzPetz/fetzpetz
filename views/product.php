@@ -13,7 +13,12 @@
                 <span><?= nl2br($shownProduct->__get("description")) ?></span>
             </div>
             <div class="actions">
-                <!-- in den Warenkorb -->
+                <div class="button share-button">
+                    <i class="icon share"></i>
+                </div>
+                <div class="button like-button">
+                    <i class="icon heart"></i>
+                </div>
             </div>
         </div>
     </article>

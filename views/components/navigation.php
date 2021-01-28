@@ -26,12 +26,24 @@ $desktopCategoryLimit = 3;
                 <div class="item">
                     <span>Wishlist</span>
                 </div>
+                <a href="<?= $this->getPath('/cart'); ?>" class="item">
+                    <span>Cart</span>
+                </a>
+                <?php if($this->isAuthenticated()): ?>
+                <div class="item margin-top">
+                    <span>Logout</span>
+                </div>
+                <div class="item color">
+                    <span>My Profile</span>
+                </div>
+                <?php else: ?>
                 <a href="<?= $this->getPath('/login'); ?>" class="item margin-top">
                     <span>Log in</span>
                 </a>
                 <a href="<?= $this->getPath('/signup'); ?>" class="item color">
                     <span>Sign up</span>
                 </a>
+                <?php endif ?>
             </div>
         </div>
     </div>
