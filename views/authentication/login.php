@@ -12,6 +12,13 @@
     <section class="login-view view">
         <h1 style="text-align: center;">Login<br></h1>
         <form method="post" class="form">
+            <?php if (sizeof($errors) > 0) : ?>
+                <ul class="errors">
+                    <?php foreach ($errors as $error) : ?>
+                        <li><?= $error; ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            <?php endif; ?>
             <div class="input-item">
                 <input id="email" name="email" type="email" placeholder="E-Mail Address">
             </div>

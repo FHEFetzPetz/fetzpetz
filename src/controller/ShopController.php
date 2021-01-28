@@ -16,10 +16,12 @@ class ShopController extends Controller
             '/cart-test' => 'cartTest',
             '/cart/remove/{id}' => 'cartRemove',
             '/cart/quantity/{id}/{quantity}' => 'cartQuantity',
+            '/wishlist' => 'wishlist',
         ];
     }
 
-    public function cart() {
+    public function cart()
+    {
         $this->setParameter("title", "FetzPetz | Cart");
 
         $this->addExtraHeaderFields([
@@ -36,22 +38,25 @@ class ShopController extends Controller
         $this->setView("shop/cart.php");
     }
 
-    public function cartTest() {
+    public function cartTest()
+    {
         $product = $this->kernel->getModelService()->findOne(Product::class);
         $this->kernel->getShopService()->addToCart($product, 2);
 
         $this->redirectTo("/cart");
     }
 
-    public function cartRemove($id) {
+    public function cartRemove($id)
+    {
         $product = $this->kernel->getModelService()->findOneById(Product::class, $id);
-        if($product != null) $this->kernel->getShopService()->removeFromCart($product);
+        if ($product != null) $this->kernel->getShopService()->removeFromCart($product);
         return $this->redirectTo('/cart');
     }
 
-    public function cartQuantity($id, $quantity) {
+    public function cartQuantity($id, $quantity)
+    {
         $product = $this->kernel->getModelService()->findOneById(Product::class, $id);
-        if($product == null) return $this->redirectTo('/cart');
+        if ($product == null) return $this->redirectTo('/cart');
 
         $shopService = $this->kernel->getShopService();
 
@@ -64,5 +69,24 @@ class ShopController extends Controller
             "total" => $shopService->getTotal(),
             "item_count" => sizeof($shopService->getCart())
         ]);
+    }
+
+    public function wishlist()
+    {
+        if (!$this->kernel->getSecurityService()->isAuthenticated())
+            return $this->redirectTo('/login');
+
+        $this->setParameter("title", "FetzPetz | Wishlist");
+
+        $this->addExtraHeaderFields([
+            ["type" => "stylesheet", "href" => "/assets/css/profile.css"],
+            ["type" => "stylesheet", "href" => "/assets/css/wishlist.css"]
+        ]);
+
+        $items = [];
+
+        $this->setParameter("items", $items);
+
+        $this->setView("shop/wishlist.php");
     }
 }

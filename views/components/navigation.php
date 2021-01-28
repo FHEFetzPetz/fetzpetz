@@ -3,7 +3,7 @@ $categories = $this->kernel->getModelService()->find(\App\FetzPetz\Model\Categor
 $desktopCategoryLimit = 3;
 
 ?>
-<nav id="navigation"<?php if (isset($slim) && $slim) { ?> class="slim"<?php } ?>>
+<nav id="navigation" <?php if (isset($slim) && $slim) { ?> class="slim" <?php } ?>>
     <div class="menu-overlay">
         <div class="menu">
             <div class="header">
@@ -23,26 +23,26 @@ $desktopCategoryLimit = 3;
                 ?>
             </div>
             <div class="mobile">
-                <div class="item">
+                <a href="<?= $this->getPath('/wishlist'); ?>" class="item">
                     <span>Wishlist</span>
-                </div>
+                </a>
                 <a href="<?= $this->getPath('/cart'); ?>" class="item">
                     <span>Cart</span>
                 </a>
-                <?php if($this->isAuthenticated()): ?>
-                <div class="item margin-top">
-                    <span>Logout</span>
-                </div>
-                <div class="item color">
-                    <span>My Profile</span>
-                </div>
-                <?php else: ?>
-                <a href="<?= $this->getPath('/login'); ?>" class="item margin-top">
-                    <span>Log in</span>
-                </a>
-                <a href="<?= $this->getPath('/signup'); ?>" class="item color">
-                    <span>Sign up</span>
-                </a>
+                <?php if ($this->isAuthenticated()) : ?>
+                    <a href="<?= $this->getPath('/logout'); ?>" class="item margin-top">
+                        <span>Logout</span>
+                    </a>
+                    <div class="item color">
+                        <span>My Profile</span>
+                    </div>
+                <?php else : ?>
+                    <a href="<?= $this->getPath('/login'); ?>" class="item margin-top">
+                        <span>Log in</span>
+                    </a>
+                    <a href="<?= $this->getPath('/signup'); ?>" class="item color">
+                        <span>Sign up</span>
+                    </a>
                 <?php endif ?>
             </div>
         </div>
@@ -70,7 +70,7 @@ $desktopCategoryLimit = 3;
         <div class="actions">
             <div class="desktop-actions">
                 <a href="<?= $this->getPath('/login'); ?>" class="action"><i class="icon user"></i></a> <!-- Konditionen für anmeldung-->
-                <div class="action"><i class="icon heart"></i></div>
+                <a href="<?= $this->getPath('/wishlist'); ?>" class="action"><i class="icon heart"></i></a>
             </div>
             <a href="<?= $this->getPath('/cart') ?>" class="action"><i class="icon shopping-cart"></i></a>
         </div>

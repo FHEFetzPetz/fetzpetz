@@ -13,12 +13,34 @@ class AuthenticationController extends Controller
         return [
             '/login' => 'login',
             '/signup' => 'signup',
+            '/logout' => 'logout',
         ];
     }
 
     public function login()
     {
+        $email = strtolower($_POST['email'] ?? '');
+        $password = $_POST['password'] ?? '';
+
+        $errors = [];
+
         $this->setParameter("title", "FetzPetz | Login");
+
+        if (isset($_POST['email'])) {
+
+            $password = $_POST['password'];
+
+            $existingUser = $this->kernel->getModelService()->findOne(User::class, ['email' => $email]);
+
+            if (!is_null($existingUser) && password_verify($password, $existingUser->__get("password_hash"))) {
+                $this->kernel->getSecurityService()->authenticateWithUser($existingUser);
+
+                //TODO ZIELSEITE 
+               return  $this->redirectTo('/');
+            } else $errors[] = 'invalid credentials';
+        }
+
+        $this->setParameter('errors', $errors);
 
         $this->addExtraHeaderFields([
             ["type" => "stylesheet", "href" => "/assets/css/authentication.css"]
@@ -98,5 +120,10 @@ class AuthenticationController extends Controller
         if ($length < $min) return false;
         if ($length > $max) return false;
         return true;
+    }
+
+    public function logout() {
+        $this->kernel->getSecurityService()->removeAuthentication();
+        return $this->redirectTo('/');
     }
 }

@@ -14,16 +14,16 @@ $categories = $this->kernel->getModelService()->find(\App\FetzPetz\Model\Categor
                     </div>
                 <?php }
                 ?>
-                <div class="item">
+                <a href="<?= $this->getPath('/wishlist') ?>" class="item">
                     <span>Wishlist</span>
-                </div>
+                </a>
                 <a href="<?= $this->getPath('/cart') ?>" class="item">
                     <span>Cart</span>
                 </a>
                 <?php if($this->isAuthenticated()): ?>
-                <div class="item margin-top">
+                <a href="<?= $this->getPath('/logout'); ?>" class="item margin-top">
                     <span>Logout</span>
-                </div>
+                </a>
                 <div class="item color">
                     <span>My Profile</span>
                 </div>
