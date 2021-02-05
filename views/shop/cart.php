@@ -23,15 +23,15 @@
                                 </thead>
                                 <tbody>
                                     <?php foreach ($items as $item) : ?>
-                                        <tr data-id="<?= $item["product"]->__get("id") ?>">
+                                        <tr data-id="<?= $item["product"]->id ?>">
                                             <td>
                                                 <div class="product-item">
-                                                    <div class="image" style="background-image: url(<?= $item['product']->__get("image") ?>)"></div>
+                                                    <div class="image" style="background-image: url(<?= $item['product']->image ?>)"></div>
                                                     <div class="data">
-                                                        <h4><?= $item['product']->__get("name") ?></h4>
-                                                        <div class="price"><?= number_format($item['product']->__get("cost_per_item"),2,'.','') ?> €</div>
+                                                        <h4><?= $item['product']->name ?></h4>
+                                                        <div class="price"><?= number_format($item['product']->cost_per_item,2,'.','') ?> €</div>
                                                         <div class="actions">
-                                                            <a href="<?= $this->getPath('/cart/remove/' . $item['product']->__get('id')) ?>" class="action">Remove from Cart</a>
+                                                            <a href="<?= $this->getPath('/cart/remove/' . $item['product']->id) ?>" class="action">Remove from Cart</a>
                                                         </div>
                                                     </div>
                                                 </div>

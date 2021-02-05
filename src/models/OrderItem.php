@@ -24,10 +24,10 @@ class OrderItem extends Model
     }
 
     public function getOrderID(ModelService $modelService) {
-        return $modelService->findOneById(Order::class, $this->__get("order_id"));
+        return $modelService->findOneById(Order::class, $this->order_id);
     }
 
     public function getProductID(ModelService $modelService) {
-        return $modelService->findOneById(Product::class, $this->__get("product_id"));
+        return $modelService->findOneById(Product::class, $this->product_id);
     }
 }

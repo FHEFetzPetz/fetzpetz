@@ -4,6 +4,8 @@ namespace App\FetzPetz\Services;
 
 use App\FetzPetz\Core\Service;
 use App\FetzPetz\Model\Product;
+use App\FetzPetz\Model\User;
+use App\FetzPetz\Model\WishlistItem;
 
 class ShopService extends Service
 {
@@ -19,8 +21,8 @@ class ShopService extends Service
         $productEntries = $this->kernel->getModelService()->find(Product::class, ["id" => array_keys($cartItems)]);
 
         foreach ($productEntries as $product) {
-            $cartItem = $cartItems[$product->__get("id")];
-            $total = $product->__get("cost_per_item") * $cartItem["quantity"];
+            $cartItem = $cartItems[$product->id];
+            $total = $product->cost_per_item * $cartItem["quantity"];
 
             $output[] = array_merge(["product" => $product, "total" => $total], $cartItem);
         }
@@ -31,11 +33,11 @@ class ShopService extends Service
     public function getProductInCart(Product $product): ?array
     {
         $cartItems = $_SESSION["cart"] ?? [];
-        $id = $product->__get("id");
+        $id = $product->id;
 
         if (isset($cartItems[$id])) {
             $cartItem = $cartItems[$id];
-            $total = $product->__get("cost_per_item") * $cartItem["quantity"];
+            $total = $product->cost_per_item * $cartItem["quantity"];
 
             return array_merge(["product_id" => intval($id), "total" => $total], $cartItem);
         }
@@ -52,10 +54,10 @@ class ShopService extends Service
     {
         $cartItems = $_SESSION["cart"] ?? [];
 
-        if (isset($cartItems[$product->__get("id")]))
-            $cartItems[$product->__get("id")] = ["last_updated" => new \DateTime(), "quantity" => $quantity + $cartItems[$product->__get('id')]['quantity']];
+        if (isset($cartItems[$product->id]))
+            $cartItems[$product->id] = ["last_updated" => new \DateTime(), "quantity" => $quantity + $cartItems[$product->id]['quantity']];
         else
-            $cartItems[$product->__get("id")] = ["last_updated" => new \DateTime(), "quantity" => $quantity];
+            $cartItems[$product->id] = ["last_updated" => new \DateTime(), "quantity" => $quantity];
 
         $_SESSION["cart"] = $cartItems;
     }
@@ -68,8 +70,8 @@ class ShopService extends Service
     {
         $cartItems = $_SESSION["cart"] ?? [];
 
-        if (isset($cartItems[$product->__get("id")]))
-            unset($cartItems[$product->__get("id")]);
+        if (isset($cartItems[$product->id]))
+            unset($cartItems[$product->id]);
 
         $_SESSION["cart"] = $cartItems;
     }
@@ -79,7 +81,7 @@ class ShopService extends Service
      * @param Product $product
      * @param int $quantity
      */
-    public function changeQuantity(Product $product, int $quantity)
+    public function changeCartItemQuantity(Product $product, int $quantity)
     {
         if ($quantity <= 0) {
             $this->removeFromCart($product);
@@ -87,8 +89,8 @@ class ShopService extends Service
         }
         $cartItems = $_SESSION["cart"] ?? [];
 
-        if (isset($cartItems[$product->__get("id")]))
-            $cartItems[$product->__get("id")] = ["last_updated" => new \DateTime(), "quantity" => $quantity];
+        if (isset($cartItems[$product->id]))
+            $cartItems[$product->id] = ["last_updated" => new \DateTime(), "quantity" => $quantity];
 
         $_SESSION["cart"] = $cartItems;
     }
@@ -97,7 +99,7 @@ class ShopService extends Service
      * Get total of cart items by product price and quantity
      * @return float
      */
-    public function getTotal(): float
+    public function getCartTotal(): float
     {
         $cart = $this->getCart();
         $total = 0.00;
@@ -106,5 +108,77 @@ class ShopService extends Service
             $total += $item["total"];
 
         return $total;
+    }
+
+    private function isUserPresent(User $user = null) : ?User {
+        if($user == null) {
+            $securityService = $this->kernel->getSecurityService();
+            if (!$securityService->isAuthenticated()) return null;
+            $user = $securityService->getUser();
+        }
+
+        return $user;
+    }
+
+    public function getWishlist(User $user = null): array {
+        $user = $this->isUserPresent($user);
+        if(!$user) return [];
+
+        $modelService = $this->kernel->getModelService();
+
+        $wishlistItems = $modelService->find(WishlistItem::class, ["user_id" => $user->id]);
+        $productIds = [];
+
+        foreach($wishlistItems as $item)
+            $productIds[$item->product_id] = null;
+
+        $productEntries = $modelService->find(Product::class, ["id" => array_keys($productIds)]);
+        foreach($productEntries as $product)
+            $productIds[$product->id] = $product;
+
+        $output = [];
+
+        foreach($wishlistItems as $item) {
+            if(isset($productIds[$product->id])) {
+                $item->product = $productIds[$product->id];
+                $item->user = $user;
+
+                $output[] = $item;
+            }
+        }
+
+        return $output;
+    }
+
+    public function addToWishlist(Product $product, User $user = null): ?WishlistItem {
+        $user = $this->isUserPresent($user);
+
+        if(!$user) return null;
+
+        $modelService = $this->kernel->getModelService();
+
+        $existingEntry = $modelService->findOne(WishlistItem::class, ["user_id" => $user->id, "product_id" => $product->id]);
+        if($existingEntry != null) return $existingEntry;
+
+        $wishlistItem = new WishlistItem([
+            "user_id" => $user->id,
+            "product_id" => $product->id
+        ]);
+
+        $modelService->insert($wishlistItem);
+
+        return $wishlistItem;
+    }
+
+    public function removeFromWishlist(Product $product, User $user = null) {
+        $user = $this->isUserPresent($user);
+        if(!$user) return null;
+
+        $modelService = $this->kernel->getModelService();
+
+        $existingEntry = $modelService->findOne(WishlistItem::class, ["user_id" => $user->id, "product_id" => $product->id]);
+        if($existingEntry == null) return null;
+
+        $modelService->destroy($existingEntry);
     }
 }

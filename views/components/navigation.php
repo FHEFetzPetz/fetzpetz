@@ -16,7 +16,7 @@ $desktopCategoryLimit = 3;
                 foreach ($categories as $category) {
                     $index++; ?>
                     <div class="item<?php if ($index <= $desktopCategoryLimit) echo " desktop" ?>">
-                        <span><?= $category->__get('name') ?></span>
+                        <span><?= $category->name ?></span>
                         <i class="icon chevron-right"></i>
                     </div>
                 <?php }

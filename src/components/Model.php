@@ -73,7 +73,6 @@ class Model
      */
     public function __set($key, $value)
     {
-        if(!$this->inSchema($key)) return;
         $this->values[$key] = $value;
     }
 
@@ -88,7 +87,7 @@ class Model
     public function __get($key)
     {
         $schemaItem = $this->getSchemaItem($key);
-        if($schemaItem == null) return null;
+        if($schemaItem == null && !isset($this->values[$key])) return null;
 
         return $this->values[$key] ?? $schemaItem[2];
     }
@@ -100,7 +99,7 @@ class Model
      */
     public function __unset($key)
     {
-        if(!$this->inSchema($key)) return;
+        if(!$this->inSchema($key) && !isset($this->values[$key])) return;
         unset($this->values[$key]);
     }
 

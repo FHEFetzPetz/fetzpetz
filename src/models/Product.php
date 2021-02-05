@@ -28,6 +28,38 @@ class Product extends Model
     }
 
     public function getCreatedBy(ModelService $modelService) {
-        return $modelService->findOneById(User::class, $this->__get("created_by"));
+        return $modelService->findOneById(User::class, $this->created_by);
+    }
+
+    public function getWishlistUsers(ModelService $modelService): array {
+        $wishlistItems = $modelService->find(WishlistItem::class, ["product_id" => $this->id]);
+        $users = [];
+
+        foreach($wishlistItems as $item) {
+            $users[$item->user_id] = null;
+        }
+
+        $userItems = $modelService->find(User::class, ["id" => array_keys($users)]);
+
+        foreach($userItems as $user)
+            $users[$user->id] = $user;
+
+        return array_values($users);
+    }
+
+    public function getCategories(ModelService $modelService): array {
+        $productCategories = $modelService->find(ProductCategory::class, ["product_id" => $this->id]);
+        $categories = [];
+
+        foreach($productCategories as $item) {
+            $categories[$item->category_id] = null;
+        }
+
+        $categoryItems = $modelService->find(Category::class, ["id" => array_keys($categories)]);
+
+        foreach($categoryItems as $category)
+            $categories[$category->id] = $category;
+
+        return array_values($categories);
     }
 }

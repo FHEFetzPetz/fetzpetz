@@ -24,6 +24,22 @@ class Category extends Model
     }
 
     public function getCreatedBy(ModelService $modelService) {
-        return $modelService->findOneById(User::class, $this->__get("created_by"));
+        return $modelService->findOneById(User::class, $this->created_by);
+    }
+
+    public function getProducts(ModelService $modelService): array {
+        $productCategories = $modelService->find(ProductCategory::class, ["category_id" => $this->id]);
+        $products = [];
+
+        foreach($productCategories as $item) {
+            $products[$item->product_id] = null;
+        }
+
+        $productItems = $modelService->find(Product::class, ["id" => array_keys($products)]);
+
+        foreach($productItems as $product)
+            $products[$product->id] = $product;
+
+        return array_values($products);
     }
 }

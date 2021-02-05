@@ -3,6 +3,7 @@
 namespace App\FetzPetz\Controller;
 
 use App\FetzPetz\Components\Controller;
+use App\FetzPetz\Model\Category;
 use App\FetzPetz\Model\Product;
 use App\FetzPetz\Model\User;
 
@@ -30,7 +31,7 @@ class ShopController extends Controller
         ]);
 
         $items = $this->kernel->getShopService()->getCart();
-        $total = $this->kernel->getShopService()->getTotal();
+        $total = $this->kernel->getShopService()->getCartTotal();
 
         $this->setParameter("items", $items);
         $this->setParameter("total", $total);
@@ -60,13 +61,13 @@ class ShopController extends Controller
 
         $shopService = $this->kernel->getShopService();
 
-        $shopService->changeQuantity($product, $quantity);
+        $shopService->changeCartItemQuantity($product, $quantity);
 
         $cartProduct = $shopService->getProductInCart($product);
 
         return $this->printJson([
             "changed_product" => $cartProduct,
-            "total" => $shopService->getTotal(),
+            "total" => $shopService->getCartTotal(),
             "item_count" => sizeof($shopService->getCart())
         ]);
     }

@@ -9,7 +9,7 @@ $categories = $this->kernel->getModelService()->find(\App\FetzPetz\Model\Categor
                 <?php
                 foreach($categories as $category) { ?>
                     <div class="item">
-                        <span><?= $category->__get('name') ?></span>
+                        <span><?= $category->name ?></span>
                         <i class="icon chevron-right"></i>
                     </div>
                 <?php }
@@ -58,17 +58,17 @@ $categories = $this->kernel->getModelService()->find(\App\FetzPetz\Model\Categor
 
                     if($isFirst) { ?>
                         <article class="promoted-product-wrap">
-                            <a href="<?= $this->getPath('/product/' . $product->__get('id')) ?>" class="product-card">
-                                <div class="image" style="background-image: url(<?= $product->__get("image") ?>)"></div>
+                            <a href="<?= $this->getPath('/product/' . $product->id) ?>" class="product-card">
+                                <div class="image" style="background-image: url(<?= $product->image ?>)"></div>
                                 <div class="data">
                                     <div class="title">
-                                        <span><?= $product->__get("name") ?></span>
+                                        <span><?= $product->name ?></span>
                                         <div class="like-button">
                                             <i class="icon heart"></i>
                                         </div>
                                     </div>
-                                    <span class="price"><?= $product->__get("cost_per_item") ?> €</span>
-                                    <div class="description"><?= nl2br($product->__get("description")) ?></div>
+                                    <span class="price"><?= $product->cost_per_item ?> €</span>
+                                    <div class="description"><?= nl2br($product->description) ?></div>
                                 </div>
                             </a>
                         </article>

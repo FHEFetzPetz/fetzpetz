@@ -25,18 +25,18 @@ class Order extends Model
     }
 
     public function getUserID(ModelService $modelService) {
-        return $modelService->findOneById(User::class, $this->__get("user_id"));
+        return $modelService->findOneById(User::class, $this->user_id);
     }
 
     public function getPaymentReferenceID(ModelService $modelService) {
-        return $modelService->findOneById(PaymentReference::class, $this->__get("payment_reference_id"));
+        return $modelService->findOneById(PaymentReference::class, $this->payment_reference_id);
     }
 
     public function getShippingAddressId(ModelService $modelService) {
-        return $modelService->findOneById(Address::class, $this->__get("shipping_address_id"));
+        return $modelService->findOneById(Address::class, $this->shipping_address_id);
     }
 
     public function getBillingAddressId(ModelService $modelService) {
-        return $modelService->findOneById(Address::class, $this->__get("billing_address_id"));
+        return $modelService->findOneById(Address::class, $this->billing_address_id);
     }
 }

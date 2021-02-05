@@ -31,7 +31,7 @@ class ProductController extends Controller
             return $this->setView("fallback/404.php");
         }
 
-        $this->setParameter("title", "FetzPetz | " . $product->__get('name'));
+        $this->setParameter("title", "FetzPetz | " . $product->name);
 
         $products = $this->kernel->getModelService()->find(Product::class);
         

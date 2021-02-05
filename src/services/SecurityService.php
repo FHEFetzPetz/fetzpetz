@@ -35,7 +35,7 @@ class SecurityService extends Service
      * @param User $user
      */
     public function authenticateWithUser(User $user) {
-        $_SESSION["user_id"] = $user->__get("id");
+        $_SESSION["user_id"] = $user->id;
         $this->currentUser = $user;
     }
 

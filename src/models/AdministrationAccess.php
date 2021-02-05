@@ -23,10 +23,10 @@ class AdministrationAccess extends Model
     }
 
     public function getUserID(ModelService $modelService) {
-        return $modelService->findOneById(User::class, $this->__get("user_id"));
+        return $modelService->findOneById(User::class, $this->user_id);
     }
 
     public function getCreatedByID(ModelService $modelService) {
-        return $modelService->findOneById(User::class, $this->__get("created_by"));
+        return $modelService->findOneById(User::class, $this->created_by);
     }
 }

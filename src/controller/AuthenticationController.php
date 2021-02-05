@@ -32,7 +32,7 @@ class AuthenticationController extends Controller
 
             $existingUser = $this->kernel->getModelService()->findOne(User::class, ['email' => $email]);
 
-            if (!is_null($existingUser) && password_verify($password, $existingUser->__get("password_hash"))) {
+            if (!is_null($existingUser) && password_verify($password, $existingUser->password_hash)) {
                 $this->kernel->getSecurityService()->authenticateWithUser($existingUser);
 
                 //TODO ZIELSEITE 
