@@ -3,6 +3,7 @@
 namespace App\FetzPetz\Model;
 
 use App\FetzPetz\Components\Model;
+use App\FetzPetz\Services\ModelService;
 
 class User extends Model
 {
@@ -24,5 +25,21 @@ class User extends Model
         ];
 
         parent::__construct($values, $initializedFromSQL);
+    }
+
+    public function getWishlistProducts(ModelService $modelService): array {
+        $wishlistItems = $modelService->find(WishlistItem::class, ["user_id" => $this->id]);
+        $products = [];
+
+        foreach($wishlistItems as $item) {
+            $products[$item->product_id] = null;
+        }
+
+        $productItems = $modelService->find(Product::class, ["id" => array_keys($products)]);
+
+        foreach($productItems as $product)
+            $products[$product->id] = $product;
+
+        return array_values($products);
     }
 }
