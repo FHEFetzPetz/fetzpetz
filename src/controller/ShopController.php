@@ -18,6 +18,10 @@ class ShopController extends Controller
             '/cart/remove/{id}' => 'cartRemove',
             '/cart/quantity/{id}/{quantity}' => 'cartQuantity',
             '/wishlist' => 'wishlist',
+            '/wishlist-test' => 'wishlistTest',
+            '/wishlist/remove/redirect/{id}' => 'wishlistRemoveRedirect',
+            '/wishlist/remove/{id}' => 'wishlistRemove',
+            '/wishlist/add/{id}' => 'wishlistAdd'
         ];
     }
 
@@ -84,10 +88,43 @@ class ShopController extends Controller
             ["type" => "stylesheet", "href" => "/assets/css/wishlist.css"]
         ]);
 
-        $items = [];
+        $items = $this->kernel->getShopService()->getWishlist($this->getUser());
 
         $this->setParameter("items", $items);
 
         $this->setView("shop/wishlist.php");
+    }
+
+    public function wishlistTest()
+    {
+        $product = $this->kernel->getModelService()->findOne(Product::class);
+        $this->kernel->getShopService()->addToWishlist($product, $this->getUser());
+
+        $this->redirectTo("/wishlist");
+    }
+
+    public function wishlistRemoveRedirect($id)
+    {
+        $product = $this->kernel->getModelService()->findOneById(Product::class, $id);
+        if ($product != null) $this->kernel->getShopService()->removeFromWishlist($product, $this->getUser());
+        return $this->redirectTo('/wishlist');
+    }
+
+    public function wishlistRemove($id)
+    {
+        $product = $this->kernel->getModelService()->findOneById(Product::class, $id);
+        if ($product != null) $this->kernel->getShopService()->removeFromWishlist($product, $this->getUser());
+        return $this->printJson([
+            'result' => 'ok'
+        ]);
+    }
+
+    public function wishlistAdd($id)
+    {
+        $product = $this->kernel->getModelService()->findOneById(Product::class, $id);
+        if ($product != null) $this->kernel->getShopService()->addToWishlist($product, $this->getUser());
+        return $this->printJson([
+            'result' => 'ok'
+        ]);
     }
 }

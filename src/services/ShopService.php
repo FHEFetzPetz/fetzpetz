@@ -139,13 +139,30 @@ class ShopService extends Service
         $output = [];
 
         foreach($wishlistItems as $item) {
-            if(isset($productIds[$product->id])) {
-                $item->product = $productIds[$product->id];
+            if(isset($productIds[$item->product_id])) {
+                $item->product = $productIds[$item->product_id];
                 $item->user = $user;
 
                 $output[] = $item;
             }
         }
+
+        return $output;
+    }
+
+    public function getRawWishlist(User $user = null){
+        $user = $this->isUserPresent($user);
+
+        if(!$user) return [];
+
+        $modelService = $this->kernel->getModelService();
+
+        $wishlistItems = $modelService->find(WishlistItem::class, ["user_id" => $user->id]);
+        
+        $output = [];
+
+        foreach($wishlistItems as $item)
+            $output[] = $item->product_id;
 
         return $output;
     }

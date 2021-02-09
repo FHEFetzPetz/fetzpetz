@@ -25,8 +25,10 @@ class IndexController extends Controller
         ]);
 
         $products = $this->kernel->getModelService()->find(Product::class);
+        $wishlist = $this->kernel->getShopService()->getRawWishlist($this->getUser());
 
         $this->setParameter("products", $products);
+        $this->setParameter("wishlist", $wishlist);
         $this->setParameter("slim", true);
 
         $this->setView("index.php");

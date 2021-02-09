@@ -38,6 +38,32 @@
         <script>
             scrollTopButton = document.getElementById("scroll-top");
 
+            function toggleLikeProduct(id, item) {
+                var request = new XMLHttpRequest();
+                const url = item.classList.contains('active') ? ("<?= $this->getPath('/wishlist/remove/') ?>" + id) : ("<?= $this->getPath('/wishlist/add/') ?>" + id);
+                request.open("GET", url);
+                request.addEventListener('load', function() {
+                    if (request.status === 200) {
+                        item.classList.toggle('active');
+                    } else
+                        alert("nicht so nice");
+                });
+
+                request.send();
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+                this.querySelectorAll('.product-card .like-button').forEach(function(item) {
+                    item.addEventListener('click', function(event) {
+                        event.preventDefault();
+
+                        const id = item.closest('.product-card').getAttribute('data-id');
+                        toggleLikeProduct(id, item);
+                    })
+                });
+            })
+
+
             window.onscroll = function() {scrollFunction()};
 
             function scrollFunction() {

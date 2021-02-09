@@ -34,9 +34,10 @@ class ProductController extends Controller
         $this->setParameter("title", "FetzPetz | " . $product->name);
 
         $products = $this->kernel->getModelService()->find(Product::class);
+        $wishlist = $this->kernel->getShopService()->getRawWishlist($this->getUser());
         
         $this->setParameter("products", $products);
-
+        $this->setParameter("wishlist", $wishlist);
         $this->setParameter("shownProduct", $product);
 
         $this->setView("product.php");

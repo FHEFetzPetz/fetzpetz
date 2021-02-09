@@ -271,6 +271,10 @@ html {
     background-color: rgba(255, 255, 255, 0.2);
 }
 
+.product-card .image .like-button.active {
+    color: #EB5757;
+}
+
 .product-card .data {
     padding: 8px 5px;
     color: #C4C4C4;

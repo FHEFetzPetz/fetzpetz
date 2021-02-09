@@ -1,5 +1,4 @@
 <main id="product">
-
     <article class="product-view">
         <div class="image"><img src="<?= $shownProduct->image ?>" alt="product"></div>
         <div class="data">
@@ -17,10 +16,10 @@
                 add to Cart
             </a>
             <div class="actions">
-                <div class="button share-button">
+                <a href="mailto:?to=&body=<?= $this->getAbsolutePath('/product/'.$shownProduct->id) ?>" class="button share-button">
                     <i class="icon share"></i>
-                </div>
-                <div class="button like-button">
+                </a>
+                <div class="button like-button<?= in_array($shownProduct->id, $wishlist) ? ' active' : '' ?>">
                     <i class="icon heart"></i>
                 </div>
             </div>
@@ -34,5 +33,10 @@
         endforeach;
         ?>
     </section>
-
 </main>
+
+<script>
+    document.querySelector('.product-view .like-button').addEventListener('click', function() {
+        toggleLikeProduct('<?= $shownProduct->id ?>', this)
+    })
+</script>
