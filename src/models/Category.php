@@ -18,6 +18,7 @@ class Category extends Model
             ['description',self::TYPE_TEXT,null],
             ['image',self::TYPE_STRING,null],
             ['active',self::TYPE_INTEGER,null],
+            ['parent',self::TYPE_INTEGER,null],
         ];
 
         parent::__construct($values, $initializedFromSQL);
@@ -25,6 +26,10 @@ class Category extends Model
 
     public function getCreatedBy(ModelService $modelService) {
         return $modelService->findOneById(User::class, $this->created_by);
+    }
+
+    public function getChildren(ModelService $modelService) {
+        return $modelService->find(Category::class, ["parent"=>$this->id]);
     }
 
     public function getProducts(ModelService $modelService): array {

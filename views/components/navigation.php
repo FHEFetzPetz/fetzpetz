@@ -1,5 +1,6 @@
 <?php
-$categories = $this->kernel->getModelService()->find(\App\FetzPetz\Model\Category::class);
+$modelService = $this->kernel->getModelService();
+$categories = $modelService->find(\App\FetzPetz\Model\Category::class, ['parent' => null]);
 $desktopCategoryLimit = 3;
 
 ?>
@@ -14,12 +15,20 @@ $desktopCategoryLimit = 3;
                 <?php
                 $index = 0;
                 foreach ($categories as $category) {
-                    $index++; ?>
-                    <div class="item<?php if ($index <= $desktopCategoryLimit) echo " desktop" ?>">
+                    $index++;
+                    $selected = isset($selectedCategory) && $selectedCategory->id == $category->id; ?>
+                    <a href="<?= $this->getPath('/category/' . $category->id); ?>" class="item<?= ($index <= $desktopCategoryLimit) ? ' desktop' : '' ?><?= $selected ? ' selected' : '' ?>">
                         <span><?= $category->name ?></span>
                         <i class="icon chevron-right"></i>
-                    </div>
-                <?php }
+                    </a>
+                    <?php if ($selected) :
+                        foreach ($category->getChildren($modelService) as $child) : ?>
+                            <a href="<?= $this->getPath('/category/' . $child->id); ?>" class="item child">
+                                <span><?= $child->name ?></span>
+                            </a>
+                <?php endforeach;
+                    endif;
+                }
                 ?>
             </div>
             <div class="mobile">
@@ -59,12 +68,12 @@ $desktopCategoryLimit = 3;
         </div>
         <?php if (!isset($slim) || !$slim) : ?>
             <div class="search-box">
-                <div class="search-inner">
-                    <input type="text" placeholder="Search for products">
+                <form action="<?= $this->getPath('/search') ?>" class="search-inner">
+                    <input type="text" name="query" placeholder="Search for products">
                     <div class="search-button">
                         <i class="icon search"></i>
                     </div>
-                </div>
+                </form>
             </div>
         <?php endif; ?>
         <div class="actions">

@@ -96,6 +96,11 @@ html {
     background-color: rgba(255, 255, 255, 0.1);
 }
 
+#navigation .menu .item.child {
+    padding-left: 35px;
+    height: 40px;
+}
+
 #navigation .menu .item span {
     flex: 1;
 }
@@ -103,6 +108,10 @@ html {
 #navigation .menu .item i {
     width: 30px;
     text-align: center;
+}
+
+#navigation .menu .item.selected i {
+    transform: rotateZ(90deg);
 }
 
 #navigation .menu .item.margin-top {

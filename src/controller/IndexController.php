@@ -3,6 +3,7 @@
 namespace App\FetzPetz\Controller;
 
 use App\FetzPetz\Components\Controller;
+use App\FetzPetz\Model\Category;
 use App\FetzPetz\Model\Product;
 use App\FetzPetz\Model\User;
 
@@ -13,7 +14,7 @@ class IndexController extends Controller
     {
         return [
             '/' => 'index',
-            '/test' => 'test'
+            '/category/{id}' => 'category', 
         ];
     }
 
@@ -34,10 +35,29 @@ class IndexController extends Controller
         $this->setView("index.php");
     }
 
-    public function test() {
-        $this->setParameter("title", "Es ist Mittwoch (meine Freunde)");
-        $this->setParameter("navigation", false);
+    public function category($id) {
 
-        $this->setView("test.php");
+        $category = $this->kernel->getModelService()->findOneById(Category::class,$id);
+
+        if ($category==null)
+            return $this->redirectTo('/');
+
+        $this->setParameter("title", "FetzPetz | Main Page");
+
+        $this->addExtraHeaderFields([
+            ["type" => "stylesheet", "href" => "/assets/css/mainpage.css"]
+        ]);
+
+        $products = $category->getProducts($this->kernel->getModelService());
+        $wishlist = $this->kernel->getShopService()->getRawWishlist($this->getUser());
+
+        $this->setParameter("selectedCategory", $category);
+        $this->setParameter("products", $products);
+        $this->setParameter("wishlist", $wishlist);
+        $this->setParameter("slim", true);
+
+        $this->setView("index.php");
     }
+
+
 }

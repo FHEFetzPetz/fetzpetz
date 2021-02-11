@@ -30,7 +30,9 @@ class ModelService extends Service
             if(!empty($where)) {
                 $whereItems = [];
                 foreach($where as $key=>$value) {
-                    if(is_array($value))
+                    if(is_null($value))
+                        $whereItems[] = $key . ' is null';
+                    else if(is_array($value))
                         $whereItems[] = $key . ' in (\'' . join('\',\'',$value) . '\')';
                     else
                         $whereItems[] = $key . '=\'' . $value . '\'';
