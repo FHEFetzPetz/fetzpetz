@@ -1,9 +1,3 @@
-<?php
-$modelService = $this->kernel->getModelService();
-$categories = $modelService->find(\App\FetzPetz\Model\Category::class, ['parent' => null]);
-$desktopCategoryLimit = 3;
-
-?>
 <nav id="navigation" <?php if (isset($slim) && $slim) { ?> class="slim" <?php } ?>>
     <div class="menu-overlay">
         <div class="menu">
@@ -11,49 +5,7 @@ $desktopCategoryLimit = 3;
                 <div class="close"><i class="icon times"></i></div>
                 <div class="title">Menu</div>
             </div>
-            <div class="categories">
-                <?php
-                $index = 0;
-                foreach ($categories as $category) {
-                    $index++;
-                    $selected = isset($selectedCategory) && $selectedCategory->id == $category->id; ?>
-                    <a href="<?= $this->getPath('/category/' . $category->id); ?>" class="item<?= ($index <= $desktopCategoryLimit) ? ' desktop' : '' ?><?= $selected ? ' selected' : '' ?>">
-                        <span><?= $category->name ?></span>
-                        <i class="icon chevron-right"></i>
-                    </a>
-                    <?php if ($selected) :
-                        foreach ($category->getChildren($modelService) as $child) : ?>
-                            <a href="<?= $this->getPath('/category/' . $child->id); ?>" class="item child">
-                                <span><?= $child->name ?></span>
-                            </a>
-                <?php endforeach;
-                    endif;
-                }
-                ?>
-            </div>
-            <div class="mobile">
-                <a href="<?= $this->getPath('/wishlist'); ?>" class="item">
-                    <span>Wishlist</span>
-                </a>
-                <a href="<?= $this->getPath('/cart'); ?>" class="item">
-                    <span>Cart</span>
-                </a>
-                <?php if ($this->isAuthenticated()) : ?>
-                    <a href="<?= $this->getPath('/logout'); ?>" class="item margin-top">
-                        <span>Logout</span>
-                    </a>
-                    <div class="item color">
-                        <span>My Profile</span>
-                    </div>
-                <?php else : ?>
-                    <a href="<?= $this->getPath('/login'); ?>" class="item margin-top">
-                        <span>Log in</span>
-                    </a>
-                    <a href="<?= $this->getPath('/signup'); ?>" class="item color">
-                        <span>Sign up</span>
-                    </a>
-                <?php endif ?>
-            </div>
+            <?php $this->renderComponent("components/sidebarContents.php"); ?>
         </div>
     </div>
     <div class="inner">

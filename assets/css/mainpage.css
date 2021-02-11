@@ -11,12 +11,6 @@
 
 #content {
     flex: 1;
-    padding: 0 10px;
-}
-
-#content .product-wrap {
-    min-width: 100%;
-    max-width: 100%;
 }
 
 #content #welcome-box {
@@ -85,6 +79,12 @@
     flex: 1;
     min-width: 100%;
     padding: 5px;
+}
+
+#content .product-wrap {
+    min-width: 100%;
+    padding: 5px;
+    flex: 0;
 }
 
 #content .promoted-product-wrap .product-card {
@@ -181,15 +181,16 @@
     color: white;
 }
 
-@media (min-width: 550px) {
+@media (min-width: 450px) {
     #content .product-wrap {
-        min-width: 267px;
-        max-width: 267px;
-        padding: 3px;
+        min-width: 50%;
+        max-width: 50%;
+        padding: 5px;
+        flex: 0;
     }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 800px) {
     #sidebar {
         display: block;
         flex: 1;
@@ -238,9 +239,17 @@
         color: white;
         border: none;
     }
+
+    #content {
+        padding-left: 10px;
+    }
+
     #content .products {
         justify-content: flex-start;
     }
+}
+
+@media (min-width: 1200px) {
     #content .promoted-product-wrap .product-card {
         display: flex;
     }
@@ -254,5 +263,29 @@
     }
     #content .promoted-product-wrap .product-card .data .title span {
         flex: 1;
+    }
+
+    #content .products {
+        justify-content: center;
+    }
+
+    #content .product-wrap {
+        min-width: 33%;
+        max-width: 33%;
+        padding: 5px;
+    }
+}
+
+@media (min-width: 1400px) {
+
+    #content .products {
+        justify-content: flex-start;
+    }
+
+    #content .product-wrap {
+        min-width: 25%;
+        max-width: 25%;
+        padding: 5px;
+        flex: 0;
     }
 }

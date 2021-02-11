@@ -374,7 +374,7 @@ html {
     color: white;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 800px) {
     #navigation {
         height: 100px;
         padding: 0 10px;
