@@ -35,8 +35,12 @@ class AuthenticationController extends Controller
             if (!is_null($existingUser) && password_verify($password, $existingUser->password_hash)) {
                 $this->kernel->getSecurityService()->authenticateWithUser($existingUser);
 
-                //TODO ZIELSEITE 
-               return  $this->redirectTo('/');
+                if(strlen($_GET['redirect_to'] ?? '') > 0)
+                    $this->redirectTo($_GET['redirect_to']);
+                else {
+                    //TODO ZIELSEITE
+                    $this->redirectTo('/');
+                }
             } else $errors[] = 'invalid credentials';
         }
 
@@ -99,8 +103,12 @@ class AuthenticationController extends Controller
                 $this->kernel->getModelService()->insert($user);
                 $this->kernel->getSecurityService()->authenticateWithUser($user);
 
-                //TODO ZIELSEITE 
-                $this->redirectTo('/');
+                if(strlen($_GET['redirect_to'] ?? '') > 0)
+                    $this->redirectTo($_GET['redirect_to']);
+                else {
+                    //TODO ZIELSEITE
+                    $this->redirectTo('/');
+                }
             }
         }
 

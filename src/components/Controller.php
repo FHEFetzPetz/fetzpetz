@@ -210,6 +210,12 @@ class Controller extends Service
         return $this->kernel->getSecurityService()->isAuthenticated();
     }
 
+    public function isAdministrator(): bool {
+        return
+            $this->isAuthenticated() &&
+            $this->kernel->getSecurityService()->isAdministrator($this->getUser());
+    }
+
     /**
      * Redirects the user to a local path and
      * cancels the template, view, component rendering

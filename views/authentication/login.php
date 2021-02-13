@@ -1,7 +1,7 @@
 <div id="authentication">
     <section class="signup-info view">
         <h2 style="text-align: center;">Wanna join the party?<br></h2>
-        <form method='GET' action='signup' class="form">
+        <form method='GET' action='signup<?= strlen($_GET['redirect_to']) > 0 ? ('?redirect_to='.$_GET['redirect_to']) : '' ?>' class="form">
             <div class="submit-item">
                 <button>Sign Up now! ♥</button>
             </div>

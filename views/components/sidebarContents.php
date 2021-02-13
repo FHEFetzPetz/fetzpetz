@@ -32,6 +32,11 @@ endforeach;
         <span>Cart</span>
     </a>
 <?php if ($this->isAuthenticated()) : ?>
+    <?php if($this->isAdministrator()) : ?>
+        <a href="<?= $this->getPath('/admin'); ?>" class="item">
+            <span>Administration</span>
+        </a>
+    <?php endif; ?>
     <a href="<?= $this->getPath('/logout'); ?>" class="item margin-top">
         <span>Logout</span>
     </a>

@@ -5,6 +5,7 @@ namespace App\FetzPetz\Services;
 
 use App\FetzPetz\Components\Model;
 use App\FetzPetz\Core\Service;
+use App\FetzPetz\Model\AdministrationAccess;
 use App\FetzPetz\Model\User;
 
 
@@ -60,6 +61,10 @@ class SecurityService extends Service
 
     public function isAuthenticated(): bool {
        return $this->currentUser != null;
+    }
+
+    public function isAdministrator(User $user): bool {
+        return $this->kernel->getModelService()->findOne(AdministrationAccess::class, ['user_id' => $user->id, 'active' => 1]) != null;
     }
 
 }

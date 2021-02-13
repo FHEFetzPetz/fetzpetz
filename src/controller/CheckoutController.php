@@ -21,7 +21,7 @@ class CheckoutController extends Controller
     {
 
         if (!$this->isAuthenticated()) {
-            return $this->redirectTo('/login');
+            return $this->redirectTo('/login?redirect_to=/checkout/address');
         }
 
         $items = $this->kernel->getShopService()->getCart();
@@ -195,7 +195,7 @@ class CheckoutController extends Controller
     {
 
         if (!$this->isAuthenticated()) {
-            return $this->redirectTo('/login');
+            return $this->redirectTo('/login?redirect_to=/checkout/payment-method');
         }
 
         $items = $this->kernel->getShopService()->getCart();
@@ -235,7 +235,7 @@ class CheckoutController extends Controller
     {
 
         if (!$this->isAuthenticated()) {
-            return $this->redirectTo('/login');
+            return $this->redirectTo('/login?redirect_to=/checkout/summary');
         }
 
         $items = $this->kernel->getShopService()->getCart();

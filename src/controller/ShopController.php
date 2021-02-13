@@ -83,7 +83,7 @@ class ShopController extends Controller
     public function wishlist()
     {
         if (!$this->kernel->getSecurityService()->isAuthenticated())
-            return $this->redirectTo('/login');
+            return $this->redirectTo('/login?redirect_to=/wishlist');
 
         $this->setParameter("title", "FetzPetz | Wishlist");
 
