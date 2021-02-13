@@ -189,6 +189,7 @@
     align-items: center;
     margin-top: 10px;
     transition: background-color .2s ease, color .2s ease;
+    text-decoration: none;
 }
 
 #content .box table tfoot .total .checkout-button:hover {

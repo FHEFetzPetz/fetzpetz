@@ -1,0 +1,92 @@
+#checkout {
+    padding: 10px;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+#checkout .box {
+    background: #333333;
+    padding: 15px;
+}
+
+#checkout .box.address {
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#checkout .box h1 {
+    color: #a7a7a7;
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+#checkout .box h2 {
+    color: #a7a7a7;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 17px;
+}
+
+#checkout .box .form {
+    width: 100%;
+    max-width: 350px;
+    padding: 0 20px;
+}
+
+#checkout .box .form .input-item {
+    display: flex;
+    margin: 5px -5px;
+}
+
+#checkout .box .form .input-item input,
+#checkout .box .form .input-item select {
+    height: 40px;
+    width: 100%;
+    padding: 0 15px;
+    margin: 5px;
+    border: solid 1px #c4c4c4;
+    border-radius: 5px;
+    background: #f1f1f1;
+}
+
+#checkout .box .form .submit-item {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+#checkout .box .form .submit-item button {
+    height: 40px;
+    padding: 0 25px;
+    border: none;
+    border-radius: 5px;
+    background: #f1f1f1;
+    font-size: 18px;
+    color: #333333;
+    cursor: pointer;
+    transition: background-color .2s ease, color .2s ease;
+}
+
+#checkout .box .form .submit-item button:hover {
+    background-color: #844aba;
+    color: white;
+}
+
+#checkout .box .form .input-item input:focus,
+#checkout .box .form .submit-item button:focus {
+    outline: none;
+}
+
+#checkout .box .form .payment-method {
+    list-style-type: none;
+}
+
+#checkout .box .form .payment-method li {
+    margin: 20px 0;
+    color: #a7a7a7;
+}

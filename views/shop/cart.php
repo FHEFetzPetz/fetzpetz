@@ -54,7 +54,7 @@
                                         <td colspan="3" class="total">
                                             <span class="total-text">Total (<?= sizeof($items) ?> Item(s)): <?= number_format($total, 2,'.','') ?> €</span>
                                             <br>
-                                            <div class="checkout-button">Proceed to Checkout</div>
+                                            <a href="<?= $this->getPath('/checkout/address') ?>" class="checkout-button">Proceed to Checkout</a>
                                         </td>
                                     </tr>
                                 </tfoot>
