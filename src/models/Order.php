@@ -18,7 +18,7 @@ class Order extends Model
             ['shipping_address_id',self::TYPE_INTEGER,null],
             ['billing_address_id',self::TYPE_INTEGER,null],
             ['order_status',self::TYPE_STRING,null],
-            ['shipment_data',self::TYPE_TEXT,null]
+            ['shipment_data',self::TYPE_OBJECT,null]
         ];
 
         parent::__construct($values, $initializedFromSQL);

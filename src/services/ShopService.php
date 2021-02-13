@@ -3,6 +3,10 @@
 namespace App\FetzPetz\Services;
 
 use App\FetzPetz\Core\Service;
+use App\FetzPetz\Model\Address;
+use App\FetzPetz\Model\Order;
+use App\FetzPetz\Model\OrderItem;
+use App\FetzPetz\Model\PaymentReference;
 use App\FetzPetz\Model\Product;
 use App\FetzPetz\Model\User;
 use App\FetzPetz\Model\WishlistItem;
@@ -197,5 +201,91 @@ class ShopService extends Service
         if($existingEntry == null) return null;
 
         $modelService->destroy($existingEntry);
+    }
+
+    public function placeOrder(): ?Order {
+        $cart = $this->getCart();
+        $securityService = $this->kernel->getSecurityService();
+
+        if(
+            sizeof($cart) < 0 ||
+            !$securityService->isAuthenticated() ||
+            !isset($_SESSION['checkout_address']) ||
+            !isset($_SESSION['checkout_payment_method'])) return null;
+
+        $modelService = $this->kernel->getModelService();
+        $user = $this->kernel->getSecurityService()->getUser();
+
+        $address = $_SESSION['checkout_address'];
+
+        $paymentReference = new PaymentReference([
+            'payment_method' => $_SESSION['checkout_payment_method'],
+            'payment_data' => null,
+            'created_at' => new \DateTime()
+        ]);
+
+        $shippingAddress = new Address([
+            'firstname' => $address['firstName'],
+            'lastname' => $address['lastName'],
+            'street' => $address['street'],
+            'zip' => $address['zip'],
+            'city' => $address['city'],
+            'state' => $address['state'],
+            'country' => $address['country'],
+            'phone_number' => $address['phoneNumber']
+        ]);
+
+        $billingAddress = null;
+
+        if($address['billingAddress'] != null) {
+            $billingAddressData = $address['billingAddress'];
+
+            $billingAddress = new Address([
+                'firstname' => $billingAddressData['firstName'],
+                'lastname' => $billingAddressData['lastName'],
+                'street' => $billingAddressData['street'],
+                'zip' => $billingAddressData['zip'],
+                'city' => $billingAddressData['city'],
+                'state' => $billingAddressData['state'],
+                'country' => $billingAddressData['country'],
+                'phone_number' => $billingAddressData['phoneNumber']
+            ]);
+        }
+
+        $modelService->insert($paymentReference);
+        $modelService->insert($shippingAddress);
+        if($billingAddress) $modelService->insert($billingAddress);
+
+        $order = new Order([
+            'user_id' => $user->id,
+            'payment_reference_id' => $paymentReference->id,
+            'shipping_address_id' => $shippingAddress->id,
+            'billing_address_id' => $billingAddress ? $billingAddress->id : null,
+            'order_status' => 'pending',
+            'shipment_data' => null
+        ]);
+
+        $modelService->insert($order);
+
+        foreach($cart as $item) {
+            $product = $item["product"];
+            $quantity = $item['quantity'];
+
+            $orderItem = new OrderItem([
+                'order_id' => $order->id,
+                'product_id' => $product->id,
+                'amount' => $quantity,
+                'cost_per_item' => $product->cost_per_item,
+                'item_data' => null
+            ]);
+
+            $modelService->insert($orderItem);
+        }
+
+        unset($_SESSION["cart"]);
+        unset($_SESSION["checkout_address"]);
+        unset($_SESSION["checkout_payment_method"]);
+
+        return $order;
     }
 }

@@ -55,7 +55,11 @@ class ShopController extends Controller
     {
         $product = $this->kernel->getModelService()->findOneById(Product::class, $id);
         if ($product != null) $this->kernel->getShopService()->removeFromCart($product);
-        return $this->redirectTo('/cart');
+
+        if($_GET['source'] ?? '' === 'checkout')
+            return $this->redirectTo('/checkout/summary');
+        else
+            return $this->redirectTo('/cart');
     }
 
     public function cartQuantity($id, $quantity)

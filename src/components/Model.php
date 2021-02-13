@@ -14,6 +14,7 @@ class Model
     const TYPE_DECIMAL  = 'decimal';
     const TYPE_DATE     = 'date';
     const TYPE_DATETIME = 'datetime';
+    const TYPE_OBJECT   = 'object';
     const TYPE_JSON     = 'json';
     const TYPE_BOOL     = 'bool';
     const TYPE_TEXT     = 'text';
@@ -119,9 +120,9 @@ class Model
         if(!$value) return null;
 
         switch($type) {
-            case self::TYPE_DATE: return $value->format('Y-m-d H:i:s');
-            case self::TYPE_DATETIME: return $value->format('Y-m-d H:i:s');
+            case self::TYPE_DATE: case self::TYPE_DATETIME: return $value->format('Y-m-d H:i:s');
             case self::TYPE_BOOL: return $value ? 1 : 0;
+            case self::TYPE_OBJECT: return serialize($value);
             default: return $value;
         }
     }
@@ -145,6 +146,7 @@ class Model
         switch($type) {
             case self::TYPE_DATE: return new \DateTime($value);
             case self::TYPE_BOOL: return $value == 1;
+            case self::TYPE_OBJECT: return unserialize($value);
             default: return $value;
         }
     }

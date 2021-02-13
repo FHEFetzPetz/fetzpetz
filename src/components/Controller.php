@@ -188,13 +188,18 @@ class Controller extends Service
      * generated as a query parameter or normal url
      *
      * @param $url
+     * @param array $additional
      * @return string
      */
-    public function getPath($url) {
+    public function getPath($url, $additional = []) {
+        $queryPairs = [];
+        foreach($additional as $key=>$value)
+            $queryPairs[] = urlencode($key) . '=' . urlencode($value);
+
         if($this->kernel->getConfig()["htaccessRouting"])
-            return $url;
+            return $url . ((sizeof($queryPairs) > 0) ? ('?' . join('&', $queryPairs)) : '');
         else
-            return "/?page=$url";
+            return "/?page=$url" . ((sizeof($queryPairs) > 0) ? ('&' . join('&', $queryPairs)) : '');
     }
 
     public function getUser(): ?User {

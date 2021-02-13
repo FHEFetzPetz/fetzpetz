@@ -17,7 +17,7 @@ class OrderItem extends Model
             ['product_id',self::TYPE_INTEGER,null],
             ['amount',self::TYPE_INTEGER,null],
             ['cost_per_item',self::TYPE_DECIMAL,null],
-            ['item_data',self::TYPE_TEXT,null]
+            ['item_data',self::TYPE_OBJECT,null]
         ];
 
         parent::__construct($values, $initializedFromSQL);

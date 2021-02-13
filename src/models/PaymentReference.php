@@ -13,7 +13,7 @@ class PaymentReference extends Model
         $this->schema = [
             ['id',self::TYPE_INTEGER,null],
             ['payment_method',self::TYPE_STRING,null],
-            ['payment_data',self::TYPE_TEXT,null],
+            ['payment_data',self::TYPE_OBJECT,null],
             ['created_at',self::TYPE_DATETIME,null]
         ];
 
