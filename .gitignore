@@ -119,3 +119,10 @@ fabric.properties
 
 logs/*
 .htaccess
+/.idea/codeStyles/codeStyleConfig.xml
+/.idea/dataSources.xml
+/.idea/fetzpetz.iml
+/.idea/modules.xml
+/.idea/php.xml
+/.idea/sqldialects.xml
+/.idea/vcs.xml
