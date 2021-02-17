@@ -48,7 +48,10 @@ class ShopController extends Controller
     public function cartRemove($id)
     {
         $product = $this->kernel->getModelService()->findOneById(Product::class, $id);
-        if ($product != null) $this->kernel->getShopService()->removeFromCart($product);
+        if ($product != null){
+            $this->kernel->getShopService()->removeFromCart($product);
+            $this->kernel->getNotificationService()->pushNotification('Removed from cart', $product->name . ' has been removed from your cart.');
+        }
 
         if($_GET['source'] ?? '' === 'checkout')
             return $this->redirectTo('/checkout/summary');
@@ -96,7 +99,10 @@ class ShopController extends Controller
     public function wishlistRemoveRedirect($id)
     {
         $product = $this->kernel->getModelService()->findOneById(Product::class, $id);
-        if ($product != null) $this->kernel->getShopService()->removeFromWishlist($product, $this->getUser());
+        if ($product != null) {
+            $this->kernel->getShopService()->removeFromWishlist($product, $this->getUser());
+            $this->kernel->getNotificationService()->pushNotification('Removed from wishlist', $product->name . ' has been removed from your wishlist.');
+        }
         return $this->redirectTo('/wishlist');
     }
 

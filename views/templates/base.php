@@ -30,10 +30,17 @@
 
     </head>
     <body>
-        <?php
-            if(!isset($navigation) || $navigation) $this->renderComponent("components/navigation.php");
-            $this->renderView()
-        ?>
+        <?php if(!isset($navigation) || $navigation) $this->renderComponent("components/navigation.php"); ?>
+        <div id="notifications">
+            <?php foreach($this->kernel->getNotificationService()->getNotifications() as $notification): ?>
+            <div class="notification" data-type="<?= $notification["type"] ?>">
+                <div class="title"><?= $notification["title"] ?></div>
+                <span><?= $notification["message"] ?></span>
+                <div class="close"><i class="icon times"></i></div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+        <?php $this->renderView() ?>
         <div id="scroll-top"><i class="icon chevron-up"></i></div>
         <script>
             scrollTopButton = document.getElementById("scroll-top");
@@ -95,13 +102,32 @@
                 e.stopPropagation();
             });
 
-            <?php if(!isset($showSearch) || $showSearch): ?>
+            <?php if(!isset($slim) || !$slim): ?>
             document.querySelector("#navigation .search-box .search-button").addEventListener("click",function(e) {
                 if(window.innerWidth < 900)
                     document.getElementById("navigation").classList.add("search");
             });
             <?php endif ?>
             <?php endif ?>
+
+            document.querySelectorAll('#notifications .notification .close').forEach(function(item) {
+                item.addEventListener('click', function() {
+                    this.closest('.notification').remove();
+                });
+            });
+
+            function pushNotification(title, message, type) {
+                const notification = document.createElement('div');
+                notification.classList.add('notification');
+                notification.innerHTML = "<div class='title'>"+title+"</div><span>"+message+"</span><div class='close'><i class='icon times'></i></div>";
+                notification.setAttribute('data-type', type);
+
+                notification.addEventListener('click', function() {
+                    this.closest('.notification').remove();
+                });
+
+                document.getElementById('notifications').appendChild(notification);
+            }
         </script>
     </body>
 </html>

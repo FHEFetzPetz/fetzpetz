@@ -38,7 +38,7 @@ class AuthenticationController extends Controller
                 if(strlen($_GET['redirect_to'] ?? '') > 0)
                     $this->redirectTo($_GET['redirect_to']);
                 else {
-                    //TODO ZIELSEITE
+                    $this->kernel->getNotificationService()->pushNotification('Login successful', 'You are now logged in as ' . $existingUser->firstname . ' ' . $existingUser->lastname, 'success');
                     $this->redirectTo('/');
                 }
             } else $errors[] = 'invalid credentials';
@@ -105,7 +105,7 @@ class AuthenticationController extends Controller
                 if(strlen($_GET['redirect_to'] ?? '') > 0)
                     $this->redirectTo($_GET['redirect_to']);
                 else {
-                    //TODO ZIELSEITE
+                    $this->kernel->getNotificationService()->pushNotification('Registration successful', 'You are now logged in as ' . $existingUser->firstname . ' ' . $existingUser->lastname, 'success');
                     $this->redirectTo('/');
                 }
             }
@@ -131,6 +131,7 @@ class AuthenticationController extends Controller
 
     public function logout() {
         $this->kernel->getSecurityService()->removeAuthentication();
+        $this->kernel->getNotificationService()->pushNotification('Logout successful', 'You have been logged out', 'success');
         return $this->redirectTo('/');
     }
 }

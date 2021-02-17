@@ -5,6 +5,7 @@ namespace App\FetzPetz;
 use App\FetzPetz\Services\DatabaseService;
 use App\FetzPetz\Services\LoggerService;
 use App\FetzPetz\Services\ModelService;
+use App\FetzPetz\Services\NotificationService;
 use App\FetzPetz\Services\ShopService;
 use App\FetzPetz\Services\RequestService;
 use App\FetzPetz\Services\SecurityService;
@@ -18,6 +19,7 @@ class Kernel {
     private $shopService;
     private $loggerService;
     private $modelService;
+    private $notificationService;
 
     /**
      * Kernel constructor.
@@ -34,6 +36,7 @@ class Kernel {
         $this->shopService = new ShopService($this);
         $this->loggerService = new LoggerService($this);
         $this->modelService = new ModelService($this);
+        $this->notificationService = new NotificationService($this);
 
         $this->databaseService->prepareHandler();
         $this->securityService->prepareService();
@@ -67,6 +70,10 @@ class Kernel {
 
     public function getModelService(): ModelService {
         return $this->modelService;
+    }
+
+    public function getNotificationService(): NotificationService {
+        return $this->notificationService;
     }
 
     public function getDatabase(): \PDO {

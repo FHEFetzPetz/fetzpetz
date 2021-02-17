@@ -287,6 +287,8 @@ class ShopService extends Service
         unset($_SESSION["checkout_address"]);
         unset($_SESSION["checkout_payment_method"]);
 
+        $this->kernel->getNotificationService()->pushNotification('Order placed', 'Your order has been placed successfully and will be shipped shortly!', 'success');
+
         return $order;
     }
 }

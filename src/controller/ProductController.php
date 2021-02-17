@@ -52,6 +52,7 @@ class ProductController extends Controller
         }
 
         $this->kernel->getShopService()->addToCart($product, 1);
+        $this->kernel->getNotificationService()->pushNotification('Added to Cart', $product->name . ' has been added to your cart.');
 
         return $this->redirectTo('/cart');
     }
