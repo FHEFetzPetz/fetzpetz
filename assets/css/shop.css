@@ -1,8 +1,8 @@
-#cart {
+#shop {
     padding: 10px;
 }
 
-#cart .row {
+#shop .row {
     display: flex;
     flex-direction: row;
     padding: 10px;
@@ -19,11 +19,42 @@
     padding: 15px;
 }
 
-#content .box h1 {
+#shop .box h1,
+#shop .box h2,
+#shop .box h3 {
     color: #a7a7a7;
     margin-top: 0;
     margin-bottom: 5px;
+}
+
+#shop .box h1.padding {
     padding-left: 10px;
+}
+
+#shop .box h1 small {
+    font-weight: 500;
+}
+
+#shop .box h2 {
+    margin-bottom: 15px;
+    font-size: 17px;
+}
+
+#shop .box h3 {
+    margin-bottom: 10px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+}
+
+#shop .box h3 small {
+    margin-left: 5px;
+    padding-bottom: 2px;
+}
+
+#shop .box h3 small a {
+    color: #844ABA;
+    text-decoration: none;
 }
 
 #content .box .items .empty-message {
@@ -195,4 +226,21 @@
 #content .box table tfoot .total .checkout-button:hover {
     background-color: #844aba;
     color: white;
+}
+
+#shop .box .row {
+    display: flex;
+    margin: -10px -10px 10px;
+}
+
+#shop .box .row .column {
+    flex: 1;
+    margin: 10px;
+    padding: 10px;
+}
+
+#shop .box .row .column p {
+    color: #a7a7a7;
+    font-size: 14px;
+    margin: 2px 0;
 }

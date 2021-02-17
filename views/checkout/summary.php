@@ -67,7 +67,7 @@
                     <p><?= $address['firstName'] ?> <?= $address['lastName'] ?></p>
                     <p><?= $address['street'] ?></p>
                     <p><?= $address['zip'] ?> <?= $address['city'] ?><?= strlen($address['state'] > 0) ? (' (' . $address['state'] . ')') : '' ?></p>
-                    <p><?= $address['city'] ?></p>
+                    <p><?= $address['country'] ?></p>
                     <p><?= $address['phoneNumber'] ?></p>
                 </div>
                 <?php if($address['billingAddress'] != null): ?>
@@ -76,7 +76,7 @@
                     <p><?= $address['billingAddress']['firstName'] ?> <?= $address['billingAddress']['lastName'] ?></p>
                     <p><?= $address['billingAddress']['street'] ?></p>
                     <p><?= $address['billingAddress']['zip'] ?> <?= $address['billingAddress']['city'] ?><?= strlen($address['billingAddress']['state'] > 0) ? (' (' . $address['billingAddress']['state'] . ')') : '' ?></p>
-                    <p><?= $address['billingAddress']['city'] ?></p>
+                    <p><?= $address['billingAddress']['country'] ?></p>
                     <p><?= $address['billingAddress']['phoneNumber'] ?></p>
                 </div>
                 <?php endif; ?>

@@ -15,7 +15,6 @@ class User extends Model
             ['id',self::TYPE_INTEGER,null],
             ['firstname',self::TYPE_STRING,null],
             ['lastname',self::TYPE_STRING,null],
-            ['birthday',self::TYPE_DATE,null],
             ['password_hash',self::TYPE_STRING,null],
             ['email',self::TYPE_STRING,null],
             ['email_verified',self::TYPE_INTEGER,null],

@@ -96,7 +96,6 @@ class AuthenticationController extends Controller
                     'lastname' => $lastName,
                     'email' => $email,
                     'password_hash' => $passwordHash,
-                    'birthday' => new \DateTime(),
                     'created_at' => new \DateTime()
                 ]);
 

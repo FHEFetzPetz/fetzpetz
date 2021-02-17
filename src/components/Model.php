@@ -144,7 +144,7 @@ class Model
         if(!$value) return null;
 
         switch($type) {
-            case self::TYPE_DATE: return new \DateTime($value);
+            case self::TYPE_DATE: case self::TYPE_DATETIME: return new \DateTime($value);
             case self::TYPE_BOOL: return $value == 1;
             case self::TYPE_OBJECT: return unserialize($value);
             default: return $value;

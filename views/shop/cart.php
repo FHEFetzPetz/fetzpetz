@@ -1,5 +1,5 @@
 <div class="container">
-    <section id="cart">
+    <section id="shop">
         <div class="row">
             <?php $this->renderComponent("components/profileSidebar.php"); ?>
             <div id="content">

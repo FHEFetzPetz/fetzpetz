@@ -30,7 +30,7 @@
         <?php endif; ?>
         <div class="actions">
             <div class="desktop-actions">
-                <a href="<?= $this->getPath('/login'); ?>" class="action"><i class="icon user"></i></a> <!-- Konditionen für anmeldung-->
+                <a href="<?= $this->getPath('/profile'); ?>" class="action"><i class="icon user"></i></a> 
                 <a href="<?= $this->getPath('/wishlist'); ?>" class="action"><i class="icon heart"></i></a>
             </div>
             <a href="<?= $this->getPath('/cart') ?>" class="action"><i class="icon shopping-cart"></i></a>

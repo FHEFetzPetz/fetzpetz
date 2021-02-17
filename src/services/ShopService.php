@@ -262,7 +262,8 @@ class ShopService extends Service
             'shipping_address_id' => $shippingAddress->id,
             'billing_address_id' => $billingAddress ? $billingAddress->id : null,
             'order_status' => 'pending',
-            'shipment_data' => null
+            'shipment_data' => null,
+            'created_at' => new \DateTime()
         ]);
 
         $modelService->insert($order);

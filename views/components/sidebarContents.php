@@ -40,9 +40,9 @@ endforeach;
     <a href="<?= $this->getPath('/logout'); ?>" class="item margin-top">
         <span>Logout</span>
     </a>
-    <div class="item color">
+    <a href="<?= $this->getPath('/profile'); ?>" class="item color">
         <span>My Profile</span>
-    </div>
+    </a>
 <?php else : ?>
     <a href="<?= $this->getPath('/login'); ?>" class="item margin-top">
         <span>Log in</span>

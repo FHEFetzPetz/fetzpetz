@@ -4,6 +4,7 @@ namespace App\FetzPetz\Controller;
 
 use App\FetzPetz\Components\Controller;
 use App\FetzPetz\Model\Category;
+use App\FetzPetz\Model\Order;
 use App\FetzPetz\Model\Product;
 use App\FetzPetz\Model\User;
 
@@ -14,14 +15,15 @@ class ShopController extends Controller
     {
         return [
             '/cart' => 'cart',
-            '/cart-test' => 'cartTest',
             '/cart/remove/{id}' => 'cartRemove',
             '/cart/quantity/{id}/{quantity}' => 'cartQuantity',
             '/wishlist' => 'wishlist',
-            '/wishlist-test' => 'wishlistTest',
             '/wishlist/remove/redirect/{id}' => 'wishlistRemoveRedirect',
             '/wishlist/remove/{id}' => 'wishlistRemove',
-            '/wishlist/add/{id}' => 'wishlistAdd'
+            '/wishlist/add/{id}' => 'wishlistAdd',
+            '/profile' => 'profile',
+            '/profile/orders' => 'profileOrders',
+            '/profile/orders/{id}' => 'profileOrderView'
         ];
     }
 
@@ -31,7 +33,7 @@ class ShopController extends Controller
 
         $this->addExtraHeaderFields([
             ["type" => "stylesheet", "href" => "/assets/css/profile.css"],
-            ["type" => "stylesheet", "href" => "/assets/css/cart.css"]
+            ["type" => "stylesheet", "href" => "/assets/css/shop.css"]
         ]);
 
         $items = $this->kernel->getShopService()->getCart();
@@ -41,14 +43,6 @@ class ShopController extends Controller
         $this->setParameter("total", $total);
 
         $this->setView("shop/cart.php");
-    }
-
-    public function cartTest()
-    {
-        $product = $this->kernel->getModelService()->findOne(Product::class);
-        $this->kernel->getShopService()->addToCart($product, 2);
-
-        $this->redirectTo("/cart");
     }
 
     public function cartRemove($id)
@@ -99,14 +93,6 @@ class ShopController extends Controller
         $this->setView("shop/wishlist.php");
     }
 
-    public function wishlistTest()
-    {
-        $product = $this->kernel->getModelService()->findOne(Product::class);
-        $this->kernel->getShopService()->addToWishlist($product, $this->getUser());
-
-        $this->redirectTo("/wishlist");
-    }
-
     public function wishlistRemoveRedirect($id)
     {
         $product = $this->kernel->getModelService()->findOneById(Product::class, $id);
@@ -130,5 +116,59 @@ class ShopController extends Controller
         return $this->printJson([
             'result' => 'ok'
         ]);
+    }
+
+    public function profile()
+    {
+        if (!$this->isAuthenticated()) {
+            return $this->redirectTo('/login?redirect_to=/profile');
+        }
+
+        $this->redirectTo('/profile/orders');
+    }
+
+    public function profileOrders()
+    {
+        if (!$this->isAuthenticated()) {
+            return $this->redirectTo('/login?redirect_to=/profile');
+        }
+
+        $this->setParameter("title", "FetzPetz | My Orders");
+
+        $this->addExtraHeaderFields([
+            ["type" => "stylesheet", "href" => "/assets/css/profile.css"],
+            ["type" => "stylesheet", "href" => "/assets/css/shop.css"]
+        ]);
+
+        $orders = $this->kernel->getModelService()->find(Order::class, ['user_id'=>$this->getUser()->id]);
+
+        $this->setParameter('orders', $orders);
+
+        $this->setView("shop/orders.php");
+    }
+
+    public function profileOrderView($id)
+    {
+        if (!$this->isAuthenticated()) {
+            return $this->redirectTo('/login?redirect_to=/profile');
+        }
+
+        $order = $this->kernel->getModelService()->findOne(Order::class, ['user_id'=>$this->getUser()->id, 'id'=>$id]);
+        if ($order == null) {
+            $this->setParameter("title", "FetzPetz | 404 - Order not found");
+            $this->setParameter('message','Order not found');
+            return $this->setView("fallback/404.php");
+        }
+
+        $this->setParameter("title", "FetzPetz | Order #" . sprintf('%04d',$order->id));
+
+        $this->addExtraHeaderFields([
+            ["type" => "stylesheet", "href" => "/assets/css/profile.css"],
+            ["type" => "stylesheet", "href" => "/assets/css/shop.css"]
+        ]);
+
+        $this->setParameter("order", $order);
+
+        $this->setView("shop/orderView.php");
     }
 }

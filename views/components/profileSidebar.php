@@ -1,8 +1,8 @@
 <div id="sidebar">
     <?php if ($this->isAuthenticated()) : ?>
-        <div class="item">
+        <a href="<?= $this->getPath('/profile/orders'); ?>" class="item">
             <span>Orders</span>
-        </div>
+        </a>
     <?php endif ?>
     <a href="<?= $this->getPath('/cart') ?>" class="item">
         <span>Cart</span>
