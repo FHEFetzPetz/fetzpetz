@@ -23,7 +23,8 @@ class ShopController extends Controller
             '/wishlist/add/{id}' => 'wishlistAdd',
             '/profile' => 'profile',
             '/profile/orders' => 'profileOrders',
-            '/profile/orders/{id}' => 'profileOrderView'
+            '/profile/orders/{id}' => 'profileOrderView',
+            '/profile/settings' => 'profileSettings'
         ];
     }
 
@@ -48,12 +49,12 @@ class ShopController extends Controller
     public function cartRemove($id)
     {
         $product = $this->kernel->getModelService()->findOneById(Product::class, $id);
-        if ($product != null){
+        if ($product != null) {
             $this->kernel->getShopService()->removeFromCart($product);
             $this->kernel->getNotificationService()->pushNotification('Removed from cart', $product->name . ' has been removed from your cart.');
         }
 
-        if($_GET['source'] ?? '' === 'checkout')
+        if ($_GET['source'] ?? '' === 'checkout')
             return $this->redirectTo('/checkout/summary');
         else
             return $this->redirectTo('/cart');
@@ -146,7 +147,7 @@ class ShopController extends Controller
             ["type" => "stylesheet", "href" => "/assets/css/shop.css"]
         ]);
 
-        $orders = $this->kernel->getModelService()->find(Order::class, ['user_id'=>$this->getUser()->id]);
+        $orders = $this->kernel->getModelService()->find(Order::class, ['user_id' => $this->getUser()->id]);
 
         $this->setParameter('orders', $orders);
 
@@ -159,14 +160,14 @@ class ShopController extends Controller
             return $this->redirectTo('/login?redirect_to=/profile');
         }
 
-        $order = $this->kernel->getModelService()->findOne(Order::class, ['user_id'=>$this->getUser()->id, 'id'=>$id]);
+        $order = $this->kernel->getModelService()->findOne(Order::class, ['user_id' => $this->getUser()->id, 'id' => $id]);
         if ($order == null) {
             $this->setParameter("title", "FetzPetz | 404 - Order not found");
-            $this->setParameter('message','Order not found');
+            $this->setParameter('message', 'Order not found');
             return $this->setView("fallback/404.php");
         }
 
-        $this->setParameter("title", "FetzPetz | Order #" . sprintf('%04d',$order->id));
+        $this->setParameter("title", "FetzPetz | Order #" . sprintf('%04d', $order->id));
 
         $this->addExtraHeaderFields([
             ["type" => "stylesheet", "href" => "/assets/css/profile.css"],
@@ -176,5 +177,94 @@ class ShopController extends Controller
         $this->setParameter("order", $order);
 
         $this->setView("shop/orderView.php");
+    }
+
+    public function profileSettings()
+    {
+        if (!$this->isAuthenticated()) {
+            return $this->redirectTo('/login?redirect_to=/profile/settings');
+        }
+
+        $notificationService = $this->kernel->getNotificationService();
+        $modelService = $this->kernel->getModelService();
+
+        if (isset($_POST['updatePersonal'])) {
+            $firstName = $_POST['firstName'] ?? '';
+            $lastName = $_POST['lastName'] ?? '';
+
+            if (!$this->isStringValid($firstName, 2, 100))
+                $notificationService->pushNotification('Invalid Firstname', 'Your Firstname should be at least 2 characters long up to 100 characters', 'error');
+            else if (!$this->isStringValid($lastName, 2, 50))
+                $notificationService->pushNotification('Invalid Lastname', 'Your Lastname should be at least 2 characters long up to 50 characters', 'error');
+            else {
+                $user = $this->getUser();
+
+                $user->firstname = $firstName;
+                $user->lastname = $lastName;
+
+                $modelService->update($user);
+                $notificationService->pushNotification('Personal Data updated', 'Your Personal Data has been updated', 'success');
+            }
+        }
+
+        if (isset($_POST['updateEmail'])) {
+            $email = strtolower($_POST['email'] ?? '');
+
+            $existingUser = $this->kernel->getModelService()->findOne(User::class, ['email' => $email]);
+
+            if ($existingUser != null)
+                $notificationService->pushNotification('Invalid E-Mail', 'The E-Mail is already in Use', 'error');
+            else {
+                $user = $this->getUser();
+
+                $user->email = $email;
+                $user->email_verified = 0;
+
+                $modelService->update($user);
+                $notificationService->pushNotification('E-Mail Address updated', 'Your E-Mail Address has been updated', 'success');
+            }
+        }
+
+        if (isset($_POST['updatePassword'])) {
+            $oldPassword = $_POST['oldPassword'] ?? '';
+            $newPassword = $_POST['newPassword'] ?? '';
+            $newPassword2 = $_POST['newPassword2'] ?? '';
+
+            $user = $this->getUser();
+
+            if (!password_verify($oldPassword, $user->password_hash))
+                $notificationService->pushNotification('Invalid Password', 'Your Password is invalid', 'error');
+            else if (strlen($newPassword) < 8) {
+                $notificationService->pushNotification('Invalid Password', 'Your new Password should have at least 8 characters', 'error');
+            } else if ($newPassword !== $newPassword2) {
+                $notificationService->pushNotification('Invalid Password', 'Your new Password should match', 'error');
+            } else {
+                $passwordHash = password_hash($newPassword, PASSWORD_BCRYPT);
+
+                $user->password_hash = $passwordHash;
+
+                $modelService->update($user);
+                $notificationService->pushNotification('Password updated', 'Your Password has been updated', 'success');
+            }
+        }
+
+
+        $this->setParameter("title", "FetzPetz | Settings");
+
+        $this->addExtraHeaderFields([
+            ["type" => "stylesheet", "href" => "/assets/css/profile.css"],
+            ["type" => "stylesheet", "href" => "/assets/css/shop.css"]
+        ]);
+
+        $this->setView("shop/settings.php");
+    }
+
+    private function isStringValid(string $value, int $min, int $max): bool
+    {
+        $length = strlen($value);
+
+        if ($length < $min) return false;
+        if ($length > $max) return false;
+        return true;
     }
 }

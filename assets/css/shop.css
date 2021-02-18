@@ -17,6 +17,7 @@
 #content .box {
     background: #333333;
     padding: 15px;
+    margin-bottom: 10px;
 }
 
 #shop .box h1,
@@ -243,4 +244,48 @@
     color: #a7a7a7;
     font-size: 14px;
     margin: 2px 0;
+}
+
+#shop .box .input-item {
+    display: flex;
+    margin: 5px -5px;
+    max-width: 350px;
+}
+
+#shop .box .input-item input {
+    height: 35px;
+    width: 100%;
+    padding: 0 15px;
+    margin: 5px;
+    border: solid 1px #c4c4c4;
+    border-radius: 5px;
+    background: #f1f1f1;
+}
+
+#shop .box .submit-item {
+    margin-top: 20px;
+    display: flex;
+    max-width: 350px;
+}
+
+#shop .box .submit-item button {
+    height: 35px;
+    padding: 0 25px;
+    border: none;
+    border-radius: 5px;
+    background: #f1f1f1;
+    font-size: 16px;
+    color: #333333;
+    cursor: pointer;
+    transition: background-color .2s ease, color .2s ease;
+}
+
+#shop .box .submit-item button:hover {
+    background-color: #844aba;
+    color: white;
+}
+
+#shop .box .input-item input:focus,
+#shop .box .submit-item button:focus {
+    outline: none;
 }

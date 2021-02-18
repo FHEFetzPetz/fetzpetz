@@ -11,9 +11,9 @@
         <a href="<?= $this->getPath('/wishlist'); ?>" class="item">
             <span>Wishlist</span>
         </a>
-        <div class="item">
+        <a href="<?= $this->getPath('/profile/settings'); ?>" class="item">
             <span>Settings</span>
-        </div>
+        </a>
         <a href="<?= $this->getPath('/logout'); ?>" class="item margin-top">
             <span>Logout</span>
         </a>

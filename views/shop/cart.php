@@ -26,7 +26,7 @@
                                         <tr data-id="<?= $item["product"]->id ?>">
                                             <td>
                                                 <div class="product-item">
-                                                    <div class="image" style="background-image: url(<?= $item['product']->image ?>)"></div>
+                                                    <a href="<?= $this->getPath('/product/' . $item['product']->id) ?>" class="image" style="background-image: url(<?= $item['product']->image ?>)"></a>
                                                     <div class="data">
                                                         <h4><?= $item['product']->name ?></h4>
                                                         <div class="price"><?= number_format($item['product']->cost_per_item,2,'.','') ?> €</div>

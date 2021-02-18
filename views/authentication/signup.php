@@ -15,13 +15,13 @@
                 <input id="lastname" name="lastname" type="text" placeholder="Lastname" maxlenght="50" value="<?= $lastName; ?>" required>
             </div>
             <div class="input-item">
-                <input id="email" name="email" type="email" placeholder="E-Mail Address" value="<?= $email; ?>" required>
+                <input id="email" name="email" type="email" placeholder="E-Mail Address" maxlenght="100" value="<?= $email; ?>" required>
             </div>
             <div class="input-item">
-                <input id="password" name="password" type="password" placeholder="Password" required>
+                <input id="password" name="password" type="password" placeholder="Password" minlength="8" maxlength="100" required>
             </div>
             <div class="input-item">
-                <input id="repeat-password" name="repeat-password" type="password" placeholder="Repeat Password" required>
+                <input id="repeat-password" name="repeat-password" type="password" placeholder="Repeat Password" minlength="8" maxlength="100" required>
             </div>
             <div class="submit-item">
                 <button>Sign up! ♥</button>

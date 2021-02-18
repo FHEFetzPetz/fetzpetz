@@ -69,7 +69,7 @@ class AuthenticationController extends Controller
 
         if (isset($_POST['email'])) {
             $password = $_POST['password'];
-            $reapeatPassword = $_POST['repeat-password'];
+            $repeatPassword = $_POST['repeat-password'];
 
             $existingUser = $this->kernel->getModelService()->findOne(User::class, ['email' => $email]);
 
@@ -85,7 +85,7 @@ class AuthenticationController extends Controller
             if (strlen($password) < 8)
                 $errors[] = 'Password should be at least 8 characters long!';
 
-            if ($password != $reapeatPassword)
+            if ($password != $repeatPassword)
                 $errors[] = 'Passwords should match!';
 
             if (sizeof($errors) == 0) {
@@ -105,7 +105,7 @@ class AuthenticationController extends Controller
                 if(strlen($_GET['redirect_to'] ?? '') > 0)
                     $this->redirectTo($_GET['redirect_to']);
                 else {
-                    $this->kernel->getNotificationService()->pushNotification('Registration successful', 'You are now logged in as ' . $existingUser->firstname . ' ' . $existingUser->lastname, 'success');
+                    $this->kernel->getNotificationService()->pushNotification('Registration successful', 'You are now logged in as ' . $user->firstname . ' ' . $user->lastname, 'success');
                     $this->redirectTo('/');
                 }
             }
