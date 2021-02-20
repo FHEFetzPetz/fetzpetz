@@ -14,7 +14,11 @@ class IndexController extends Controller
     {
         return [
             '/' => 'index',
-            '/category/{id}' => 'category', 
+            '/category/{id}' => 'category',
+            '/imprint' => 'imprint',
+            '/privacy-policy' => 'privacyPolicy',
+            '/terms-of-service' => 'termsOfService',
+            '/faq' => 'faq'
         ];
     }
 
@@ -59,5 +63,47 @@ class IndexController extends Controller
         $this->setView("index.php");
     }
 
+    public function imprint() {
+        $this->setParameter("title", "FetzPetz | Imprint");
 
+        $this->addExtraHeaderFields([
+            ["type" => "stylesheet", "href" => "/assets/css/standalone.css"]
+        ]);
+
+        
+        $this->setView("standalone/imprint.php");
+    }
+
+    public function privacyPolicy() {
+        $this->setParameter("title", "FetzPetz | Privacy Policy");
+
+        $this->addExtraHeaderFields([
+            ["type" => "stylesheet", "href" => "/assets/css/standalone.css"]
+        ]);
+
+        
+        $this->setView("standalone/privacyPolicy.php");
+    }
+
+    public function termsOfService() {
+        $this->setParameter("title", "FetzPetz | Terms of Service");
+
+        $this->addExtraHeaderFields([
+            ["type" => "stylesheet", "href" => "/assets/css/standalone.css"]
+        ]);
+
+        
+        $this->setView("standalone/termsOfService.php");
+    }
+
+    public function faq() {
+        $this->setParameter("title", "FetzPetz | FAQ");
+
+        $this->addExtraHeaderFields([
+            ["type" => "stylesheet", "href" => "/assets/css/standalone.css"]
+        ]);
+
+        
+        $this->setView("standalone/faq.php");
+    }
 }
