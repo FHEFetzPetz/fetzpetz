@@ -11,7 +11,6 @@ use App\FetzPetz\Model\OrderItem;
 use App\FetzPetz\Model\Product;
 use App\FetzPetz\Model\ProductCategory;
 use App\FetzPetz\Model\User;
-use mysql_xdevapi\Exception;
 
 class AdminController extends Controller
 {
@@ -66,7 +65,7 @@ class AdminController extends Controller
         $this->setParameter('administrators', $adminIds);
 
         $this->setTemplate('administration');
-        $this->setView("admin/users/list.php");
+        return $this->setView("admin/users/list.php");
     }
 
     public function usersNew() {
@@ -200,7 +199,7 @@ class AdminController extends Controller
         $this->setParameter('type', $type);
 
         $this->setTemplate('administration');
-        $this->setView("admin/users/update.php");
+        return $this->setView("admin/users/update.php");
     }
 
     public function usersDelete($id) {
@@ -263,7 +262,7 @@ class AdminController extends Controller
         $this->setParameter('categories', $categories);
 
         $this->setTemplate('administration');
-        $this->setView("admin/categories/list.php");
+        return $this->setView("admin/categories/list.php");
     }
 
     public function categoriesNew() {
@@ -356,7 +355,7 @@ class AdminController extends Controller
         $this->setParameter('type', $type);
 
         $this->setTemplate('administration');
-        $this->setView("admin/categories/update.php");
+        return $this->setView("admin/categories/update.php");
     }
 
     public function categoriesDelete($id) {
@@ -418,7 +417,7 @@ class AdminController extends Controller
         $this->setParameter('categoryIds', $categoryIds);
 
         $this->setTemplate('administration');
-        $this->setView("admin/products/list.php");
+        return $this->setView("admin/products/list.php");
     }
 
     public function productsNew() {
@@ -541,7 +540,7 @@ class AdminController extends Controller
         $this->setParameter('type', $type);
 
         $this->setTemplate('administration');
-        $this->setView("admin/products/update.php");
+        return $this->setView("admin/products/update.php");
     }
 
     public function productsDelete($id) {
@@ -601,7 +600,7 @@ class AdminController extends Controller
         $this->setParameter('product', $product);
 
         $this->setTemplate('administration');
-        $this->setView("admin/products/categories.php");
+        return $this->setView("admin/products/categories.php");
     }
 
     public function productsCategoriesNew($id) {
@@ -657,7 +656,7 @@ class AdminController extends Controller
         $this->setParameter('categories', $availableCategories);
 
         $this->setTemplate('administration');
-        $this->setView("admin/products/categoriesNew.php");
+        return $this->setView("admin/products/categoriesNew.php");
     }
 
     public function productsCategoriesDelete($id, $relId) {
@@ -717,7 +716,7 @@ class AdminController extends Controller
         $this->setParameter('orders', $orders);
 
         $this->setTemplate('administration');
-        $this->setView("admin/orders/list.php");
+        return $this->setView("admin/orders/list.php");
     }
 
     public function ordersView($id) {
@@ -738,7 +737,7 @@ class AdminController extends Controller
         $this->setParameter('order', $order);
 
         $this->setTemplate('administration');
-        $this->setView("admin/orders/details.php");
+        return $this->setView("admin/orders/details.php");
     }
 
     public function ordersStatus($id) {
@@ -770,7 +769,7 @@ class AdminController extends Controller
         }
 
         $this->setTemplate('administration');
-        $this->setView("admin/orders/status.php");
+        return $this->setView("admin/orders/status.php");
     }
 
     private function isStringValid(string $value, int $min, int $max): bool

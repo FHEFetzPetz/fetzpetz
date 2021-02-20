@@ -5,7 +5,6 @@ namespace App\FetzPetz\Controller;
 use App\FetzPetz\Components\Controller;
 use App\FetzPetz\Model\Category;
 use App\FetzPetz\Model\Product;
-use App\FetzPetz\Model\User;
 
 class IndexController extends Controller
 {
@@ -36,7 +35,7 @@ class IndexController extends Controller
         $this->setParameter("wishlist", $wishlist);
         $this->setParameter("slim", true);
 
-        $this->setView("index.php");
+        return $this->setView("index.php");
     }
 
     public function category($id) {
@@ -60,7 +59,7 @@ class IndexController extends Controller
         $this->setParameter("wishlist", $wishlist);
         $this->setParameter("slim", true);
 
-        $this->setView("index.php");
+        return $this->setView("index.php");
     }
 
     public function imprint() {
@@ -70,8 +69,8 @@ class IndexController extends Controller
             ["type" => "stylesheet", "href" => "/assets/css/standalone.css"]
         ]);
 
-        
-        $this->setView("standalone/imprint.php");
+
+        return $this->setView("standalone/imprint.php");
     }
 
     public function privacyPolicy() {
@@ -81,8 +80,7 @@ class IndexController extends Controller
             ["type" => "stylesheet", "href" => "/assets/css/standalone.css"]
         ]);
 
-        
-        $this->setView("standalone/privacyPolicy.php");
+        return $this->setView("standalone/privacyPolicy.php");
     }
 
     public function termsOfService() {
@@ -92,8 +90,7 @@ class IndexController extends Controller
             ["type" => "stylesheet", "href" => "/assets/css/standalone.css"]
         ]);
 
-        
-        $this->setView("standalone/termsOfService.php");
+        return $this->setView("standalone/termsOfService.php");
     }
 
     public function faq() {
@@ -103,7 +100,6 @@ class IndexController extends Controller
             ["type" => "stylesheet", "href" => "/assets/css/standalone.css"]
         ]);
 
-        
-        $this->setView("standalone/faq.php");
+        return $this->setView("standalone/faq.php");
     }
 }

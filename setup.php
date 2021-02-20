@@ -65,6 +65,10 @@ echo "\n\nCreate Test-Data? [yes/no] ";
 $result = awaitInput();
 
 if(trim($result) == 'yes') {
+    $mysqli->close();
+    $mysqli = new mysqli($dbConfig['host'], $dbConfig['username'], $dbConfig['password'], null, $dbConfig['port']);
+    $mysqli->select_db($dbConfig['database']);
+
     $data = file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'setup' . DIRECTORY_SEPARATOR . 'testdata.sql');
 
     echo "\n\033[01;35mCreating Test-Data...\033[0m";
@@ -77,6 +81,10 @@ if(trim($result) == 'yes') {
 
         echo "\n\n\033[01;32mTest-Data created.\033[0m\n\n";
     }
+
+    $mysqli->close();
+    $mysqli = new mysqli($dbConfig['host'], $dbConfig['username'], $dbConfig['password'], null, $dbConfig['port']);
+    $mysqli->select_db($dbConfig['database']);
 }
 
 echo "\n\nCreate \033[01;31mAdmin-User\033[0m? [yes/no] ";
@@ -106,6 +114,8 @@ if(trim($result) == 'yes') {
     if(!$queryResult) echo "\n\n\033[01;31mFailed to create User: " . $mysqli->error . "\033[0m";
 
     $userId = $mysqli->insert_id;
+
+    print_r($userId);
 
     $queryResult = $mysqli->query(
         'INSERT INTO administration_access (user_id, created_at)

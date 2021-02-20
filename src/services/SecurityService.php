@@ -3,7 +3,6 @@
 
 namespace App\FetzPetz\Services;
 
-use App\FetzPetz\Components\Model;
 use App\FetzPetz\Core\Service;
 use App\FetzPetz\Model\AdministrationAccess;
 use App\FetzPetz\Model\User;

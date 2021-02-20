@@ -53,7 +53,7 @@ class SearchController extends Controller
         $this->setParameter("wishlist", $wishlist);
         $this->setParameter("slim", true);
 
-        $this->setView("index.php");
+        return $this->setView("index.php");
     }
 
 }

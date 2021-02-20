@@ -1,3 +1,4 @@
+START TRANSACTION;
 SET FOREIGN_KEY_CHECKS=0;
 
 INSERT INTO `address` (`id`, `firstname`, `lastname`, `street`, `zip`, `city`, `state`, `country`, `phone_number`) VALUES
@@ -127,3 +128,4 @@ INSERT INTO `user` (`id`, `firstname`, `lastname`, `password_hash`, `email`, `em
 (4, 'Ashley', 'Denton', '$2y$10$bJW6.9zBsMMe3h1lHP6upOTPFhATqlfJ8JBuCd9TZs51g93wZjAJ.', 'ashleydenton@gmail.com', 0, NULL, 0, '2021-02-20 18:11:15');
 
 SET FOREIGN_KEY_CHECKS=1;
+COMMIT;

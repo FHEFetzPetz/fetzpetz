@@ -3,7 +3,6 @@
 namespace App\FetzPetz\Controller;
 
 use App\FetzPetz\Components\Controller;
-use App\FetzPetz\Model\Category;
 use App\FetzPetz\Model\Order;
 use App\FetzPetz\Model\Product;
 use App\FetzPetz\Model\User;
@@ -43,7 +42,7 @@ class ShopController extends Controller
         $this->setParameter("items", $items);
         $this->setParameter("total", $total);
 
-        $this->setView("shop/cart.php");
+        return $this->setView("shop/cart.php");
     }
 
     public function cartRemove($id)
@@ -94,7 +93,7 @@ class ShopController extends Controller
 
         $this->setParameter("items", $items);
 
-        $this->setView("shop/wishlist.php");
+        return $this->setView("shop/wishlist.php");
     }
 
     public function wishlistRemoveRedirect($id)
@@ -131,7 +130,7 @@ class ShopController extends Controller
             return $this->redirectTo('/login?redirect_to=/profile');
         }
 
-        $this->redirectTo('/profile/orders');
+        return $this->redirectTo('/profile/orders');
     }
 
     public function profileOrders()
@@ -151,7 +150,7 @@ class ShopController extends Controller
 
         $this->setParameter('orders', $orders);
 
-        $this->setView("shop/orders.php");
+        return $this->setView("shop/orders.php");
     }
 
     public function profileOrderView($id)
@@ -176,7 +175,7 @@ class ShopController extends Controller
 
         $this->setParameter("order", $order);
 
-        $this->setView("shop/orderView.php");
+        return $this->setView("shop/orderView.php");
     }
 
     public function profileSettings()
@@ -256,7 +255,7 @@ class ShopController extends Controller
             ["type" => "stylesheet", "href" => "/assets/css/shop.css"]
         ]);
 
-        $this->setView("shop/settings.php");
+        return $this->setView("shop/settings.php");
     }
 
     private function isStringValid(string $value, int $min, int $max): bool

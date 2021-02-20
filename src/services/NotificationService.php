@@ -3,13 +3,6 @@
 namespace App\FetzPetz\Services;
 
 use App\FetzPetz\Core\Service;
-use App\FetzPetz\Model\Address;
-use App\FetzPetz\Model\Order;
-use App\FetzPetz\Model\OrderItem;
-use App\FetzPetz\Model\PaymentReference;
-use App\FetzPetz\Model\Product;
-use App\FetzPetz\Model\User;
-use App\FetzPetz\Model\WishlistItem;
 
 class NotificationService extends Service
 {

@@ -4,7 +4,6 @@ namespace App\FetzPetz\Controller;
 
 use App\FetzPetz\Components\Controller;
 use App\FetzPetz\Model\Product;
-use App\FetzPetz\Model\User;
 
 class ProductController extends Controller
 {
@@ -40,7 +39,7 @@ class ProductController extends Controller
         $this->setParameter("wishlist", $wishlist);
         $this->setParameter("shownProduct", $product);
 
-        $this->setView("product.php");
+        return $this->setView("product.php");
     }
 
     public function productCart($id) {

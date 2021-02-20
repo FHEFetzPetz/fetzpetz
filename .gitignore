@@ -120,3 +120,5 @@ fabric.properties
 logs/*
 .htaccess
 /.idea/*
+
+assets/upload/*

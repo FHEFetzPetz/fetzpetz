@@ -55,7 +55,7 @@ class AuthenticationController extends Controller
             ["type" => "stylesheet", "href" => "/assets/css/authentication.css"]
         ]);
 
-        $this->setView("authentication/login.php");
+        return $this->setView("authentication/login.php");
     }
 
     public function signup()
@@ -122,7 +122,7 @@ class AuthenticationController extends Controller
             ["type" => "stylesheet", "href" => "/assets/css/authentication.css"]
         ]);
 
-        $this->setView("authentication/signup.php");
+        return $this->setView("authentication/signup.php");
     }
 
     private function isStringValid(string $value, int $min, int $max): bool

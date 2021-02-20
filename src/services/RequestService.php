@@ -2,7 +2,6 @@
 
 namespace App\FetzPetz\Services;
 
-use App\FetzPetz\Components\Model;
 use App\FetzPetz\Core\Service;
 
 class RequestService extends Service

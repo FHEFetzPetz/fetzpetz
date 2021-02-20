@@ -21,11 +21,11 @@ class AdministrationAccess extends Model
         parent::__construct($values, $initializedFromSQL);
     }
 
-    public function getUserID(ModelService $modelService) {
+    public function getUser(ModelService $modelService) {
         return $modelService->findOneById(User::class, $this->user_id);
     }
 
-    public function getCreatedByID(ModelService $modelService) {
+    public function getCreatedBy(ModelService $modelService) {
         return $modelService->findOneById(User::class, $this->created_by);
     }
 }

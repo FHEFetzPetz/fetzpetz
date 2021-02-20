@@ -227,6 +227,10 @@ class Controller extends Service
         header("Location: " . $this->getPath($url));
     }
 
+    /**
+     * Prints a json string with content type application/json
+     * @param $data
+     */
     public function printJson($data) {
         $this->canRender = false;
         header('Content-Type: application/json');

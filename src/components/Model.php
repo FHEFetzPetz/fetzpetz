@@ -151,6 +151,5 @@ class Model
         }
     }
 
-    public function __destruct()
-    {}
+    public function __destruct() {}
 }

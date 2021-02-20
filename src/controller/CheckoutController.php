@@ -16,7 +16,6 @@ class CheckoutController extends Controller
         ];
     }
 
-
     public function checkoutAddress()
     {
 
@@ -184,8 +183,6 @@ class CheckoutController extends Controller
             ["type" => "stylesheet", "href" => "/assets/css/checkout.css"]
         ]);
 
-
-
         $this->setParameter("errors", $errors);
         return $this->setView("checkout/address.php");
     }
@@ -226,7 +223,7 @@ class CheckoutController extends Controller
         ]);
 
         $this->setParameter("errors", $errors);
-        $this->setView("checkout/paymentMethod.php");
+        return $this->setView("checkout/paymentMethod.php");
     }
 
     public function checkoutSummary()
@@ -276,7 +273,7 @@ class CheckoutController extends Controller
         ]);
 
         $this->setParameter("errors", $errors);
-        $this->setView("checkout/summary.php");
+        return $this->setView("checkout/summary.php");
     }
 
     private function isStringValid(string $value, int $min, int $max): bool
