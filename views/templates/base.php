@@ -31,7 +31,6 @@
 </head>
 
 <body>
-    <?php if (!isset($navigation) || $navigation) $this->renderComponent("components/navigation.php"); ?>
     <div id="notifications">
         <?php foreach ($this->kernel->getNotificationService()->getNotifications() as $notification) : ?>
             <div class="notification" data-type="<?= $notification["type"] ?>">
@@ -41,7 +40,13 @@
             </div>
         <?php endforeach; ?>
     </div>
-    <?php $this->renderView() ?>
+    <div id="website">
+        <?php if (!isset($navigation) || $navigation) $this->renderComponent("components/navigation.php"); ?>
+        <div class="view">
+            <?php $this->renderView() ?>
+        </div>
+        <?php if (!isset($footer) || $footer) $this->renderComponent("components/footer.php"); ?>
+    </div>
     <div id="scroll-top"><i class="icon chevron-up"></i></div>
     <script>
         scrollTopButton = document.getElementById("scroll-top");

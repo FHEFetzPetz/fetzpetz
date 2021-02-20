@@ -109,6 +109,13 @@
     font-weight: 600;
 }
 
+#content .box .errors {
+    list-style-type: none;
+    padding-left: 0;
+    text-align: left;
+    color: #FF4343;
+}
+
 #content .box .input-item {
     display: flex;
     margin: 5px -5px;

@@ -235,6 +235,16 @@ html {
     color: #7c7c7c;
 }
 
+#website {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+#website > .view {
+    flex: 1;
+}
+
 .product-wrap {
     flex: 1;
     min-width: 267px;
@@ -441,6 +451,79 @@ html {
     background: rgba(0, 0, 0, 0.1);
 }
 
+#footer {
+    background: #333333;
+    padding: 20px;
+}
+
+#footer .row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: #a7a7a7;
+    padding: 20px 0 40px;
+    margin: -10px auto;
+}
+
+#footer .row .column {
+    flex: 1;
+    margin: 10px;
+}
+
+#footer .row .column h2 {
+    font-weight: 600;
+    font-size: 20px;
+    margin: 0 0 20px;
+}
+
+#footer .row .column .item {
+    display: block;
+    color: #a7a7a7;
+    font-size: 15px;
+    text-decoration: none;
+    margin: 5px 0;
+}
+
+#footer .bottom-chin {
+    display: flex;
+    align-items: center;
+    color: #a7a7a7;
+    font-size: 14px;
+    flex-direction: column;
+    text-align: center;
+}
+
+#footer .bottom-chin .logo-holder {
+    margin-bottom: 20px;
+}
+
+#footer .bottom-chin .logo-holder img {
+    max-height: 40px;
+}
+
+#footer .bottom-chin i {
+    color: #FF4343;
+    animation-name: heartBeat;
+    animation-duration: 2s;
+    animation-timing-function: ease;
+    animation-iteration-count: infinite;
+}
+
+@keyframes heartBeat {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.25);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
 @media (min-width: 800px) {
     #navigation {
         height: 100px;
@@ -559,5 +642,23 @@ html {
     }
     #navigation .search-box .search-inner .search-button:hover {
         background-color: rgba(0, 0, 0, 0.15);
+    }
+
+    #footer .row {
+        flex-direction: row;
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    #footer .bottom-chin {
+        flex-direction: row;
+        text-align: left;
+    }
+
+    #footer .bottom-chin .logo-holder {
+        border-right: solid 1px #7c7c7c;
+        margin-right: 15px;
+        padding-right: 15px;
+        margin-bottom: 0;
     }
 }

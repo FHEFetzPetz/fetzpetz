@@ -16,7 +16,7 @@ class ModelService extends Service
      * @param array|string[] $select
      * @return array
      */
-    public function find($className, array $where = [], array $select = ['*']) {
+    public function find($className, array $where = [], array $select = ['*'], $limit = null) {
         $this->kernel->getLoggerService()->log('Called find for model ' . $className, 'debug');
 
         $tablename = $className::TABLENAME;
@@ -40,6 +40,8 @@ class ModelService extends Service
 
                 $sql .= ' where ' . join(' and ', $whereItems);
             }
+
+            if($limit != null) $sql .= ' limit ' . $limit;
 
             $result = $database->query($sql)->fetchAll();
         } catch(\PDOException $exception) {

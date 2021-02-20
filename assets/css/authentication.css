@@ -32,6 +32,13 @@
     padding: 0 20px;
 }
 
+#authentication .view .form .errors {
+    list-style-type: none;
+    padding-left: 0;
+    text-align: center;
+    color: #FF4343;
+}
+
 #authentication .view .form .input-item {
     display: flex;
     margin: 5px -5px;
