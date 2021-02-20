@@ -61,6 +61,24 @@ if(trim($result) == 'yes') {
         die('Connection to mysql-server failed: (' . $mysqli->connect_errno . '): ' . $mysqli->connect_error);
 }
 
+echo "\n\nCreate Test-Data? [yes/no] ";
+$result = awaitInput();
+
+if(trim($result) == 'yes') {
+    $data = file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'setup' . DIRECTORY_SEPARATOR . 'testdata.sql');
+
+    echo "\n\033[01;35mCreating Test-Data...\033[0m";
+
+    $queryResult = $mysqli->multi_query($data);
+    if(!$queryResult) die("\n\n\033[01;31mFailed to create Test-Data: " . $mysqli->error . "\033[0m");
+    else {
+        foreach(glob('setup/assets/*') as $file)
+            copy($file, __DIR__ . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'upload' . DIRECTORY_SEPARATOR . str_replace('setup/assets/','',$file));
+
+        echo "\n\n\033[01;32mTest-Data created.\033[0m\n\n";
+    }
+}
+
 echo "\n\nCreate \033[01;31mAdmin-User\033[0m? [yes/no] ";
 $result = awaitInput();
 
@@ -102,11 +120,26 @@ if(trim($result) == 'yes') {
     echo "\n\033[01;36mFor security reasons please change your password as soon as possible!\033[0m";
 }
 
-echo "\n\nCreate Test-Data? [yes/no] ";
+echo "\n\n\033[01;33mSetup Completed!\033[0m";
+
+
+
+echo "\n\nDelete \033[01;31msetup.php and assets\033[0m? [yes/no] ";
 $result = awaitInput();
 
-if(trim($result) == 'yes') {
-    echo "\n\033[01;36mWork in Progress (sorry)!\033[0m";
+function deleteRecursive($directory) {
+    foreach(glob($directory . '/*') as $file) {
+        if(is_dir($file)) {
+            deleteRecursive($file);
+            rmdir($file);
+        } else
+            unlink($file);
+    }
+
+    rmdir($directory);
 }
 
-echo "\n\n\033[01;33mSetup Completed!\033[0m";
+if(trim($result) == 'yes') {
+    deleteRecursive('setup');
+    unlink(__FILE__);
+}
