@@ -4,8 +4,9 @@
 $config = [
     'appDir' => __DIR__,
     'environment' => 'dev',
-    'htaccessRouting' => true, //if true site can be reached by [website]/subpage instead of [website]?page=subpage
-    'subDirectory' => ''
+    'htaccessRouting' => true, // if true site can be reached by [website]/subpage instead of [website]?page=subpage
+    'subDirectory' => '',
+    'imageUploadSize' => 5242880 // 5 MiB
 ];
 
 session_start();

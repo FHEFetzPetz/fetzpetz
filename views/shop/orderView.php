@@ -33,15 +33,23 @@ $billingAddress = $order->billing_address_id != null ? $order->getBillingAddress
                                                     <div class="product-item">
                                                         <div class="image" style="background-image: url(<?= $item->product->image ?>)"></div>
                                                         <div class="data">
-                                                            <h4><?= $item->product->name ?></h4>
-                                                            <div class="price"><?= number_format($item->cost_per_item, 2, '.', '') ?> €</div>
+                                                            <div class="mobile-row">
+                                                                <span class="mobile-field">Name:</span>
+                                                                <h4><?= $item->product->name ?></h4>
+                                                            </div>
+                                                            <div class="mobile-row">
+                                                                <span class="mobile-field">Unit Price:</span>
+                                                                <div class="price"><?= number_format($item->cost_per_item, 2, '.', '') ?> €</div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </td>
                                                 <td>
+                                                    <span class="mobile-field">Total:</span>
                                                     <div class="item-price"><?= number_format($item->cost_per_item * $item->amount, 2, '.', '') ?> €</div>
                                                 </td>
                                                 <td class="quantity">
+                                                    <span class="mobile-field">Quantity:</span>
                                                     <span><?= $item->amount ?></span>
                                                 </td>
                                             </tr>

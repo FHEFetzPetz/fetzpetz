@@ -33,7 +33,7 @@ class ShopController extends Controller
         $this->setParameter("title", "FetzPetz | Cart");
 
         $this->addExtraHeaderFields([
-            ["type" => "stylesheet", "href" => "/assets/css/profile.css"],
+            ["type" => "stylesheet", "href" => "/assets/css/profileSidebar.css"],
             ["type" => "stylesheet", "href" => "/assets/css/shop.css"]
         ]);
 
@@ -86,8 +86,8 @@ class ShopController extends Controller
         $this->setParameter("title", "FetzPetz | Wishlist");
 
         $this->addExtraHeaderFields([
-            ["type" => "stylesheet", "href" => "/assets/css/profile.css"],
-            ["type" => "stylesheet", "href" => "/assets/css/wishlist.css"]
+            ["type" => "stylesheet", "href" => "/assets/css/profileSidebar.css"],
+            ["type" => "stylesheet", "href" => "/assets/css/shop.css"]
         ]);
 
         $items = $this->kernel->getShopService()->getWishlist($this->getUser());
@@ -143,7 +143,7 @@ class ShopController extends Controller
         $this->setParameter("title", "FetzPetz | My Orders");
 
         $this->addExtraHeaderFields([
-            ["type" => "stylesheet", "href" => "/assets/css/profile.css"],
+            ["type" => "stylesheet", "href" => "/assets/css/profileSidebar.css"],
             ["type" => "stylesheet", "href" => "/assets/css/shop.css"]
         ]);
 
@@ -170,7 +170,7 @@ class ShopController extends Controller
         $this->setParameter("title", "FetzPetz | Order #" . sprintf('%04d', $order->id));
 
         $this->addExtraHeaderFields([
-            ["type" => "stylesheet", "href" => "/assets/css/profile.css"],
+            ["type" => "stylesheet", "href" => "/assets/css/profileSidebar.css"],
             ["type" => "stylesheet", "href" => "/assets/css/shop.css"]
         ]);
 
@@ -252,7 +252,7 @@ class ShopController extends Controller
         $this->setParameter("title", "FetzPetz | Settings");
 
         $this->addExtraHeaderFields([
-            ["type" => "stylesheet", "href" => "/assets/css/profile.css"],
+            ["type" => "stylesheet", "href" => "/assets/css/profileSidebar.css"],
             ["type" => "stylesheet", "href" => "/assets/css/shop.css"]
         ]);
 

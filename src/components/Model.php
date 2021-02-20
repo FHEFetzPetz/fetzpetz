@@ -117,7 +117,7 @@ class Model
         $type = $schemaItem[1];
         $value = $this->values[$key] ?? $schemaItem[2];
 
-        if(!$value) return null;
+        if(is_null($value)) return null;
 
         switch($type) {
             case self::TYPE_DATE: case self::TYPE_DATETIME: return $value->format('Y-m-d H:i:s');

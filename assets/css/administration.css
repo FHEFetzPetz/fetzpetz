@@ -1,66 +1,21 @@
-#sidebar {
-    display: block;
-    flex: 1;
-    max-width: 300px;
-    background: #333333;
-}
-
-#sidebar .item {
-    height: 50px;
-    border-bottom: solid 1px #484848;
-    padding: 0 15px;
-    display: flex;
-    align-items: center;
-    color: #a7a7a7;
-    font-size: 14px;
-    text-decoration: none;
-    cursor: pointer;
-    transition: background-color .2s ease;
-}
-
-#sidebar .item:hover {
-    background-color: rgba(255,255,255,0.1);
-}
-
-#sidebar .item span {
-    flex: 1;
-}
-
-#sidebar .item i {
-    width: 30px;
-    text-align: center;
-}
-
-#sidebar .item.margin-top {
-    margin-top: 50px;
-    border-top: solid 1px #484848;
-}
-
-#sidebar .item.color {
-    background: linear-gradient(to right, #EB5757, #844ABA);
-    color: white;
-    border: none;
-}
-
 #administration {
     padding: 10px;
 }
 
 #administration .row {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     padding: 10px;
-    align-items: flex-start;
 }
 
 #content {
     flex: 1;
-    padding: 0 10px;
 }
 
 #content .box {
     background: #333333;
     padding: 15px;
+    overflow-x: auto;
 }
 
 #content .box h1 {
@@ -68,4 +23,425 @@
     margin-top: 0;
     margin-bottom: 5px;
     padding-left: 10px;
+}
+
+#content .box h2 {
+    color: #a7a7a7;
+    margin-top: 0;
+    margin-bottom: 5px;
+    padding-left: 10px;
+    font-size: 15px;
+}
+
+#content .box h3 {
+    color: #a7a7a7;
+}
+
+#content .box .title-row {
+    display: flex;
+    align-items: center;
+}
+
+#content .box .title-row .title {
+    flex: 1;
+}
+
+#content .box .title-row .button {
+    height: 35px;
+    padding: 0 15px;
+    border: none;
+    border-radius: 5px;
+    background: #f1f1f1;
+    font-size: 16px;
+    color: #333333;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    margin-right: 10px;
+    transition: background-color .2s ease, color .2s ease;
+    text-decoration: none;
+}
+
+#content .box .title-row .button:hover {
+    background-color: #844aba;
+    color: white;
+}
+
+#content .box:not(.order) table {
+    color: #a7a7a7;
+    margin-top: 20px;
+    width: 100%;
+}
+
+#content .box:not(.order) table thead {
+    display: none;
+}
+
+#content .box:not(.order) table tr,
+#content .box:not(.order) table tr td {
+    display: block;
+}
+
+#content .box:not(.order) table tr {
+    border-top: solid 1px #484848;
+    padding: 10px;
+}
+
+#content .box:not(.order) table tr td {
+    margin: 5px 0;
+    display: flex;
+    font-size: 14px;
+}
+
+#content .box:not(.order) table tr td .item-list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+#content .box:not(.order) table tr td .mobile-field {
+    flex: 1;
+}
+
+#content .box:not(.order) table tbody td a {
+    color: inherit;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+#content .box .input-item {
+    display: flex;
+    margin: 5px -5px;
+    max-width: 350px;
+    color: #a7a7a7;
+    align-items: center;
+}
+
+#content .box .input-item.file {
+    margin: 15px 0;
+}
+
+#content .box .input-item.file input {
+    margin-left: 10px;
+}
+
+#content .box .input-item.checkbox {
+    margin: 15px 0;
+}
+
+#content .box .input-item input:not([type='file']):not([type='checkbox']),
+#content .box .input-item select,
+#content .box .input-item textarea {
+    height: 35px;
+    width: 100%;
+    padding: 0 15px;
+    margin: 5px;
+    border: solid 1px #c4c4c4;
+    border-radius: 5px;
+    background: #f1f1f1;
+}
+
+#content .box .input-item textarea {
+    height: auto;
+    min-height: 120px;
+    padding: 10px 15px;
+    resize: vertical;
+    font-family: inherit;
+}
+
+#content .box .input-item input[type='checkbox'] {
+    margin-right: 10px;
+    height: 20px;
+    width: 20px;
+}
+
+#content .box .submit-item {
+    margin-top: 20px;
+    display: flex;
+    max-width: 350px;
+}
+
+#content .box .submit-item button {
+    height: 35px;
+    padding: 0 25px;
+    border: none;
+    border-radius: 5px;
+    background: #f1f1f1;
+    font-size: 16px;
+    color: #333333;
+    cursor: pointer;
+    transition: background-color .2s ease, color .2s ease;
+}
+
+#content .box .submit-item button:hover {
+    background-color: #844aba;
+    color: white;
+}
+
+#content .box .input-item input:focus,
+#content .box .submit-item button:focus {
+    outline: none;
+}
+
+#content .box .input-item ul {
+    list-style: none;
+    padding-left: 10px;
+}
+
+#content .box .input-item ul li {
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+}
+
+#content .box .spacer {
+    margin-top: 60px;
+    border-top: solid 1px #818181;
+    max-width: 350px;
+    padding: 20px 10px 0;
+}
+
+#content .box .spacer a {
+    display: block;
+    color: #a7a7a7;
+    text-decoration: none;
+    margin: 5px 0;
+}
+
+#content .box.order .items .empty-message {
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: #a7a7a7;
+}
+
+#content .box.order .items .empty-message i {
+    font-size: 40px;
+}
+
+#content .box.order .items .empty-message span {
+    font-size: 17px;
+    font-weight: 600;
+    margin-top: 20px;
+}
+
+#content .box.order .items .empty-message a {
+    color: #844ABA;
+    font-weight: 500;
+    text-decoration: none;
+    margin-top: 10px;
+}
+
+#content .box.order table {
+    width: 100%;
+    color: #a7a7a7;
+    margin-top: 20px;
+}
+
+#content .box.order table thead th:nth-child(1) {
+    width: 100%;
+}
+
+#content .box.order table thead th {
+    min-width: 150px;
+    text-align: left;
+    padding: 0 10px 10px;
+    font-size: 14px;
+}
+
+#content .box.order table thead th:last-child {
+    text-align: right;
+}
+
+#content .box.order table tbody td {
+    border-top: solid 1px #484848;
+    padding: 10px;
+    vertical-align: top;
+}
+
+#content .box.order .product-item {
+    display: flex;
+    align-items: flex-start;
+}
+
+#content .box.order .product-item .image {
+    width: 120px;
+    height: 120px;
+    margin-right: 10px;
+    background-size: cover;
+    background-position: center;
+}
+
+#content .box.order .product-item .data {
+    flex: 1;
+    display: flex;
+    min-height: 120px;
+    flex-direction: column;
+}
+
+#content .box.order .product-item .data h4 {
+    margin: 0 0 10px;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+#content .box.order .product-item .data .price {
+    font-size: 16px;
+    margin-bottom: 20px;
+    flex: 1;
+}
+
+#content .box.order .product-item .data .actions {
+    margin: 0 -4px;
+}
+
+#content .box.order .product-item .data .actions .action {
+    font-size: 14px;
+    margin: 0 4px;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    transition: color .2s ease;
+}
+
+#content .box.order .product-item .data .actions .action:hover {
+    color: #844ABA;
+}
+
+#content .box.order table tbody .item-price {
+    font-size: 18px;
+    font-weight: 600;
+    min-height: 30px;
+    display: flex;
+    align-items: center;
+}
+
+#content .box.order table tbody .quantity {
+    text-align: right;
+}
+
+#content .box.order table tbody .quantity .quantity-actions {
+    display: inline-flex;
+    margin: 0 -4px 0 6px;
+}
+
+#content .box.order table tbody .quantity .quantity-actions .action {
+    height: 30px;
+    width: 30px;
+    border: solid 1px #c4c4c4;
+    border-radius: 5px;
+    background: #f1f1f1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 4px;
+    color: #333333;
+    cursor: pointer;
+    transition: background .2s ease;
+}
+
+#content .box.order table tbody .quantity .quantity-actions .action:hover {
+    background: #d1d1d1;
+}
+
+#content .box.order table tbody input:focus {
+    outline: none;
+}
+
+#content .box.order table tfoot .total {
+    text-align: right;
+    border-top: solid 1px #484848;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+#content .box.order table tfoot .total .checkout-button {
+    height: 35px;
+    padding: 0 15px;
+    border: none;
+    border-radius: 5px;
+    background: #f1f1f1;
+    font-size: 16px;
+    color: #333333;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    margin-top: 10px;
+    transition: background-color .2s ease, color .2s ease;
+    text-decoration: none;
+}
+
+#content .box.order table tfoot .total .checkout-button:hover {
+    background-color: #844aba;
+    color: white;
+}
+
+#content .box.order .row {
+    display: flex;
+    margin: -10px -10px 10px;
+    width: 100%;
+}
+
+#content .box.order .row .column {
+    flex: 1;
+    margin: 10px;
+    padding: 10px;
+}
+
+#content .box.order .row .column p {
+    color: #a7a7a7;
+    font-size: 14px;
+    margin: 2px 0;
+}
+
+@media (min-width: 1000px) {
+
+    #content .box:not(.order) table thead {
+        display: table-header-group;
+    }
+
+    #content .box:not(.order) table thead th.flex {
+        width: 100%;
+    }
+
+    #content .box:not(.order) table thead th {
+        min-width: 100px;
+        text-align: left;
+        padding: 0 10px 10px;
+        font-size: 14px;
+    }
+
+    #content .box:not(.order) table tbody td {
+        border-top: solid 1px #484848;
+        padding: 10px;
+        vertical-align: top;
+        font-size: 14px;
+    }
+
+    #content .box:not(.order) table tr {
+        display: table-row;
+        border-top: none;
+    }
+
+    #content .box:not(.order) table tbody td {
+        display: table-cell;
+    }
+
+    #content .box:not(.order) table tbody td .mobile-field {
+        display: none;
+    }
+}
+
+@media (min-width: 1200px) {
+    #administration .row {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    #content {
+        padding: 0 10px;
+    }
 }

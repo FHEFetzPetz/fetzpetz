@@ -16,7 +16,6 @@ class Category extends Model
             ['created_by',self::TYPE_INTEGER,null],
             ['name',self::TYPE_STRING,null],
             ['description',self::TYPE_TEXT,null],
-            ['image',self::TYPE_STRING,null],
             ['active',self::TYPE_INTEGER,null],
             ['parent',self::TYPE_INTEGER,null],
         ];

@@ -33,6 +33,11 @@ class AuthenticationController extends Controller
             $existingUser = $this->kernel->getModelService()->findOne(User::class, ['email' => $email]);
 
             if (!is_null($existingUser) && password_verify($password, $existingUser->password_hash)) {
+                if(!$existingUser->active) {
+                    $this->kernel->getNotificationService()->pushNotification('Account suspended', 'The account has been suspended.', 'warning');
+                    return $this->redirectTo('/login');
+                }
+
                 $this->kernel->getSecurityService()->authenticateWithUser($existingUser);
 
                 if(strlen($_GET['redirect_to'] ?? '') > 0)

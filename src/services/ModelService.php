@@ -107,7 +107,7 @@ class ModelService extends Service
             $key = $schema[0];
             $value = $model->getForSQL($key);
 
-            if($value) {
+            if(!is_null($value)) {
                 $insertSchema[] = $key;
                 $insertValues[] = $value;
                 $insertPreparation[] = "?"; // used for PDO prepare with values on execute
@@ -157,7 +157,7 @@ class ModelService extends Service
             $key = $schema[0];
             $value = $model->getForSQL($key);
 
-            if($value && $key != $primaryKey) {
+            if($key != $primaryKey) {
                 $updateSchema[] = $key . '=?';
                 $updateValues[] = $value; // used for PDO prepare with values on execute
             }

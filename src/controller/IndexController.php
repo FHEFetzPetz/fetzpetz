@@ -39,7 +39,7 @@ class IndexController extends Controller
 
         $category = $this->kernel->getModelService()->findOneById(Category::class,$id);
 
-        if ($category==null)
+        if ($category == null || !$category->active)
             return $this->redirectTo('/');
 
         $this->setParameter("title", "FetzPetz | Main Page");

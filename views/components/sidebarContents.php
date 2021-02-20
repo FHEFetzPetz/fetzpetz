@@ -1,7 +1,7 @@
 <?php
 
 $modelService = $this->kernel->getModelService();
-$categories = $modelService->find(\App\FetzPetz\Model\Category::class, ['parent' => null]);
+$categories = $modelService->find(\App\FetzPetz\Model\Category::class, ['parent' => null, 'active' => 1]);
 $desktopCategoryLimit = 3;
 
 $index = 0; ?>

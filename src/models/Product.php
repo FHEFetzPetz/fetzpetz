@@ -17,11 +17,9 @@ class Product extends Model
             ['name',self::TYPE_STRING,null],
             ['description',self::TYPE_TEXT,null],
             ['image',self::TYPE_STRING,null],
-            ['extra_attributes',self::TYPE_TEXT,null],
             ['cost_per_item',self::TYPE_DECIMAL,null],
-            ['availability',self::TYPE_INTEGER,null],
             ['active',self::TYPE_INTEGER,null],
-            ['search_tags',self::TYPE_TEXT,null]
+            ['search_tags',self::TYPE_OBJECT,[]]
         ];
 
         parent::__construct($values, $initializedFromSQL);

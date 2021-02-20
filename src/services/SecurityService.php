@@ -52,7 +52,15 @@ class SecurityService extends Service
     }
 
     public function checkUserExistence(int $id): ?User {
-        return $this->kernel->getModelService()->findOneById(User::class, $id);
+        $user = $this->kernel->getModelService()->findOneById(User::class, $id);
+
+        if($user != null && !$user->active) {
+            $this->kernel->getNotificationService()->pushNotification('Account suspended', 'Your account has been suspended.', 'warning');
+            $this->removeAuthentication();
+            return null;
+        }
+
+        return $user;
     }
 
     public function getUser(): ?User {
@@ -64,7 +72,7 @@ class SecurityService extends Service
     }
 
     public function isAdministrator(User $user): bool {
-        return $this->kernel->getModelService()->findOne(AdministrationAccess::class, ['user_id' => $user->id, 'active' => 1]) != null;
+        return $this->kernel->getModelService()->findOne(AdministrationAccess::class, ['user_id' => $user->id]) != null;
     }
 
 }

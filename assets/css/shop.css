@@ -4,14 +4,12 @@
 
 #shop .row {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     padding: 10px;
-    align-items: flex-start;
 }
 
 #content {
     flex: 1;
-    padding: 0 10px;
 }
 
 #content .box {
@@ -90,91 +88,123 @@
     margin-top: 20px;
 }
 
-#content .box table thead th:nth-child(1) {
+#content .box table thead {
+    display: none;
+}
+
+#content .box table tr,
+#content .box table tr td {
+    display: block;
+}
+
+#content .box table tr {
+    border-top: solid 1px #484848;
+    padding: 10px;
+    margin: 5px 0;
+}
+
+#content .box table tr td {
+    display: flex;
+    font-size: 14px;
+}
+
+#content .box table tr td .product-item h4 {
+    margin: 5px 0;
+}
+
+#content .box table tr td .product-item .price,
+#content .box table tr td .product-item .actions {
+    margin: 5px 0;
+}
+
+#content .box table tr td .mobile-field {
+    flex: 1;
+    text-align: left;
+}
+
+#content .box table tr .mobile-row {
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+#content .box table tr td .product-item {
     width: 100%;
 }
 
-#content .box table thead th {
-    min-width: 150px;
-    text-align: left;
-    padding: 0 10px 10px;
-    font-size: 14px;
-}
-
-#content .box table thead th:last-child {
-    text-align: right;
-}
-
-#content .box table tbody td {
-    border-top: solid 1px #484848;
-    padding: 10px;
-    vertical-align: top;
-}
-
-#content .box .product-item {
-    display: flex;
-    align-items: flex-start;
-}
-
-#content .box .product-item .image {
-    width: 120px;
-    height: 120px;
-    margin-right: 10px;
-    background-size: cover;
-    background-position: center;
-}
-
-#content .box .product-item .data {
-    flex: 1;
-    display: flex;
-    min-height: 120px;
-    flex-direction: column;
-}
-
-#content .box .product-item .data h4 {
-    margin: 0 0 10px;
-    font-weight: 600;
-    font-size: 18px;
-}
-
-#content .box .product-item .data .price {
-    font-size: 16px;
-    margin-bottom: 20px;
-    flex: 1;
-}
-
-#content .box .product-item .data .actions {
-    margin: 0 -4px;
-}
-
-#content .box .product-item .data .actions .action {
-    font-size: 14px;
-    margin: 0 4px;
-    cursor: pointer;
-    text-decoration: none;
+#content .box table tbody td a {
     color: inherit;
-    transition: color .2s ease;
-}
-
-#content .box .product-item .data .actions .action:hover {
-    color: #844ABA;
-}
-
-#content .box table tbody .item-price {
-    font-size: 18px;
+    text-decoration: none;
     font-weight: 600;
-    min-height: 30px;
+}
+
+#content .box table tfoot td {
     display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+#content .box table tfoot .total {
+    text-align: right;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+#content .box table tfoot .total .checkout-button {
+    height: 35px;
+    padding: 0 15px;
+    border: none;
+    border-radius: 5px;
+    background: #f1f1f1;
+    font-size: 16px;
+    color: #333333;
+    cursor: pointer;
+    display: inline-flex;
     align-items: center;
+    transition: background-color .2s ease, color .2s ease;
+    text-decoration: none;
+}
+
+#content .box table tfoot .total .checkout-button:hover {
+    background-color: #844aba;
+    color: white;
 }
 
 #content .box table tbody .quantity {
     text-align: right;
+    margin-top: 10px;
 }
 
 #content .box table tbody .quantity .quantity-actions {
     display: inline-flex;
     margin: 0 -4px 0 6px;
+}
+
+#content .box .product-item .data .cart-button {
+    height: 40px;
+    padding: 0 15px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 5px;
+    background: #f1f1f1;
+    font-size: 18px;
+    color: #333333;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    margin-top: 20px;
+    transition: background-color .2s ease, color .2s ease;
+}
+
+#content .box .product-item .data .cart-button i {
+    margin-right: 5px;
+}
+
+#content .box .product-item .data .cart-button:hover {
+    background-color: #844aba;
+    color: white;
 }
 
 #content .box table tbody .quantity .quantity-actions .action {
@@ -196,37 +226,145 @@
     background: #d1d1d1;
 }
 
-#content .box table tbody input:focus {
-    outline: none;
-}
+@media (min-width: 1000px) {
 
-#content .box table tfoot .total {
-    text-align: right;
-    border-top: solid 1px #484848;
-    padding: 10px;
-    font-size: 18px;
-    font-weight: 500;
-}
+    #content .box table thead {
+        display: table-header-group;
+    }
 
-#content .box table tfoot .total .checkout-button {
-    height: 35px;
-    padding: 0 15px;
-    border: none;
-    border-radius: 5px;
-    background: #f1f1f1;
-    font-size: 16px;
-    color: #333333;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    margin-top: 10px;
-    transition: background-color .2s ease, color .2s ease;
-    text-decoration: none;
-}
+    #content .box table thead th {
+        min-width: 100px;
+        text-align: left;
+        padding: 0 10px 10px;
+        font-size: 14px;
+    }
 
-#content .box table tfoot .total .checkout-button:hover {
-    background-color: #844aba;
-    color: white;
+    #content .box table tr {
+        display: table-row;
+        border-top: none;
+    }
+
+    #content .box table tbody td {
+        display: table-cell;
+    }
+
+    #content .box table tbody td .mobile-field {
+        display: none;
+    }
+    
+    #content .box table thead th:nth-child(1) {
+        width: 100%;
+    }
+
+    #content .box table thead th {
+        min-width: 150px;
+        text-align: left;
+        padding: 0 10px 10px;
+        font-size: 14px;
+    }
+
+    #content .box table thead th:last-child {
+        text-align: right;
+    }
+    
+    #content .box table tbody td {
+        border-top: solid 1px #484848;
+        padding: 10px;
+        vertical-align: top;
+        font-size: 14px;
+    }
+
+    #content .box .product-item {
+        display: flex;
+        align-items: flex-start;
+    }
+
+    #content .box .product-item .image {
+        width: 120px;
+        height: 120px;
+        margin-right: 10px;
+        background-size: cover;
+        background-position: center;
+    }
+
+    #content .box .product-item .data {
+        flex: 1;
+        display: flex;
+        min-height: 120px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    #content .box .product-item .data h4 {
+        margin: 0 0 10px;
+        font-weight: 600;
+        font-size: 18px;
+    }
+
+    #content .box .product-item .data .price {
+        font-size: 16px;
+        margin-bottom: 20px;
+        flex: 1;
+    }
+
+    #content .box .product-item .data .actions {
+        margin: 0 -4px;
+    }
+
+    #content .box .product-item .data .actions .action {
+        font-size: 14px;
+        margin: 0 4px;
+        cursor: pointer;
+        text-decoration: none;
+        color: inherit;
+        transition: color .2s ease;
+    }
+
+    #content .box .product-item .data .actions .action:hover {
+        color: #844ABA;
+    }
+
+    #content .box .product-item .data .cart-button {
+        margin-top: 0;
+        font-size: 16px;
+    }
+
+    #content .box table tbody .item-price {
+        font-size: 18px;
+        font-weight: 600;
+        min-height: 30px;
+        display: flex;
+        align-items: center;
+    }
+
+    #content .box table tbody input:focus {
+        outline: none;
+    }
+
+    #content .box table tbody .quantity {
+        margin-top: 0;
+        justify-content: flex-end;
+    }
+
+    #content .box table tfoot {
+        display: table-footer-group;
+    }
+
+    #content .box table tfoot tr {
+        display: table-row;
+    }
+
+    #content .box table tfoot tr td {
+        display: table-cell;
+    }
+
+    #content .box table tfoot .total {
+        border-top: solid 1px #484848;
+    }
+
+    #content .box table tfoot .total .checkout-button {
+        margin-top: 10px;
+    }
 }
 
 #shop .box .row {
@@ -288,4 +426,15 @@
 #shop .box .input-item input:focus,
 #shop .box .submit-item button:focus {
     outline: none;
+}
+
+@media (min-width: 1200px) {
+    #shop .row {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    #content {
+        padding: 0 10px;
+    }
 }

@@ -15,7 +15,6 @@ class AdministrationAccess extends Model
             ['id',self::TYPE_INTEGER,null],
             ['user_id',self::TYPE_INTEGER,null],
             ['created_by',self::TYPE_INTEGER,null],
-            ['active',self::TYPE_INTEGER,null],
             ['created_at',self::TYPE_DATETIME,null]
         ];
 

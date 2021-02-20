@@ -181,7 +181,6 @@ class CheckoutController extends Controller
         $this->setParameter("title", "FetzPetz | Checkout");
 
         $this->addExtraHeaderFields([
-            ["type" => "stylesheet", "href" => "/assets/css/profile.css"],
             ["type" => "stylesheet", "href" => "/assets/css/checkout.css"]
         ]);
 
@@ -223,7 +222,6 @@ class CheckoutController extends Controller
         $this->setParameter('paymentMethod', $paymentMethod);
 
         $this->addExtraHeaderFields([
-            ["type" => "stylesheet", "href" => "/assets/css/profile.css"],
             ["type" => "stylesheet", "href" => "/assets/css/checkout.css"]
         ]);
 
@@ -274,7 +272,6 @@ class CheckoutController extends Controller
         $this->setParameter("title", "FetzPetz | Checkout");
 
         $this->addExtraHeaderFields([
-            ["type" => "stylesheet", "href" => "/assets/css/profile.css"],
             ["type" => "stylesheet", "href" => "/assets/css/checkout.css"]
         ]);
 

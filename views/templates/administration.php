@@ -21,6 +21,7 @@
         <link rel="stylesheet" href="/assets/css/fontawesome.css">
         <link rel="stylesheet" href="/assets/css/base.css">
         <link rel="stylesheet" href="/assets/css/administration.css">
+        <link rel="stylesheet" href="/assets/css/profileSidebar.css">
 
         <?php
             foreach($extraHeaderFields as $item) {
@@ -36,12 +37,22 @@
         <?php
             if(!isset($navigation) || $navigation) $this->renderComponent("components/navigation.php");
         ?>
+        <div id="notifications">
+            <?php foreach ($this->kernel->getNotificationService()->getNotifications() as $notification) : ?>
+                <div class="notification" data-type="<?= $notification["type"] ?>">
+                    <div class="title"><?= $notification["title"] ?></div>
+                    <span><?= $notification["message"] ?></span>
+                    <div class="close"><i class="icon times"></i></div>
+                </div>
+            <?php endforeach; ?>
+        </div>
         <div class="container">
             <section id="administration">
                 <div class="row">
                     <div id="sidebar">
-                        <a href="<?= $this->getPath('/admin') ?>" class="item">
-                            <span>Dashboard</span>
+                        <a class="item chin">
+                            <span>FetzPetz Administration</span>
+                            <i class="icon chevron-up"></i>
                         </a>
                         <a href="<?= $this->getPath('/admin/users') ?>" class="item margin-top">
                             <span>Users</span>
@@ -57,7 +68,7 @@
                         </a>
                     </div>
                     <div id="content">
-                    <?php $this->renderView() ?>
+                        <?php $this->renderView() ?>
                     </div>
                 </div>
             </section>
@@ -130,6 +141,62 @@
             });
             <?php endif ?>
             <?php endif ?>
+
+            document.querySelectorAll('#notifications .notification .close').forEach(function(item) {
+                item.addEventListener('click', function() {
+                    this.closest('.notification').remove();
+                });
+            });
+
+            function pushNotification(title, message, type) {
+                const notification = document.createElement('div');
+                notification.classList.add('notification');
+                notification.innerHTML = "<div class='title'>" + title + "</div><span>" + message + "</span><div class='close'><i class='icon times'></i></div>";
+                notification.setAttribute('data-type', type);
+
+                notification.addEventListener('click', function() {
+                    this.closest('.notification').remove();
+                });
+
+                window.setTimeout(function() {
+                    notification.classList.add('fade');
+                    window.setTimeout(function() {
+                        notification.remove();
+                    }, 300);
+                }, 1000 * 6);
+
+                document.getElementById('notifications').appendChild(notification);
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+                window.setTimeout(function() {
+                    document.querySelectorAll('#notifications .notification').forEach(function(item) {
+                        item.classList.add('fade');
+                        window.setTimeout(function() {
+                            item.remove();
+                        }, 300);
+                    });
+                }, 1000 * 6);
+            });
+
+            function awaitConfirmation(question, callback) {
+                const result = confirm(question);
+                if(result) callback();
+            }
+
+            document.querySelectorAll('.delete-confirmation').forEach(function(item) {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+
+                    awaitConfirmation(item.getAttribute('data-question'), function() {
+                        document.location = item.getAttribute('href');
+                    });
+                });
+            });
+
+            document.querySelector('#sidebar .item.chin').addEventListener('click', function() {
+                document.getElementById('sidebar').classList.toggle('opened');
+            });
         </script>
     </body>
 </html>

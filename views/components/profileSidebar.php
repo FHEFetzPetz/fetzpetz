@@ -1,10 +1,14 @@
 <div id="sidebar">
+    <a class="item chin">
+        <span>Profile</span>
+        <i class="icon chevron-up"></i>
+    </a>
     <?php if ($this->isAuthenticated()) : ?>
-        <a href="<?= $this->getPath('/profile/orders'); ?>" class="item">
+        <a href="<?= $this->getPath('/profile/orders'); ?>" class="item margin-top">
             <span>Orders</span>
         </a>
     <?php endif ?>
-    <a href="<?= $this->getPath('/cart') ?>" class="item">
+    <a href="<?= $this->getPath('/cart') ?>" class="item<?= $this->isAuthenticated() ? '' : ' margin-top' ?>">
         <span>Cart</span>
     </a>
     <?php if ($this->isAuthenticated()) : ?>
@@ -25,4 +29,9 @@
             <span>Sign up</span>
         </a>
     <?php endif ?>
+    <script>
+        document.querySelector('#sidebar .item.chin').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.toggle('opened');
+        });
+    </script>
 </div>

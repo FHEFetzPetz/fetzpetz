@@ -28,19 +28,30 @@
                                             <div class="product-item">
                                                 <div class="image" style="background-image: url(<?= $item['product']->image ?>)"></div>
                                                 <div class="data">
-                                                    <h4><?= $item['product']->name ?></h4>
-                                                    <div class="price"><?= number_format($item['product']->cost_per_item,2,'.','') ?> €</div>
-                                                    <div class="actions">
-                                                        <a href="<?= $this->getPath('/cart/remove/' . $item['product']->id, ['source' => 'checkout']) ?>" class="action">Remove from Cart</a>
+                                                    <div class="mobile-row">
+                                                        <span class="mobile-field">Name:</span>
+                                                        <h4><?= $item['product']->name ?></h4>
+                                                    </div>
+                                                    <div class="mobile-row">
+                                                        <span class="mobile-field">Unit Price:</span>
+                                                        <div class="price"><?= number_format($item['product']->cost_per_item,2,'.','') ?> €</div>
+                                                    </div>
+                                                    <div class="mobile-row">
+                                                        <span class="mobile-field">Actions:</span>
+                                                        <div class="actions">
+                                                            <a href="<?= $this->getPath('/cart/remove/' . $item['product']->id, ['source' => 'checkout']) ?>" class="action">Remove from Cart</a>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
+                                            <span class="mobile-field">Total:</span>
                                             <div class="item-price"><?= number_format($item["total"], 2,'.','') ?> €</div>
                                         </td>
-                                        <td class="quantity">
-                                            <span><?= $item['quantity'] ?></span>
+                                        <td class="quantity mobile-field">
+                                            <span class="mobile-field">Quantity:</span>
+                                            <span class="number"><?= $item['quantity'] ?></span>
                                             <div class="quantity-actions">
                                                 <div class="action" data-action="add"><i class="icon plus"></i></div>
                                                 <div class="action" data-action="sub"><i class="icon minus"></i></div>
@@ -107,7 +118,7 @@
                 const itemRow = this.closest("tr");
                 const id = itemRow.getAttribute("data-id");
                 const action = this.getAttribute("data-action");
-                var quantity = parseInt(this.closest(".quantity").querySelector("span").textContent);
+                var quantity = parseInt(this.closest(".quantity").querySelector(".number").textContent);
                 if (action === "add") quantity++;
                 else if (quantity > 0) quantity--;
 
@@ -121,7 +132,7 @@
 
                             if (data.item_count === 0) location.reload();
                         } else {
-                            itemRow.querySelector(".quantity span").textContent = data.changed_product.quantity;
+                            itemRow.querySelector(".quantity .number").textContent = data.changed_product.quantity;
                             itemRow.querySelector(".item-price").textContent = parseFloat(data.changed_product.total).toFixed(2) + " €";
                             document.querySelector("#checkout tfoot .total-text").textContent = "Total (" + data.item_count + " Item(s)): " + parseFloat(data.total).toFixed(2) + " €";
                         }

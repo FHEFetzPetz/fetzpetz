@@ -23,13 +23,11 @@
     <?php
     foreach ($extraHeaderFields as $item) {
         switch ($item['type']) {
-            case 'stylesheet': ?>
-                <link rel="stylesheet" href="<?= $item['href'] ?>"><?php break;
-                                                                case 'script': ?><script rel="stylesheet" src="<?= $item['src'] ?>"></script><?php break;
-                                                                                                                                        }
-                                                                                                                                    }
-                                                                                                                                                ?>
-
+            case 'stylesheet': ?><link rel="stylesheet" href="<?= $item['href'] ?>"><?php break;
+            case 'script': ?><script rel="stylesheet" src="<?= $item['src'] ?>"></script><?php break;
+        }
+    }
+    ?>
 </head>
 
 <body>

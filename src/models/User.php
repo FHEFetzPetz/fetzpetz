@@ -17,9 +17,9 @@ class User extends Model
             ['lastname',self::TYPE_STRING,null],
             ['password_hash',self::TYPE_STRING,null],
             ['email',self::TYPE_STRING,null],
-            ['email_verified',self::TYPE_INTEGER,null],
+            ['email_verified',self::TYPE_BOOL,null],
             ['email_verification_hash',self::TYPE_STRING,null],
-            ['active',self::TYPE_INTEGER,null],
+            ['active',self::TYPE_BOOL,null],
             ['created_at',self::TYPE_DATETIME,null]
         ];
 
@@ -40,5 +40,9 @@ class User extends Model
             $products[$product->id] = $product;
 
         return array_values($products);
+    }
+
+    public function getAdministrationAccess(ModelService $modelService) {
+        return $modelService->findOne(AdministrationAccess::class, ['user_id' => $this->id]);
     }
 }
