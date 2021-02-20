@@ -8,15 +8,19 @@ $index = 0; ?>
 <div class="categories">
 <?php
 foreach ($categories as $category):
-    $index++; $selected = isset($selectedCategory) && $selectedCategory->id == $category->id; ?>
+    $index++;
+    $selected = isset($selectedCategory) && ($selectedCategory->id == $category->id || ($selectedCategory->parent ?? -1) == $category->id);
+    ?>
     <a href="<?= $this->getPath('/category/' . $category->id); ?>" class="item<?= ($index <= $desktopCategoryLimit) ? ' desktop' : '' ?><?= $selected ? ' selected' : '' ?>">
         <span><?= $category->name ?></span>
         <i class="icon chevron-right"></i>
     </a>
     <?php
     if ($selected) :
-        foreach ($category->getChildren($modelService) as $child) : ?>
-    <a href="<?= $this->getPath('/category/' . $child->id); ?>" class="item child">
+        foreach ($category->getChildren($modelService) as $child) :
+            $childSelected = isset($selectedCategory) && ($selectedCategory->id == $child->id);
+        ?>
+    <a href="<?= $this->getPath('/category/' . $child->id); ?>" class="item child<?= $childSelected ? ' selected' : '' ?>">
         <span><?= $child->name ?></span>
     </a>
 <?php

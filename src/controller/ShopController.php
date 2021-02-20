@@ -19,6 +19,7 @@ class ShopController extends Controller
             '/wishlist' => 'wishlist',
             '/wishlist/remove/redirect/{id}' => 'wishlistRemoveRedirect',
             '/wishlist/remove/{id}' => 'wishlistRemove',
+            '/wishlist/add/redirect/{id}' => 'wishlistAddRedirect',
             '/wishlist/add/{id}' => 'wishlistAdd',
             '/profile' => 'profile',
             '/profile/orders' => 'profileOrders',
@@ -98,6 +99,9 @@ class ShopController extends Controller
 
     public function wishlistRemoveRedirect($id)
     {
+        if(!$this->isAuthenticated())
+            return $this->redirectTo('/login?redirect_to=/wishlist/remove/redirect/' . $id);
+
         $product = $this->kernel->getModelService()->findOneById(Product::class, $id);
         if ($product != null) {
             $this->kernel->getShopService()->removeFromWishlist($product, $this->getUser());
@@ -113,6 +117,20 @@ class ShopController extends Controller
         return $this->printJson([
             'result' => 'ok'
         ]);
+    }
+
+    public function wishlistAddRedirect($id)
+    {
+        if(!$this->isAuthenticated())
+            return $this->redirectTo('/login?redirect_to=/wishlist/add/redirect/' . $id);
+
+        $product = $this->kernel->getModelService()->findOneById(Product::class, $id);
+        if ($product != null) {
+            $this->kernel->getShopService()->addToWishlist($product, $this->getUser());
+            $this->kernel->getNotificationService()->pushNotification('Added to wishlist', $product->name . ' has been added to your wishlist.');
+        }
+
+        return $this->redirectTo('/wishlist');
     }
 
     public function wishlistAdd($id)

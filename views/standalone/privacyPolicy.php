@@ -63,8 +63,6 @@
             kristof.friess@fh-erfurt.de </p>
         <p>Jan Wenzel<br />
             jan.wenzel@fh-erfurt.de </p>
-        <p>Oksana Arnold<br />
-            oksana.arnold@fh-erfurt.de </p>
 
     </div>
 </div>

@@ -10,10 +10,10 @@
                     <h2>Your store for nice shit</h2>
                     <div class="search-box">
                         <form action="<?= $this->getPath('/search') ?>" class="search-inner">
-                            <input type="text" name="query" value="<?= $query ?? '' ?>" placeholder="Search for products">
-                            <div class="search-button">
+                            <input type="text" name="query" value="<?= $query ?? '' ?>" placeholder="Search for products" required>
+                            <button type="submit" class="search-button">
                                 <i class="icon search"></i>
-                            </div>
+                            </button>
                         </form>
                     </div>
                 </header>

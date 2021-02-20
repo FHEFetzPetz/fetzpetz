@@ -53,8 +53,9 @@
         scrollTopButton = document.getElementById("scroll-top");
 
         function toggleLikeProduct(id, item) {
-            var request = new XMLHttpRequest();
             const active = item.classList.contains('active')
+            <?php if($this->isAuthenticated()): ?>
+            var request = new XMLHttpRequest();
             const url = active ? ("<?= $this->getPath('/wishlist/remove/') ?>" + id) : ("<?= $this->getPath('/wishlist/add/') ?>" + id);
             request.open("GET", url);
             request.addEventListener('load', function() {
@@ -68,6 +69,9 @@
             });
 
             request.send();
+            <?php else: ?>
+            window.location = active ? ("<?= $this->getPath('/wishlist/remove/redirect/') ?>" + id) : ("<?= $this->getPath('/wishlist/add/redirect/') ?>" + id);
+            <?php endif; ?>
         }
 
         document.addEventListener('DOMContentLoaded', function() {
@@ -120,8 +124,13 @@
 
             <?php if (!isset($slim) || !$slim) : ?>
                 document.querySelector("#navigation .search-box .search-button").addEventListener("click", function(e) {
-                    if (window.innerWidth < 900)
-                        document.getElementById("navigation").classList.add("search");
+                    if (window.innerWidth < 900) {
+                        const navigation = document.getElementById("navigation");
+                        if(!navigation.classList.contains('search')) {
+                            e.preventDefault();
+                            document.getElementById("navigation").classList.add("search");
+                        }
+                    }
                 });
             <?php endif ?>
         <?php endif ?>

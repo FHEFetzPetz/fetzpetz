@@ -21,10 +21,10 @@
         <?php if (!isset($slim) || !$slim) : ?>
             <div class="search-box">
                 <form action="<?= $this->getPath('/search') ?>" class="search-inner">
-                    <input type="text" name="query" placeholder="Search for products">
-                    <div class="search-button">
+                    <input type="text" name="query" placeholder="Search for products" required>
+                    <button type="submit" class="search-button">
                         <i class="icon search"></i>
-                    </div>
+                    </button>
                 </form>
             </div>
         <?php endif; ?>

@@ -92,6 +92,7 @@ html {
     transition: background-color .2s ease;
 }
 
+#navigation .menu .item.selected,
 #navigation .menu .item:hover {
     background-color: rgba(255, 255, 255, 0.1);
 }
@@ -199,6 +200,11 @@ html {
     transition: background-color .2s ease;
 }
 
+#navigation .search-box .search-button {
+    background: none;
+    border: none;
+}
+
 #navigation .search-box .search-button:hover,
 #navigation .actions .action:hover {
     background-color: rgba(255, 255, 255, 0.1);
@@ -233,6 +239,11 @@ html {
 
 #navigation.search .search-box .search-button {
     color: #7c7c7c;
+}
+
+#navigation .search-box .search-inner input,
+#navigation .search-box .search-button:focus {
+    outline: none;
 }
 
 #website {
@@ -631,6 +642,7 @@ html {
     #navigation .search-box .search-inner input:focus {
         outline: none;
     }
+
     #navigation .search-box .search-inner .search-button {
         padding: 0 15px;
         height: 100%;
@@ -642,6 +654,9 @@ html {
     }
     #navigation .search-box .search-inner .search-button:hover {
         background-color: rgba(0, 0, 0, 0.15);
+    }
+    #navigation .search-box .search-inner .search-button:focus {
+        outline: none;
     }
 
     #footer .row {
