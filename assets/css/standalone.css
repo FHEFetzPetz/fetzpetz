@@ -1,11 +1,71 @@
 #standalone .box {
     background: #333333;
-    padding: 15px;
-    margin: 10px 0;
+    padding: 15px 30px;
+    margin: 20px 0;
     color: #a7a7a7;
 }
 
 #standalone .box a {
     text-decoration: none;
     color: inherit;
+}
+
+#standalone h1,
+#standalone h2,
+#standalone h3 {
+    position: relative;
+}
+
+#standalone h1::before,
+#standalone h2::before,
+#standalone h3::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: 0;
+    width: 25px;
+    height: 2px;
+    background: #844aba;
+}
+
+#standalone h2::before {
+    width: 18px;
+}
+
+#standalone h3::before {
+    width: 13px;
+}
+
+#standalone p + h2,
+#standalone p + h3,
+#standalone p + h4,
+#standalone ul + h2,
+#standalone ul + h3,
+#standalone ul + h4,
+#standalone ol + h2,
+#standalone ol + h3,
+#standalone ol + h4,
+#standalone div + h2,
+#standalone div + h3,
+#standalone div + h4 {
+    margin-top: 40px;
+}
+
+#standalone table {
+    width: 100%;
+    font-size: 13px;
+}
+
+#standalone table th {
+    text-align: left;
+    border-bottom: solid 1px #4f4f4f;
+    padding: 15px;
+}
+
+#standalone table td {
+    padding: 10px 15px;
+}
+
+#standalone table tr:nth-child(odd) td {
+    background: rgba(255,255,255,0.05);
 }

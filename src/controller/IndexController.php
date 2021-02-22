@@ -17,7 +17,8 @@ class IndexController extends Controller
             '/imprint' => 'imprint',
             '/privacy-policy' => 'privacyPolicy',
             '/terms-of-service' => 'termsOfService',
-            '/faq' => 'faq'
+            '/faq' => 'faq',
+            '/documentation' => 'documentation'
         ];
     }
 
@@ -101,5 +102,15 @@ class IndexController extends Controller
         ]);
 
         return $this->setView("standalone/faq.php");
+    }
+
+    public function documentation() {
+        $this->setParameter("title", "FetzPetz | Documentation");
+
+        $this->addExtraHeaderFields([
+            ["type" => "stylesheet", "href" => "/assets/css/standalone.css"]
+        ]);
+
+        return $this->setView("standalone/documentation.php");
     }
 }

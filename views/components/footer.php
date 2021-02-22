@@ -24,6 +24,7 @@ $products = $modelService->find(\App\FetzPetz\Model\Product::class, ['active' =>
             <a class="item" href="<?= $this->getPath('/privacy-policy') ?>">Privacy Policy</a>
             <a class="item" href="<?= $this->getPath('/terms-of-service') ?>">Terms of service</a>
             <a class="item" href="<?= $this->getPath('/faq') ?>">FAQ</a>
+            <a class="item" href="<?= $this->getPath('/documentation') ?>">Documentation</a>
         </section>
     </div>
     <div class="bottom-chin container">

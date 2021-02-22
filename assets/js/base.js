@@ -144,7 +144,9 @@ document.addEventListener('DOMContentLoaded', function() {
         fadeNotification(item);
     });
 
-    document.querySelector('#sidebar .item.chin').addEventListener('click', function() {
+    const chin = document.querySelector('#sidebar .item.chin');
+
+    if(chin) chin.addEventListener('click', function() {
         document.getElementById('sidebar').classList.toggle('opened');
     });
 
