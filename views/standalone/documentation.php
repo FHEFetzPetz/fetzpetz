@@ -28,9 +28,6 @@
             <li>Adminstrationsoberfläche</li>
             <li>Produktkategorien</li>
         </ul>
-        <h2>Datenbankschema</h2>
-        <img src="/assets/images/database.png" alt="FetzPetz Datenbank" style="width: 100%">
-        <p>Aufgrund eines weltweiten Einzelfalles einer Person mit einem viel zu langen Namen sind wir gezwungen das Limit für Vor- und Nachnamen zu erhöhen.</p>
         <h2>Arbeitsaufteilung</h2>
         <p>Es fanden wöchentliche Meetings statt, zu Beginn immer jeden Donnerstag um 08:00 Uhr frühs, seit Mitte Januar mehrmals die Woche als "Pair-Programming" über mehrere Stunden.</p>
         <table>
