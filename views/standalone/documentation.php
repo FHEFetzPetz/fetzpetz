@@ -661,7 +661,7 @@
             </li>
         </ol>
         <h2>Besondere Funktionalitäten</h2>
-        <h3>handleRequest und machtesRoute</h3>
+        <h3>handleRequest und matchesRoute</h3>
         <p>Bereits zu Beginn des Projektes haben wir untereinander ausgemacht, ein eigenes System zu schreiben für die Webseite, mit eigenen Handerln, Controller uvm. Dies ermöglichte uns von komplett dynamischen URLs (bspw. index.php?c=shop&a=cart) auf semi-statisch, semi-dynamische URLs (bspw. /category/4) zu wechseln. Alternativ funktioniert das Projekt aber auch mit dynamischen URLs durch eine Änderung in der Konfiguration der index.php.</p>
         <p>Das arbeiten mit diesen URLs brach zu Beginn einige Probleme herbei, welche aber durch u.a. reguläre Ausdrücke bewältigt werden konnten. Innerhalb des RequestServices mit der Methode matchesRoute ist es nun möglich URL-Pattern auszulesen und nach Matches zu suchen, selbst mit dynamischen Werten, bspw /product/{id}.</p>
         <h4>Arbeitsweise:</h4>
