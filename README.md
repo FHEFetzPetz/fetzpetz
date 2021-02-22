@@ -57,88 +57,25 @@ Erstellen Sie eine PHP-Instanz mittels `php -S localhost:[PORT]` oder rufen Sie 
 
 ## Ordnerstruktur
 
-### /assets
-
-Beinhaltet alle Styles, Fonts, Icons, Bilder, JavaScript und Uploads.
-
-### /logs
-
-Beinhaltet das LOG für die Applikation.
-
-### /setup
-
-Beinhaltet das Erstellungsskript (SQL) und die Testdaten.
-
-### /src
-
-#### /components
-
-Beinhaltet die Basiskomponenten Contoller und Model.
-
-#### /config
-
-Beinhaltet die Konfiguration für die Datenbank, das LOG und Weiteres.
-
-#### /controller
-
-Beinhaltet die Controller für die einzelnen Routen.
-
-#### /core
-
-Beinhaltet das Kernelement Service, welches für die Module relevant ist.
-
-#### /models
-
-Beinhaltet die Datenbankmodelle.
-
-#### /services
-
-Beinhaltet alle Kernmodule des Projektes.
-
-##### DatabaseService
-
-Verwaltet die Projektdatenbank mittels PDO.
-
-##### LoggerService
-
-Verwaltet die LOG-Dateien und erstellt neue Einträge.
-
-##### ModelService
-
-Sucht, erstellt, updatet, löscht und verwaltet die Datenbankmodelle.
-
-##### NotificationService
-
-Verwaltet die, in den Session abgelegten Benachrichtigungen.
-
-##### RequestService
-
-Ordnet der URL einen passenden Controller zu.
-
-##### SecurityService
-
-Verwaltet die Session des Nutzers.
-
-##### ShopService
-
-Verwaltet den Warenkorb, die Wunschliste und gibt Bestellungen auf.
-
-#### Kernel
-
-Initialisiert alle Module des Projektes.
-
-### /views
-
-Beinhaltet alle Front-End-Views, Komponenten und Templates.
-
-### autoload
-
-Lädt alle relevanten PHP Dateien.
-
-### index
-
-Ausgangsdatei für Anfragen, Initialisiert die Konfiguration, den Autoloader und gibt Befehle an den RequestService.
-
-### setup
-
-Relevante Datei für die Erstellung der Datenbank, der Testdaten und Adminbenutzer. Datei wird nach Ausführung gelöscht.
+- /assets (Beinhaltet alle Styles, Fonts, Icons, Bilder, JavaScript und Uploads.)
+- /logs (Beinhaltet das LOG für die Applikation.)
+- /setup (Beinhaltet das Erstellungsskript (SQL) und die Testdaten.)
+- /src
+  - /components (Beinhaltet die Basiskomponenten Contoller und Model.)
+  - /config (Beinhaltet die Konfiguration für die Datenbank, das LOG und Weiteres.)
+  - /controller (Beinhaltet die Controller für die einzelnen Routen.)
+  - /core (Beinhaltet das Kernelement Service, welches für die Module relevant ist.)
+  - /models (Beinhaltet die Datenbankmodelle.)
+  - /services (Beinhaltet alle Kernmodule des Projektes.)
+    - DatabaseService.php (Verwaltet die Projektdatenbank mittels PDO.)
+    - LoggerService.php (Verwaltet die LOG-Dateien und erstellt neue Einträge.)
+    - ModelService.php (Sucht, erstellt, updatet, löscht und verwaltet die Datenbankmodelle.)
+    - NotificationService.php (Verwaltet die, in den Session abgelegten Benachrichtigungen.)
+    - RequestService.php (Ordnet der URL einen passenden Controller zu.)
+    - SecurityService.php (Verwaltet die Session des Nutzers.)
+    - ShopService.php (Verwaltet den Warenkorb, die Wunschliste und gibt Bestellungen auf.)
+  - Kernel (Initialisiert alle Module des Projektes.)
+- /views (Beinhaltet alle Front-End-Views, Komponenten und Templates.)
+- autoload.php (Lädt alle relevanten PHP Dateien.)
+- index.php (Ausgangsdatei für Anfragen, Initialisiert die Konfiguration, den Autoloader und gibt Befehle an den RequestService.)
+- setup.php (Relevante Datei für die Erstellung der Datenbank, der Testdaten und Adminbenutzer. Datei wird nach Ausführung gelöscht.)
