@@ -46,6 +46,12 @@ class Order extends Model
 		return $modelService->findOneById(Address::class, $this->billing_address_id);
 	}
 
+	/**
+	 * returns products which are linked in the order-item class (many to one)
+	 *
+	 * @param ModelService $modelService
+	 * @return array
+	 */
 	public function getProducts(ModelService $modelService)
 	{
 		$orderItems = $modelService->find(OrderItem::class, ['order_id' => $this->id]);
@@ -62,6 +68,12 @@ class Order extends Model
 		return array_values($productIds);
 	}
 
+	/**
+	 * returns the total of all order-items
+	 *
+	 * @param ModelService $modelService
+	 * @return void
+	 */
 	public function getTotal(ModelService $modelService)
 	{
 		$orderItems = $modelService->find(OrderItem::class, ['order_id' => $this->id]);

@@ -1,17 +1,29 @@
+/**
+ * base javascript class for all files
+ */
 document.addEventListener('DOMContentLoaded', function() {
+    /**
+     * loads the exposed php states into a configuration
+     */
     const scriptData = document.getElementById('script-data');
     var data = {};
     if (scriptData) data = JSON.parse(scriptData.getAttribute('data-value'));
 
     scrollTopButton = document.getElementById("scroll-top");
 
+    /**
+     * toggles the like state
+     * if the user not logged in, the user will be redirected to the login page
+     * @param {number} id 
+     * @param {*} item 
+     */
     function toggleLikeProduct(id, item) {
         const active = item.classList.contains('active')
         if (data.authenticated) {
             var request = new XMLHttpRequest();
             const url = active ? (data.wishlistRemove + id) : (data.wishlistAdd + id);
             request.open("GET", url);
-            request.addEventListener('load', function () {
+            request.addEventListener('load', function() {
                 if (request.status === 200) {
                     item.classList.toggle('active');
 
@@ -27,8 +39,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    this.querySelectorAll('.product-card .like-button').forEach(function (item) {
-        item.addEventListener('click', function (event) {
+    this.querySelectorAll('.product-card .like-button').forEach(function(item) {
+        item.addEventListener('click', function(event) {
             event.preventDefault();
 
             const id = item.closest('.product-card').getAttribute('data-id');
@@ -36,10 +48,13 @@ document.addEventListener('DOMContentLoaded', function() {
         })
     });
 
-    window.onscroll = function () {
+    window.onscroll = function() {
         scrollFunction()
     };
 
+    /**
+     * shows a scroll up button, if the user has scrolled a bit
+     */
     function scrollFunction() {
         if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
             scrollTopButton.classList.add("reveal");
@@ -48,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    scrollTopButton.addEventListener("click", function () {
+    scrollTopButton.addEventListener("click", function() {
         document.body.scrollIntoView({
             behavior: 'smooth',
             block: 'start'
@@ -56,24 +71,28 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     if (data.navigation) {
-        document.querySelector("#navigation .menu-toggle").addEventListener("click", function () {
+        document.querySelector("#navigation .menu-toggle").addEventListener("click", function() {
             document.getElementById("navigation").classList.add("reveal-menu");
         });
 
-        document.querySelector("#navigation .menu .close").addEventListener("click", function () {
+        document.querySelector("#navigation .menu .close").addEventListener("click", function() {
             document.getElementById("navigation").classList.remove("reveal-menu");
         });
 
-        document.querySelector("#navigation .menu-overlay").addEventListener("click", function () {
+        document.querySelector("#navigation .menu-overlay").addEventListener("click", function() {
             document.getElementById("navigation").classList.remove("reveal-menu");
         });
 
-        document.querySelector("#navigation .menu").addEventListener("click", function (e) {
+        document.querySelector("#navigation .menu").addEventListener("click", function(e) {
             e.stopPropagation();
         });
 
-        if(!data.slim) {
-            document.querySelector("#navigation .search-box .search-button").addEventListener("click", function (e) {
+        if (!data.slim) {
+            /**
+             * opens the searchbar, if the screenwidth is less than 900px
+             * otherwise no event
+             */
+            document.querySelector("#navigation .search-box .search-button").addEventListener("click", function(e) {
                 if (window.innerWidth < 900) {
                     const navigation = document.getElementById("navigation");
                     if (!navigation.classList.contains('search')) {
@@ -91,6 +110,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    /**
+     * creates a notification, which fades after 6 seconds
+     * @param {string} title 
+     * @param {string} message 
+     * @param {string} type 
+     */
     function pushNotification(title, message, type) {
         const notification = document.createElement('div');
         notification.classList.add('notification');
@@ -101,41 +126,40 @@ document.addEventListener('DOMContentLoaded', function() {
             this.closest('.notification').remove();
         });
 
-        window.setTimeout(function() {
-            notification.classList.add('fade');
-            window.setTimeout(function() {
-                notification.remove();
-            }, 300);
-        }, 1000 * 6);
+        fadeNotification(notification);
 
         document.getElementById('notifications').appendChild(notification);
     }
 
-    window.setTimeout(function() {
-        document.querySelectorAll('#notifications .notification').forEach(function(item) {
+    function fadeNotification(item) {
+        window.setTimeout(function() {
             item.classList.add('fade');
             window.setTimeout(function() {
                 item.remove();
             }, 300);
-        });
-    }, 1000 * 6);
-});
+        }, 1000 * 6);
+    }
 
-document.querySelector('#sidebar .item.chin').addEventListener('click', function() {
-    document.getElementById('sidebar').classList.toggle('opened');
-});
+    document.querySelectorAll('#notifications .notification').forEach(function(item) {
+        fadeNotification(item);
+    });
 
-function awaitConfirmation(question, callback) {
-    const result = confirm(question);
-    if(result) callback();
-}
+    document.querySelector('#sidebar .item.chin').addEventListener('click', function() {
+        document.getElementById('sidebar').classList.toggle('opened');
+    });
 
-document.querySelectorAll('.delete-confirmation').forEach(function(item) {
-    item.addEventListener('click', function(e) {
-        e.preventDefault();
+    function awaitConfirmation(question, callback) {
+        const result = confirm(question);
+        if (result) callback();
+    }
 
-        awaitConfirmation(item.getAttribute('data-question'), function() {
-            document.location = item.getAttribute('href');
+    document.querySelectorAll('.delete-confirmation').forEach(function(item) {
+        item.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            awaitConfirmation(item.getAttribute('data-question'), function() {
+                document.location = item.getAttribute('href');
+            });
         });
     });
 });

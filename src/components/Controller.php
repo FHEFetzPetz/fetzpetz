@@ -173,9 +173,9 @@ class Controller extends Service
     public function getAbsolutePath($url) {
         $config = $this->kernel->getConfig();
 
-        $baseURL = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]" . $this->kernel->getConfig()["subDirectory"];
+        $baseURL = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]" . $config["subDirectory"];
 
-        if($this->kernel->getConfig()["htaccessRouting"])
+        if($config["htaccessRouting"])
             return $baseURL .= $url;
         else
             return $baseURL .= "?page=$url";

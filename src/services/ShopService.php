@@ -34,6 +34,12 @@ class ShopService extends Service
         return $output;
     }
 
+    /**
+     * returns the product if it is stored in the cart
+     *
+     * @param Product $product
+     * @return array|null
+     */
     public function getProductInCart(Product $product): ?array
     {
         $cartItems = $_SESSION["cart"] ?? [];
@@ -114,6 +120,12 @@ class ShopService extends Service
         return $total;
     }
 
+    /**
+     * returns the current user if the provided user is null
+     *
+     * @param User $user
+     * @return User|null
+     */
     private function isUserPresent(User $user = null) : ?User {
         if($user == null) {
             $securityService = $this->kernel->getSecurityService();
@@ -124,6 +136,12 @@ class ShopService extends Service
         return $user;
     }
 
+    /**
+     * returns the wihslist of the given user
+     *
+     * @param User $user
+     * @return array
+     */
     public function getWishlist(User $user = null): array {
         $user = $this->isUserPresent($user);
         if(!$user) return [];
@@ -154,6 +172,12 @@ class ShopService extends Service
         return $output;
     }
 
+    /**
+     * returns the wishlist without the real products
+     *
+     * @param User $user
+     * @return array
+     */
     public function getRawWishlist(User $user = null){
         $user = $this->isUserPresent($user);
 
@@ -171,6 +195,13 @@ class ShopService extends Service
         return $output;
     }
 
+    /**
+     * adds a product to the wishlist, if it is not already stored
+     *
+     * @param Product $product
+     * @param User $user
+     * @return WishlistItem|null
+     */
     public function addToWishlist(Product $product, User $user = null): ?WishlistItem {
         $user = $this->isUserPresent($user);
 
@@ -191,6 +222,13 @@ class ShopService extends Service
         return $wishlistItem;
     }
 
+    /**
+     * removes product from the wishlist, if it is stored
+     *
+     * @param Product $product
+     * @param User $user
+     * @return void
+     */
     public function removeFromWishlist(Product $product, User $user = null) {
         $user = $this->isUserPresent($user);
         if(!$user) return null;
@@ -203,6 +241,11 @@ class ShopService extends Service
         $modelService->destroy($existingEntry);
     }
 
+    /**
+     * places a order based on the session variables
+     *
+     * @return Order|null
+     */
     public function placeOrder(): ?Order {
         $cart = $this->getCart();
         $securityService = $this->kernel->getSecurityService();

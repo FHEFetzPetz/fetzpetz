@@ -24,6 +24,9 @@ class SearchController extends Controller
 
         $database = $this->kernel->getDatabase();
 
+        /**
+         * searches for matches inside products and categories
+         */
         $queryString = 'SELECT *, p.name as name, p.description as description, p.id as id FROM ' . Product::TABLENAME . ' as p 
             LEFT JOIN ' . ProductCategory::TABLENAME . ' as pc ON pc.product_id = p.id 
             LEFT JOIN ' . Category::TABLENAME . ' as c ON c.id = pc.category_id WHERE p.active = 1 AND (
@@ -49,7 +52,7 @@ class SearchController extends Controller
             ["type" => "stylesheet", "href" => "/assets/css/mainpage.css"]
         ]);
 
-        $this->setParameter("title", "FetzPetz | Suche - $query");
+        $this->setParameter("title", "FetzPetz | Search - $query");
 
         $wishlist = $this->kernel->getShopService()->getRawWishlist($this->getUser());
 

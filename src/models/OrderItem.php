@@ -23,11 +23,11 @@ class OrderItem extends Model
         parent::__construct($values, $initializedFromSQL);
     }
 
-    public function getOrderID(ModelService $modelService) {
+    public function getOrder(ModelService $modelService) {
         return $modelService->findOneById(Order::class, $this->order_id);
     }
 
-    public function getProductID(ModelService $modelService) {
+    public function getProduct(ModelService $modelService) {
         return $modelService->findOneById(Product::class, $this->product_id);
     }
 }

@@ -10,38 +10,48 @@ class Category extends Model
     const TABLENAME = '`category`';
     const PRIMARY_KEY = 'id';
 
-    public function __construct($values, $initializedFromSQL = false) {
+    public function __construct($values, $initializedFromSQL = false)
+    {
         $this->schema = [
-            ['id',self::TYPE_INTEGER,null],
-            ['created_by',self::TYPE_INTEGER,null],
-            ['name',self::TYPE_STRING,null],
-            ['description',self::TYPE_TEXT,null],
-            ['active',self::TYPE_INTEGER,null],
-            ['parent',self::TYPE_INTEGER,null],
+            ['id', self::TYPE_INTEGER, null],
+            ['created_by', self::TYPE_INTEGER, null],
+            ['name', self::TYPE_STRING, null],
+            ['description', self::TYPE_TEXT, null],
+            ['active', self::TYPE_INTEGER, null],
+            ['parent', self::TYPE_INTEGER, null],
         ];
 
         parent::__construct($values, $initializedFromSQL);
     }
 
-    public function getCreatedBy(ModelService $modelService) {
+    public function getCreatedBy(ModelService $modelService)
+    {
         return $modelService->findOneById(User::class, $this->created_by);
     }
 
-    public function getChildren(ModelService $modelService) {
-        return $modelService->find(Category::class, ["parent"=>$this->id]);
+    public function getChildren(ModelService $modelService)
+    {
+        return $modelService->find(Category::class, ["parent" => $this->id]);
     }
 
-    public function getProducts(ModelService $modelService): array {
+    /**
+     * returns products which are linked in the product-category class (many to many)
+     *
+     * @param ModelService $modelService
+     * @return array
+     */
+    public function getProducts(ModelService $modelService): array
+    {
         $productCategories = $modelService->find(ProductCategory::class, ["category_id" => $this->id]);
         $products = [];
 
-        foreach($productCategories as $item) {
+        foreach ($productCategories as $item) {
             $products[$item->product_id] = null;
         }
 
         $productItems = $modelService->find(Product::class, ["id" => array_keys($products)]);
 
-        foreach($productItems as $product)
+        foreach ($productItems as $product)
             $products[$product->id] = $product;
 
         return array_values($products);

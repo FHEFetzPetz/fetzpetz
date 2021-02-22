@@ -1,3 +1,7 @@
+/**
+ * changes the quantity of the cart items
+ * and updates DOM
+ */
 document.addEventListener('DOMContentLoaded', function() {
     const scriptData = document.getElementById('cart-data');
     var data = {};
