@@ -36,7 +36,6 @@
         </section>
     </main>
 </div>
-
 <script>
     document.querySelector('.product-view .like-button').addEventListener('click', function() {
         toggleLikeProduct('<?= $shownProduct->id ?>', this)

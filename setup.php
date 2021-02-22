@@ -115,8 +115,6 @@ if(trim($result) == 'yes') {
 
     $userId = $mysqli->insert_id;
 
-    print_r($userId);
-
     $queryResult = $mysqli->query(
         'INSERT INTO administration_access (user_id, created_at)
         VALUES (' . $userId . ', \'' . date('Y-m-d H:i:s') . '\')

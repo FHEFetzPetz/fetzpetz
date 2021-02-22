@@ -256,6 +256,10 @@ html {
     flex: 1;
 }
 
+#website .hidden-data {
+    display: none;
+}
+
 .product-wrap {
     flex: 1;
     min-width: 267px;

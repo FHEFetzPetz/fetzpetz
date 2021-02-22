@@ -29,9 +29,4 @@
             <span>Sign up</span>
         </a>
     <?php endif ?>
-    <script>
-        document.querySelector('#sidebar .item.chin').addEventListener('click', function() {
-            document.getElementById('sidebar').classList.toggle('opened');
-        });
-    </script>
 </div>
