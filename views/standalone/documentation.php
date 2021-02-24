@@ -44,7 +44,7 @@
             </tr>
             <tr>
                 <td>Design (Mobil & Desktop)</td>
-                <td>Saskia Wohlers</td>
+                <td>Saskia Wohlers, Dirk Hofmann</td>
             </tr>
             <tr>
                 <td>Produkte und Kategorien</td>
